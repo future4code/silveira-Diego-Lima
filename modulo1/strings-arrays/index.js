@@ -13,17 +13,6 @@ const emailDoUsuario = prompt("Insira seu email")
 const frase = `O e-mail ${emailDoUsuario} foi cadastrado com sucesso. Seja bem-vinda(o), ${nomeDoUsuario}!`
 console.log(frase)
 
-let comidasPreferidas =["lasanha", "strogonoff","arroz","pizza","bife"]
-console.log(comidasPreferidas)
-
-console.log(`Essas são as minhas comidas preferidas:`)
-console.log(comidasPreferidas[0])
-console.log(comidasPreferidas[1])
-console.log(comidasPreferidas[2])
-console.log(comidasPreferidas[3])
-console.log(comidasPreferidas[4])
-
-
 
 const suaComidaPreferida = prompt("Qual a sua comida preferida ?")
 
