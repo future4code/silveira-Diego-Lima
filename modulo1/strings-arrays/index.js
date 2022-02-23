@@ -13,10 +13,7 @@ const emailDoUsuario = prompt("Insira seu email")
 const frase = `O e-mail ${emailDoUsuario} foi cadastrado com sucesso. Seja bem-vinda(o), ${nomeDoUsuario}!`
 console.log(frase)
 
-const comidasPreferidas =["lasanha", "strogonoff","arroz","pizza","bife"]
-console.log(comidasPreferidas)
-const frase1 = `Essas são as minhas comidas preferidas: ${comidasPreferidas}.`
-console.log(frase1)
+
 const suaComidaPreferida = prompt("Qual a sua comida preferida ?")
 
 comidasPreferidas.splice(1,1)
