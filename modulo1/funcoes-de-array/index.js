@@ -60,7 +60,7 @@ const nomePoodle = petPoodle.map((item) =>{
         { nome: "Berinjela kg", categoria: "Hortifruti", preco: 8.99 },
         { nome: "Sabão em Pó Ypê", categoria: "Limpeza", preco: 10.80 }
      ]
-/*    
+    
 const nomeProdutos = produtos.map((item) =>{
     return item.nome
 })
@@ -72,7 +72,7 @@ const produtosDesconto = produtos.map((item) =>{
     return objeto
 })
 console.log(produtosDesconto)
-*/
+
 
 //C
 const produtosBebidas = produtos.filter((item) =>{
