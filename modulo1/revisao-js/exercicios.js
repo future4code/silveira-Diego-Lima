@@ -5,21 +5,21 @@
 
 // EXERCÍCIO 01
 function retornaTamanhoArray(array) {
-  //  return array.length
+    return array.length
 
 }
 
 // EXERCÍCIO 02
 function retornaArrayInvertido(array) {
-  //  return array.reverse()
+    return array.reverse()
   
 }
 
 // EXERCÍCIO 03
 function retornaArrayOrdenado(array) {
- //   return array.sort(function(a, b) {
- //       return a - b
- //   })
+    return array.sort(function(a, b) {
+        return a - b
+    })
 }
 
 // EXERCÍCIO 04
@@ -58,6 +58,25 @@ function retornaMaiorNumero(array) {
 
 // EXERCÍCIO 07
 function retornaObjetoEntreDoisNumeros(num1, num2) {
+let maiorNumero = 0
+let menorNumero = 0
+let maiorDivisivelPorMenor
+if(num1 > num2){
+return  maiorNumero = num1, menorNumero =num2 
+ } else if (num1<num2){
+return maiorNumero = num2, menorNumero = num1
+ } else if(maiorNumero%menorNumero){
+ return maiorDivisivelPorMenor = true
+} else {
+return maiorNumero=menorNumero
+}
+
+return objeto
+} 
+
+
+let objeto ={maiorNumero: maiorNumero, maiorDivisivelPorMenor: maiorDivisivelPorMenor, diferenca: maiorNumero-menorNumero}
+
 
 
 
@@ -69,20 +88,19 @@ function retornaNPrimeirosPares(n) {
                 arrayPares.push(numero)
             }
             return arrayPares
-
+        }
 // EXERCÍCIO 09
 function classificaTriangulo(ladoA, ladoB, ladoC) {
-  if (ladoA&&ladoB&&ladoC){
-      return `Equilátero`
-  } 
-  else if (ladoA||ladoB||ladoC){
-    return `Isósceles` }
  
-    else if (ladoA!==ladoB!==ladoC){
-         return `Escaleno`
- }
-}
+    if (ladoA&&ladoB&&ladoC){
+      return `Equilátero`
+  } else if (ladoA||ladoB||ladoC){
+    return `Isósceles` }
+     else {
+         return `Escaleno`}
 
+
+    } 
 // EXERCÍCIO 10
 function retornaSegundoMaiorESegundoMenor(array) {
   
