@@ -48,6 +48,7 @@ const cadastro = () => {
     const usuario = []
 
     //  Sua lógica aqui
+
     let nome = prompt("Qual o seu nome?")
     let idade = Number(prompt("Qual é a sua idade?"))
     let senha = prompt("Digite uma senha com 6 caracteres:")
@@ -100,6 +101,7 @@ const primeiraDose = () => {
 let nome = prompt("Digite seu nome")
 let vacina = prompt("Digite o nome da vacina ")
 let tempo = ""
+
 let data = ""
 
     if (vacina === "coronavac"){
@@ -145,6 +147,7 @@ console.log(segundaDose("Barbara"));
 
 
 
+
 // Exercício 7 --------------------------------------------------------------------------------------
 
 const avisoAosAtrasados = () => {
@@ -155,11 +158,13 @@ const avisoAosAtrasados = () => {
     ]
 
     //  Sua lógica aqui
+
     for (let i = 0 ; i < usuarios.length ; i++){
         if( usuarios[i].imunizacao !== "completa" ){
             console.log(`Olá ${usuarios[i].nome}! Sua imunização está ${usuarios[i].imunizacao}, por favor volte ao postinho para tomar a segunda dose.`)
         }
     }
+
 }
 console.log(avisoAosAtrasados());
 
@@ -196,6 +201,7 @@ const usuarios = [
 
 const cadastroDesafio = () => {
     //  Sua lógica aqui
+
       
     let nome = prompt("Qual o seu nome?")
     let anoDeNascimento = Number(prompt("Qual o seu ano de nascimento?"))
@@ -245,6 +251,7 @@ const loginDesafio = () => {
 console.log(loginDesafio());
 
 const primeiraDoseDesafio = () => {
+
     let vacina = prompt("Qual vacina você tomou ?")
     let imunizacao = "incompleta"
     
@@ -281,3 +288,4 @@ const avisoAosAtrasadosDesafio = () => {
     return mensagemIncompleta
 }
 console.log(avisoAosAtrasadosDesafio());
+
