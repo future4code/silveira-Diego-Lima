@@ -1,12 +1,29 @@
 import React from "react";
-import styled, {createGlobalStyle} from "styled-component";
+import styled from "styled-components"
+import createGlobalStyle from "styled-components"
+// import styled, {createGlobalStyle} from "styled-component";
 
-const GlobalStyled = createGlobalStyle`
-*{
-    margin:0;
-    padding: 0;
-    box-sizing: border-box;
-}`
+// const GlobalStyled = createGlobalStyle`
+// *{  margin:0;
+//     padding: 0;
+//     box-sizing: border-box;
+// }`
+const Msg = styled.div`
+  display: flex;
+  align-items: center;
+  padding-left: 5px;
+
+`
+const CardMensagem = styled.div`
+    max-width: 600px;
+    height: 100vh;
+    border: 1px solid black;
+    flex: 1 1 0%;
+    display: flex;
+    flex-direction: column;
+  
+`
+
 
 
 export default class App extends React.Component {
@@ -44,14 +61,18 @@ adicionarMensagem = () => {
 render() {
   const componentesMensagem = this.state.whatslab.map((whatslab) => {
     return (
-      <CardMensagem key={whatslab.usuario}>
-        <p>{whatslab.usuario}</p>:<p>{whatslab.mensagem}</p>
-      </CardMensagem>
+        
+        <Msg key={whatslab.usuario}>
+        <p><strong>{whatslab.usuario}</strong></p><p>:{whatslab.mensagem}</p>
+        </Msg>
+        
     );
     });   
   return (
     <>
-    <GlobalStyled/>
+    <div>
+    <CardMensagem>
+    <Msg>  
     <input
       placeholder="Usuário"
       value={this.state.inputUsuario}
@@ -63,8 +84,11 @@ render() {
       onChange={this.onChangeMensagem}
       type="text"
     />
-    <button onClick={this.adicionarMensagem}>Adicionar</button>
+    <button onClick={this.adicionarMensagem}>Enviar</button>
+    </Msg>
     {componentesMensagem}
+    </CardMensagem>
+    </div>
     </>
     );
   }
