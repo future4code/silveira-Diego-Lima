@@ -49,8 +49,33 @@ const cadastro = () => {
 
     //  Sua lógica aqui
 
-}
+    let nome = prompt("Qual o seu nome?")
+    let idade = Number(prompt("Qual é a sua idade?"))
+    let senha = prompt("Digite uma senha com 6 caracteres:")
+    let nacionalidade = prompt("Qual seu pais de origem?")
+
+    if (idade < 18){
+        return "erro no cadastro"
+    }    
+     if (senha.length < 6){
+         return "erro no cadastro"
+     }
+
+    if (nacionalidade !== "brasileiro"){
+        return "erro no cadastro"}
+
+ const pessoa ={
+     nomeDoUsuario : nome,
+     idade: idade,
+     senhaDoUsuario: senha,
+     nacionalidade: nacionalidade
+ }       
+usuario.push(pessoa)
+return usuario
+    
+ }
 console.log(cadastro());
+
 
 // Exercício 4-----------------------------------------------------------------------------------------------
 
@@ -76,24 +101,24 @@ const primeiraDose = () => {
 let nome = prompt("Digite seu nome")
 let vacina = prompt("Digite o nome da vacina ")
 let tempo = ""
-let data = "01/08/2021"
-if (vacina = "Coronavac"){
-    tempo = "28"
-    data + tempo
-    return `Olá ${nome}! A próxima dose da ${vacina} é daqui a ${tempo} dias. Compareça no posto na data ${data}.`
- } else if(vacina = "Astrazenica" ){
+
+let data = ""
+
+    if (vacina === "coronavac"){
+    tempo = 28
+    data = "12/04/2022"
+    return  `Olá ${nome}! A próxima dose da ${vacina} é daqui a ${tempo} dias. Compareça no posto na data ${data}.`
+ }  if (vacina === "astrazenica" ){
     tempo = 90
-    data + 90
+    data = "13/06/2022"
     return `Olá ${nome}! A próxima dose da ${vacina} é daqui a ${tempo} dias. Compareça no posto na data ${data}.`
-} else if(vacina = "Pfizer"){
+ }  if(vacina === "pfizer"){
     tempo = 90
-    data + 90
-    return `Olá ${nome}! A próxima dose da ${vacina} é daqui a ${tempo} dias. Compareça no posto na data ${data}.`
-}
+    data = "13/06/2022"
+     return `Olá ${nome}! A próxima dose da ${vacina} é daqui a ${tempo} dias. Compareça no posto na data ${data}.`
+ }
 
-}
-
-
+ }
 
 console.log(primeiraDose())
 
@@ -110,10 +135,18 @@ const segundaDose = (nomeDoUsuario) => {
     ]
 
     //  Sua lógica aqui
+        
+    for (let i = 0 ; i < usuarios.length ; i++){
+        if(nomeDoUsuario === usuarios[i].nome){
+            usuarios[i].imunizacao = "completa"
+        }
+    }
 
-
-}
+ console.log(usuarios)}
 console.log(segundaDose("Barbara"));
+
+
+
 
 // Exercício 7 --------------------------------------------------------------------------------------
 
@@ -126,6 +159,12 @@ const avisoAosAtrasados = () => {
 
     //  Sua lógica aqui
 
+    for (let i = 0 ; i < usuarios.length ; i++){
+        if( usuarios[i].imunizacao !== "completa" ){
+            console.log(`Olá ${usuarios[i].nome}! Sua imunização está ${usuarios[i].imunizacao}, por favor volte ao postinho para tomar a segunda dose.`)
+        }
+    }
+
 }
 console.log(avisoAosAtrasados());
 
@@ -136,7 +175,7 @@ const usuarios = [
     {
         nome: "Artur",
         ano: 2000,
-        nacionalidae: "brasileiro",
+        nacionalidade: "brasileiro",
         senha: "123456",
         vacina: "pfizer",
         imunizacao: "incompleta"
@@ -144,7 +183,7 @@ const usuarios = [
     {
         nome: "Bárbara",
         ano: 1984,
-        nacionalidae: "brasileira",
+        nacionalidade: "brasileira",
         senha: "labenu",
         vacina: "astrazenica",
         imunizacao: "completa"
@@ -152,7 +191,7 @@ const usuarios = [
     {
         nome: "Carlos",
         ano: 2000,
-        nacionalidae: "brasileiro",
+        nacionalidade: "brasileiro",
         senha: "123456",
         vacina: "coronavac",
         imunizacao: "incompleta"
@@ -162,24 +201,91 @@ const usuarios = [
 
 const cadastroDesafio = () => {
     //  Sua lógica aqui
+
+      
+    let nome = prompt("Qual o seu nome?")
+    let anoDeNascimento = Number(prompt("Qual o seu ano de nascimento?"))
+    let senha = prompt("Digite uma senha com 6 caracteres:")
+    let nacionalidade = prompt("Qual a sua nacionalidade?")
+    let idade = (2022-anoDeNascimento)
+    let novaPessoa = {}
+    
+    if (idade < 18){
+        return "erro no cadastro"
+    }    
+     if (senha.length < 6){
+         return "erro no cadastro"
+     }
+
+    if (nacionalidade !== "brasileiro"){
+        return "erro no cadastro"}
+       
+        novaPessoa.nome = nome,
+       novaPessoa.ano = anoDeNascimento,
+       novaPessoa.nacionalidade = nacionalidade,
+       novaPessoa.senha = senha,
+           
+       usuarios.push(novaPessoa) 
+        
+        
+       return usuarios
+
+
 }
 console.log(cadastroDesafio());
 
 const loginDesafio = () => {
     //  Sua lógica aqui
+    let mensagem;
+    let senha = prompt("digite sua senha:");
+    for (let i = 0; i < usuarios.length ; i++ )
+    if(usuarios[i].senha === senha){
+        mensagem = "Usuário logado."
+        return mensagem;
+    }
+    if (mensagem === undefined) {
+        console.log("Senha Inválida")
+    }     
+
 }
 console.log(loginDesafio());
 
 const primeiraDoseDesafio = () => {
-//  Sua lógica aqui
+
+    let vacina = prompt("Qual vacina você tomou ?")
+    let imunizacao = "incompleta"
+    
+    usuarios[usuarios.length-1] = {
+    ...usuarios[usuarios.length-1],
+    vacina : vacina,
+    imunizacao: imunizacao
+}
+    return usuarios
+       
 }
 console.log(primeiraDoseDesafio())
+
 const segundaDoseDesafio = (nomeDoUsuario) => {
-    //  Sua lógica aqui
-}
-console.log(segundaDoseDesafio("ALGUM NOME AQUI"));
+//     //  Sua lógica aqui
+    for (let i = 0 ; i < usuarios.length ; i++){
+        if(nomeDoUsuario === usuarios[i].nome){
+            usuarios[i].imunizacao = "completa"
+        }
+    }
+ console.log(usuarios)
+ }
+console.log(segundaDoseDesafio("Carlos"));
 
 const avisoAosAtrasadosDesafio = () => {
-    //  Sua lógica aqui
+      
+    const apenasOsAtrasados = usuarios.filter((pessoa, indice, array) => {
+        return pessoa.imunizacao === "incompleta"
+     })
+    const mensagemIncompleta = apenasOsAtrasados.map((pessoa) =>{
+        return  `Olá ${pessoa.nome}! Sua imunização está ${pessoa.imunizacao}, por favor volte ao postinho para tomar a segunda dose`
+
+    }) 
+    return mensagemIncompleta
 }
 console.log(avisoAosAtrasadosDesafio());
+
