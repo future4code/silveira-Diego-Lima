@@ -24,6 +24,7 @@ class App extends React.Component {
     inputValue: '',
     filter: 'pendentes'
   }
+  
 
   componentDidUpdate(){
     localStorage.setItem("tarefa", JSON.stringify(this.state.tarefas))
