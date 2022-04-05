@@ -3,6 +3,12 @@ import React from "react";
 import axios from "axios"
 
 
+
+const headers = {
+  headers: {
+    Authorization: "diego-lima-silveira"
+  }
+}
 class App extends React.Component {
   state = {
     usuarios: [],
@@ -10,63 +16,56 @@ class App extends React.Component {
     inputEmail: ""
   };
 
-  getUsuarios = () => {
-    const headers = {
-      headers: {
-        Authorization: "diego-lima-silveira"
-      }
-    }
-    const url = "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users";
+  // componentDidMount() {
+  //   this.getUsuarios()
+  // }  
 
-    axios.get(url, headers)
+  // getUsuarios = () => {
 
-      .then((res) => {
-        console.log(res.data)
-        this.setState({})
-      }).catch((error) => {
-        console.log(error.response.data);
-      });
+  //   const url = "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users";
 
+  //   axios.get(url, headers)
 
-  }
-
-  componentDidMount() {
-    this.getUsuarios()
-  }
-
+  //     .then((res) => {
+  //       alert(res.data)
+  //       this.setState({})
+  //     }).catch((error) => {
+  //       alert(error.message);
+  //     });
+  // }
 
   criarUsuario = () => {
-    const body = {
+      const body = {
       name: this.state.inputName,
       email: this.state.inputEmail
     };
-    const headers = {
-      headers: {
-        Authorization: "diego-lima-silveira"
-      }
-    }
+
     axios.post("https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users", body, headers)
 
       .then((res) => {
-        console.log(res.data)
+        this.getUsuarios();
+        this.setState({
+          inputName: ""
+        })
+        alert(res.data)
+
       }).catch((error) => {
         console.log(error.response.data);
       });
-
   }
 
-  onChangeName = (event) => {
-    this.setState({ inputName: event.target.value });
+  onChangeName = (e) => {
+    this.setState({ inputName: e.target.value });
   }
 
-  onChangeEmail(event) {
-    this.setState({ inputEmail: event.target.value });
+  onChangeEmail = (e) => {
+    this.setState({ inputEmail: e.target.value });
   }
 
 
 
   render() {
-    const listaUsuarios =
+      const listaUsuarios =
       this.state.usuarios.map((usuario) => {
         return <li key={usuario.id}>
           {usuario.name}</li>;
@@ -81,16 +80,22 @@ class App extends React.Component {
           <input
             placeholder="Nome"
             value={this.state.inputName}
-            onChange={this.state.onChangeName} />
+            onChange={this.onChangeName} />
 
-          <input 
+          <input
             placeholder="E-mail"
             value={this.state.inputEmail}
-            onChange={this.state.onChangeEmail} />
+            onChange={this.onChangeEmail} />
 
-          <button onClick={this.state.criarUsuario} > Criar Usuario </button>
-
+          <button onClick={this.criarUsuario} > Criar Usuario </button>
         </div>
+        <hr></hr>
+        <Telausuarios></Telausuarios>
+        <ul>
+          {listaUsuarios}
+        </ul>
+
+
       </div>
     );
   }
