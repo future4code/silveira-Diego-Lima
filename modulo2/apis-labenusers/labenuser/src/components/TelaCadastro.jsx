@@ -1,5 +1,45 @@
 import React from "react";
 import axios from "axios";
+import styled from 'styled-components';
+
+
+const BotaoTrocarTela = styled.button`
+    &:hover{ background: #726b6b}
+    border-radius: 5px;
+    border: 1px solid black;
+    height: 20px;
+    
+`
+const DivInput = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 250px;
+    height: 120px;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: #777777 3px 3px 4px 2px;
+    
+    
+`
+const MainContainer =styled.div`
+    display: flex;
+    justify-content: center;
+
+`
+const BotaoCriar = styled.button`
+    &:hover{ background: #726b6b}
+    border-radius: 5px;
+    border: 1px solid black;
+    height: 20px;
+    margin: 5px;
+    
+`
+const Input = styled.input`
+    margin: 5px;
+
+`
+
 
 
 
@@ -48,28 +88,33 @@ export default class TelaCadastro extends React.Component {
 
 
     render() {
-        
+
         return (
             <div>
                 <div>
-                    <button onClick={this.props.irParaUsuarios}>Ir para Usuários</button>
+                    <BotaoTrocarTela onClick={this.props.irParaUsuarios}>Ir para Usuários</BotaoTrocarTela>
                 </div>
-                <div>
-                    <input
-                        placeholder="Nome"
-                        value={this.state.inputName}
-                        onChange={this.onChangeName} />
+                <MainContainer>
+                    <DivInput>
+                        <Input
+                            placeholder="Nome"
+                            value={this.state.inputName}
+                            onChange={this.onChangeName} />
 
-                    <input
-                        placeholder="E-mail"
-                        value={this.state.inputEmail}
-                        onChange={this.onChangeEmail} />
+                        <Input
+                            placeholder="E-mail"
+                            value={this.state.inputEmail}
+                            onChange={this.onChangeEmail} />
 
-                    <button onClick={this.criarUsuario} > Criar Usuario </button>
-                </div>
-            </div>   
+                        <BotaoCriar onClick={this.criarUsuario} > Criar Usuario </BotaoCriar>
+
+                    </DivInput>
+                </MainContainer>
+
+            </div>
 
 
-    )};
+        )
+    };
 
 };    

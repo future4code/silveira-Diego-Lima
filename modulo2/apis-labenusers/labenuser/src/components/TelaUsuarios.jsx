@@ -9,13 +9,50 @@ const headers = {
     }
   }
 
-const  CardUsuario = styled.div`
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    border: 1px solid black;
-    width: 50%;
+  const BotaoTrocarTela = styled.button`
+  &:hover{ background: #726b6b}
+  border-radius: 5px;
+  border: 1px solid black;
+  height: 20px; 
+  
+`
 
+const CardUsuario =styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 300px;
+    height: 40px;
+    border-radius: 10px;
+    box-shadow: #343030 3px 3px 4px 2px;
+    margin-bottom: 10px;
+    padding: 0px 10px;
+    cursor: pointer;
+  `
+
+const BotaoDelete =styled.button`
+ &:hover{ background: red}
+ &:hover{color: white};
+  color  : red ;
+  border-radius: 5px;
+  border: 1px solid black;
+  height: 20px;
+
+`
+
+
+
+const  MainContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center ;
+    padding: 10px;
+
+    border: 1px solid black;
+    width: 350px;
+
+
+    
 `
 
 
@@ -63,7 +100,7 @@ export default class TelaUsuarios extends React.Component {
     const listaUsuarios = this.state.usuarios.map((usuario) => {
         return <CardUsuario key={usuario.id}>
           {usuario.name}
-          <button onClick={() => this.deletarUsuario(usuario.id)}>X</button>
+          <BotaoDelete onClick={() => this.deletarUsuario(usuario.id)}>X</BotaoDelete>
           </CardUsuario>;
       });
 
@@ -72,12 +109,13 @@ export default class TelaUsuarios extends React.Component {
   return (
     <div>
       <div>
-        <button onClick={this.props.irParaCadastro}>Ir Para Cadastro</button>
+        <BotaoTrocarTela onClick={this.props.irParaCadastro}>Ir Para Cadastro</BotaoTrocarTela>
       </div>
-      <div>
+      <hr/>
+      <MainContainer>
         {listaUsuarios}
         
-      </div>
+      </MainContainer>
     </div>
   )
 }
