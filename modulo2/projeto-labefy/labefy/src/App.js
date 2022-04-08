@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import DetalhesPlaylist from './pages/DetalhesPlaylist/DetalhesPlaylist';
+import ListaPlaylist from './pages/ListaPlaylist/ListaPlaylist';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends React.Component {
+  state = {
+    telaAtual: "lista"
+  }
+
+
+  trocarTela = () => {
+    switch (this.state.telaAtual) {
+      case "lista":
+        return <ListaPlaylist />
+      case "detalhes":
+        return <DetalhesPlaylist />
+      default:
+        return <ListaPlaylist />
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+  render() {
+    return (
+      <div>
+        {this.trocarTela()}
+      </div>
+    );
+  }
 }
 
-export default App;
+
+
