@@ -1,31 +1,34 @@
 import React from 'react';
 import DetalhesPlaylist from './pages/DetalhesPlaylist/DetalhesPlaylist';
-import ListaPlaylist from './pages/ListaPlaylist/ListaPlaylist';
+import ListaPlaylist from './pages/PlaylistPage/PlaylistPage';
 
 export default class App extends React.Component {
   state = {
-    telaAtual: "lista"
+    telaAtual: "lista",
+    playlistClicada: ""
   }
 
 
   trocarTela = () => {
     switch (this.state.telaAtual) {
       case "lista":
-        return <ListaPlaylist />
+        return <ListaPlaylist irParaDetalhePlaylist={this.irParaDetalhePlaylist} />
       case "detalhes":
-        return <DetalhesPlaylist />
+        return <DetalhesPlaylist irParaPlaylistPage={this.irParaPlaylistPage} id={this.state.playlistClicada}/>
       default:
-        return <ListaPlaylist />
+        return <ListaPlaylist irParaDetalhePlaylist={this.irParaDetalhePlaylist} />
     }
   }
 
+  irParaDetalhePlaylist = (id) => {
+      this.setState({telaAtual: "detalhes", playlistClicada:id})
 
+  }
 
+  irParaPlaylistPage = () => {
+    this.setState({telaAtual: "lista", playlistClicada:""})
 
-
-
-
-
+  }
 
 
   render() {
