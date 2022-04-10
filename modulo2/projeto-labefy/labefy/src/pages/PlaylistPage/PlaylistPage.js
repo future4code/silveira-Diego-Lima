@@ -3,6 +3,12 @@ import axios from "axios";
 import { BASE_URL } from '../../constants/urls'
 import { PlaylistCard } from './styled'
 import { BotaoDelete } from './styled'
+import {BotaoAcessar} from './styled'
+import {MainContainer} from './styled'
+import {DivInput}   from './styled'
+import {BotaoCriar} from './styled'
+import {Input} from './styled'
+import {Titulo} from './styled'
 
 
 const headers = {
@@ -22,6 +28,8 @@ export default class PlaylistPage extends React.Component {
         this.getPlaylists()
 
     }
+
+
     getPlaylists = () => {
         axios.get(url, headers)
             .then((res) =>
@@ -38,8 +46,10 @@ export default class PlaylistPage extends React.Component {
         }
 
         axios.post(url, body, headers)
-            .then((res) =>
-                console.log(res))
+            .then((res) => {
+                this.setState({ inputNome: "" })
+                this.getPlaylists()
+            })
             .catch((err) =>
                 console.log(err.response))
     }
@@ -64,14 +74,16 @@ export default class PlaylistPage extends React.Component {
 
 
     render() {
-
+        // const nome = this.props.playlist.name
         const listPlaylist = this.state.lista.map((playlist) => {
             return (
                 <PlaylistCard
                     key={playlist.id}
-                    onClick={() => this.props.irParaDetalhePlaylist(playlist.id)}
                 >
-                    {playlist.name}
+                    <BotaoAcessar onClick={() => this.props.irParaDetalhePlaylist(playlist.id)}
+                                      
+                    
+                    >Acessar Playlist {playlist.name}</BotaoAcessar>
                     <BotaoDelete onClick={() => this.deletarPlaylist(playlist.id)}>X</BotaoDelete>
                 </PlaylistCard>)
 
@@ -81,19 +93,21 @@ export default class PlaylistPage extends React.Component {
         console.log(this.state.lista)
         return (
 
-            <div>
-                <div>
-                    <input placeholder={"Nome da Playlist"}
+            <MainContainer>
+                <Titulo>Bem-Vindo à </Titulo>
+                <Titulo>Labefy</Titulo>
+                <DivInput>
+                    <Input placeholder={"Nome da Playlist"}
                         value={this.state.inputNome}
                         onChange={this.onChangeInputNome}
                     />
-                    <button onClick={this.criarPlaylist}>Criar Playlist</button>
+                    <BotaoCriar onClick={this.criarPlaylist}>Criar Playlist</BotaoCriar>
 
-                </div>
+                </DivInput>
                 <div>
                     {listPlaylist}
                 </div>
-            </div>
+            </MainContainer>
 
         )
 

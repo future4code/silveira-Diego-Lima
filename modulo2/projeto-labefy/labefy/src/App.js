@@ -1,6 +1,17 @@
 import React from 'react';
 import DetalhesPlaylist from './pages/DetalhesPlaylist/DetalhesPlaylist';
 import ListaPlaylist from './pages/PlaylistPage/PlaylistPage';
+import { createGlobalStyle } from 'styled-components';
+
+const GlobalStyle = createGlobalStyle`
+  *{  
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+`
 
 export default class App extends React.Component {
   state = {
@@ -34,6 +45,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
+        <GlobalStyle/>
         {this.trocarTela()}
       </div>
     );
