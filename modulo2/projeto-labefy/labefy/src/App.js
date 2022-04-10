@@ -16,7 +16,8 @@ const GlobalStyle = createGlobalStyle`
 export default class App extends React.Component {
   state = {
     telaAtual: "lista",
-    playlistClicada: ""
+    playlistClicada: "",
+    playlistName: "" ,
   }
 
 
@@ -31,6 +32,7 @@ export default class App extends React.Component {
     }
   }
 
+  
   irParaDetalhePlaylist = (id) => {
       this.setState({telaAtual: "detalhes", playlistClicada:id})
 
@@ -43,6 +45,7 @@ export default class App extends React.Component {
 
 
   render() {
+    console.log(this.state.playlistClicada)
     return (
       <div>
         <GlobalStyle/>

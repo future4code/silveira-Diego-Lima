@@ -9,6 +9,7 @@ import {DivInput}   from './styled'
 import {BotaoCriar} from './styled'
 import {Input} from './styled'
 import {Titulo} from './styled'
+import DetalhesPlaylist from "../DetalhesPlaylist/DetalhesPlaylist";
 
 
 const headers = {
@@ -31,7 +32,7 @@ export default class PlaylistPage extends React.Component {
 
 
     getPlaylists = () => {
-        axios.get(url, headers)
+        axios.get(BASE_URL, headers)
             .then((res) =>
                 this.setState({ lista: res.data.result.list }))
             .catch((err) =>
@@ -45,7 +46,7 @@ export default class PlaylistPage extends React.Component {
             name: this.state.inputNome
         }
 
-        axios.post(url, body, headers)
+        axios.post(BASE_URL, body, headers)
             .then((res) => {
                 this.setState({ inputNome: "" })
                 this.getPlaylists()
@@ -56,7 +57,7 @@ export default class PlaylistPage extends React.Component {
 
     deletarPlaylist = (id) => {
 
-        axios.delete(`https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${id}`, headers)
+        axios.delete(`${BASE_URL}/${id}`, headers)
             .then((res) => {
                 alert("Playlist deletada com sucesso")
                 this.getPlaylists()
@@ -74,17 +75,17 @@ export default class PlaylistPage extends React.Component {
 
 
     render() {
-        // const nome = this.props.playlist.name
-        const listPlaylist = this.state.lista.map((playlist) => {
+                const listPlaylist = this.state.lista.map((playlist) => {
             return (
                 <PlaylistCard
                     key={playlist.id}
                 >
-                    <BotaoAcessar onClick={() => this.props.irParaDetalhePlaylist(playlist.id)}
+                    <BotaoAcessar onClick={() => this.props.irParaDetalhePlaylist(playlist.id)}                                            
                                       
                     
-                    >Acessar Playlist {playlist.name}</BotaoAcessar>
+                    >Acessar Playlist {playlist.name.toUpperCase()} </BotaoAcessar>
                     <BotaoDelete onClick={() => this.deletarPlaylist(playlist.id)}>X</BotaoDelete>
+                    
                 </PlaylistCard>)
 
         })

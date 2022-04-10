@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { BASE_URL } from '../../constants/urls'
 import { MusicCard } from './styled';
 import { BotaoDelete } from './styled';
 import { MainContainer } from './styled'
@@ -11,38 +12,31 @@ import { Titulo } from './styled'
 import { Texto } from './styled'
 import { Musica } from './styled'
 
-
-
 const headers = {
     headers: {
         Authorization: "diego-lima-silveira"
     }
 }
 
-
 export default class DetalhesPlaylist extends React.Component {
-
+    
     state = {
         musicas: [],
         inputNome: "",
         inputArtistas: "",
         inputUrl: "",
-        id: this.props.id
     }
 
 
     componentDidMount() {
-        this.pegarMusicasPlaylist()
-    }
+        this.pegarMusicasPlaylist()     
+    }   
 
-
-    componentDidUpdate() {
-
-    }
+       
 
     pegarMusicasPlaylist = () => {
 
-        axios.get(`https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${this.props.id}/tracks`, headers)
+        axios.get(`${BASE_URL}/${this.props.id}/tracks`, headers)
 
             .then((res) => {
                 this.setState({ musicas: res.data.result.tracks })
@@ -53,16 +47,27 @@ export default class DetalhesPlaylist extends React.Component {
 
     }
 
+    getPlaylists = () => {
+        axios.get(BASE_URL, headers)
+            .then((res) =>
+                this.setState({ lista: res.data.result.list }))
+                console.log("peguei a lista")
+            .catch((err) =>
+                console.log(err.response))
+    }
+
     adicionarMusica = () => {
         const body = {
             name: this.state.inputNome,
             artist: this.state.inputArtistas,
             url: this.state.inputUrl
         }
-        axios.post(`https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${this.props.id}/tracks`, body, headers)
+        axios.post(`${BASE_URL}/${this.props.id}/tracks`, body, headers)
             .then((res) => {
                 alert("adicionada com sucesso")
                 this.setState({ inputNome: "", inputArtistas: "", inputUrl: "", })
+                this.pegarMusicasPlaylist()
+
             })
             .catch((err) => {
                 console.log(err.response)
@@ -70,7 +75,7 @@ export default class DetalhesPlaylist extends React.Component {
     }
 
     deletarMusica = (id) => {
-        axios.delete(`https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${this.props.id}/tracks/${id}`, headers)
+        axios.delete(`${BASE_URL}/${this.props.id}/tracks/${id}`, headers)
             .then((res) => {
                 alert("Musica deletada com sucesso")
                 this.pegarMusicasPlaylist()
@@ -93,8 +98,8 @@ export default class DetalhesPlaylist extends React.Component {
     }
 
     render() {
-        const id = this.props.id
-
+        
+        console.log(this.props)
         const listaMusicas = this.state.musicas.map((musica) => {
             return (
                 <MusicCard
@@ -104,17 +109,17 @@ export default class DetalhesPlaylist extends React.Component {
                     
                     <Musica src={musica.url} />
                     <BotaoDelete onClick={() => this.deletarMusica(musica.id)}>Deletar Musica</BotaoDelete>
-
+                    
                 </MusicCard>)
 
 
         })
-        console.log(this.state.musicas)
+        
         return (
 
             <MainContainer>
 
-                <Titulo> Plalist: {this.props.nome} </Titulo>
+                <Titulo> </Titulo>
                 <DivInput>
 
                     <Input
