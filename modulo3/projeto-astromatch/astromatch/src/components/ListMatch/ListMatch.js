@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Container, DivImage } from "./styled"
+import { Container, DivImage, ButtonContainer, Matches, Texto, Titulo } from "./styled"
 
 
 const ListMatch = (props) => {
@@ -33,18 +33,18 @@ const ListMatch = (props) => {
 
         <Container>
             <button onClick={props.goToCardMatch}>Voltar</button>
-            Lista de Macthes
+            <Titulo>Lista de Matches</Titulo>
             {matches.map(matches => {
                 return (
-                    <div key={matches.id}>
+                    <Matches key={matches.id}>
                         <DivImage src={matches.photo} alt={matches.name} />
-                        <p>{matches.name} {matches.age}</p>
-                    </div>
+                        <Texto>{matches.name}, {matches.age}</Texto>
+                    </Matches>
                 )
             })}
-            <div>
+            <ButtonContainer>
                 <button onClick={clearMatches}>Resetar</button>
-            </div>
+            </ButtonContainer>
 
 
         </Container>

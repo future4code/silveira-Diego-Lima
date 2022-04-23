@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../constants/url"
-import { Container, DivImage } from "./styled"
+import { Container, DivImage, HeaderContainer,Nome, ButtonsContainer, Imagem } from "./styled"
+import Logo from '../../media/astromatch.png'
 
 
 
@@ -47,16 +48,18 @@ const CardMatch = (props) => {
    console.log(profile)
     return (
         <Container>
-            <div>
-                <button onClick={props.goToListMatch}>Matches</button>
-            </div>
+            <HeaderContainer>
+               <Imagem src={Logo} alt="astromatch"></Imagem>
+               <button onClick={props.goToListMatch}>Matches</button>
+            </HeaderContainer>
+            
             <DivImage src={profile.photo} alt={profile.name} />
-            {profile.name} {profile.age}
-            <p>{profile.bio}</p>
-            <div>
+            <Nome>{profile.name}, {profile.age}</Nome>
+            <Nome>{profile.bio}</Nome>
+            <ButtonsContainer>
                 <button onClick={() =>choosePerson(true)} >Like</button>
                 <button onClick={() =>choosePerson(false)}>Deslike</button>
-            </div>
+            </ButtonsContainer>
            
         </Container>
 
