@@ -43,3 +43,30 @@ export const Titulo = styled.strong`
     display: flex;
     justify-content: center;
 `
+export const ButtonVoltar = styled.button`
+        border-radius: 15px;
+        width: 17em;
+         height: 1.5em;
+         border: 1px solid purple;
+        color: purple;
+        font-size: 1.5em;
+        background-color: white;
+        &:hover{ background: purple}
+        &:hover{color: white};  
+        justify-content: center;
+
+`
+
+export const ButtonResetar = styled.button`
+        border-radius: 15px;
+        width: 17em;
+         height: 1.5em;
+         border: 1px solid red;
+        color: red;
+        font-size: 1.5em;
+        background-color: white;
+        &:hover{ background: red}
+        &:hover{color: white};  
+        justify-content: center;
+
+`

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../constants/url"
-import { Container, DivImage, HeaderContainer,Nome, ButtonsContainer, Imagem } from "./styled"
+import { Container, DivImage, HeaderContainer,Nome, ButtonsContainer, Imagem , ButtonLike, ButtonDeslike, ButtonMatches} from "./styled"
 import Logo from '../../media/astromatch.png'
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 
 
@@ -50,15 +51,15 @@ const CardMatch = (props) => {
         <Container>
             <HeaderContainer>
                <Imagem src={Logo} alt="astromatch"></Imagem>
-               <button onClick={props.goToListMatch}>Matches</button>
+               <ButtonMatches onClick={props.goToListMatch}>Matches</ButtonMatches>
             </HeaderContainer>
             
             <DivImage src={profile.photo} alt={profile.name} />
             <Nome>{profile.name}, {profile.age}</Nome>
             <Nome>{profile.bio}</Nome>
             <ButtonsContainer>
-                <button onClick={() =>choosePerson(true)} >Like</button>
-                <button onClick={() =>choosePerson(false)}>Deslike</button>
+               <ButtonLike><FavoriteIcon onClick={() =>choosePerson(true)}></FavoriteIcon></ButtonLike>
+                <ButtonDeslike onClick={() =>choosePerson(false)}> X </ButtonDeslike>
             </ButtonsContainer>
            
         </Container>
