@@ -1,6 +1,6 @@
 
 export const goToAdmin = (navigate) => {
-    navigate("/adminhome")
+    navigate("/admin")
 }
 export const goToApplication = (navigate) => {
     navigate("/application")

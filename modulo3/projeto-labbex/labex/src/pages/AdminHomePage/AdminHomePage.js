@@ -1,21 +1,44 @@
-import {useState,useEffect} from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { goBack } from "../../routes/coordinator";
+import { goBack, goCreate } from "../../routes/coordinator";
+import { TripsContainer, AdmContainer, DivButtons, Titulo } from "./styled";
 
 export const AdminHomePage = () => {
+
     const navigate = useNavigate()
 
-    return(
-        <div>
-           AdminHomePage 
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+        axios.get('https://us-central1-labenu-apis.cloudfunctions.net/labeX/diego/trips',
+            {
+                headers: {
+                    auth: token
+                }
+            }).then((res) => {
+                console.log('Deu certo', res.data)
+            }).catch((err) => {
+                console.log(err.response)
+            });
 
-           <div>
+
+
+    }, [])
+
+
+
+
+    return (
+        <AdmContainer>
+            <Titulo>Painel Administrativo</Titulo>
+            <DivButtons>
                 <button onClick={() => goBack(navigate)}> Voltar </button>
+                <button onClick={() => goCreate(navigate)}>Criar Viagem</button>
                 <button>  Inscrever-se </button>
-            </div>
+            </DivButtons>
 
-        </div>
+        </AdmContainer>
 
     )
 }
-;    
+    ;    

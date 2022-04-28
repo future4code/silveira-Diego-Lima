@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { goToLogin, goToListTrips } from "../../routes/coordinator";
-
+import {DivButtons} from "./styled"
 
 
 export const HomePage = () => {
@@ -13,11 +13,11 @@ export const HomePage = () => {
         <div>
             HomePage
 
-            <div>
+            <DivButtons>
                 <button onClick={ () => goToListTrips(navigate)} > Ver Viagens </button>
                 <button onClick={ () => goToLogin(navigate)}> Area de Admin </button>
 
-            </div>
+            </DivButtons>
         </div>
 
     )
