@@ -1,74 +1,94 @@
 import { useNavigate } from "react-router-dom";
 import { goBack } from "../../routes/coordinator";
-import { CreatePageContainer, InputContainer, Titulo, DivButtons } from "./styled";
-import TextField from '@material-ui/core/TextField';
+import { CreatePageContainer, InputContainer, Titulo, DivButtons, InputLabel, SelectLabel, FormContainer } from "./styled";
 import axios from "axios";
 import useForm from "../../hooks/useForm";
 
-
+const listaDePlanetas = [
+    "Mercúrio",
+    "Vênus",
+    "Terra",
+    "Marte",
+    "Jupiter",
+    "Saturno",
+    "Urano",
+    "Netuno",
+    "Plutão"
+]
 
 export const CreateTripPage = () => {
     const { form, onChange } = useForm({ name: "", planet: "", date: "", description: "", durationInDays: "" });
 
+
     const navigate = useNavigate()
 
-    const criarViagem = (event) =>{
+    const createTrip = () => {
+        console.log(form)
+        const body = form
         const token = localStorage.getItem('token')
-        axios.get('https://us-central1-labenu-apis.cloudfunctions.net/labeX/diego/trips',
-            {
-                headers: {
-                    auth: token
-                }
-            }).then((res) => {
+        const headers = {
+            headers: {
+                "auth": token
+            }
+        }
+        axios.post('https://us-central1-labenu-apis.cloudfunctions.net/labeX/diego-lima-silveira/trips', headers, body)
+            .then((res) => {
                 console.log('Deu certo', res.data)
+
             }).catch((err) => {
                 console.log(err.response)
             });
-
     }
 
     return (
         <CreatePageContainer>
             <Titulo>Criar Viagem</Titulo>
             <InputContainer>
-                <form>
-                    <TextField id="outlined-basic" label="Nome" variant="filled" size="small" margin="normal"
+                <form onSubmit={createTrip}>
+                    <InputLabel
                         name="name"
                         value={form.name}
                         onChange={onChange}
+                        placeholder={"Nome"}
+                        type="text"
                         required
 
                     />
-                    <TextField id="outlined-basic" label="Planeta" variant="filled" size="small" margin="normal"
-                        name="planet"
-                        value={form.planet}
+                    <SelectLabel
+                        name={"planet"}
+                        defaultValue={""}
                         onChange={onChange}
-                        placeholder={"Senha"}
-                        type="planet"
+                        placeholder={"Planeta"}
                         required
-                    />
-                    <TextField id="outlined-basic" label="" variant="filled" size="small" margin="normal"
+                    >
+                        <option value={""} disabled>Escolha um Planeta</option>
+                        {listaDePlanetas.map((planet) => {
+                            return <option value={planet} key={planet}>{planet}</option>
+                        })}
+                    </SelectLabel>
+                    <InputLabel
                         name="date"
                         value={form.date}
                         onChange={onChange}
                         type="date"
                         required
-
                     />
-                    <TextField id="outlined-basic" label="Descrição" variant="filled" size="small" margin="normal"
+                    <InputLabel
                         name="description"
                         value={form.description}
                         onChange={onChange}
+                        placeholder={"Descrição"}
+                        type="text"
                         required
-
                     />
-                    <TextField id="outlined-basic" label="Duração em dias" variant="filled" size="small" margin="normal"
+                    <InputLabel
                         name="durationInDays"
                         value={form.durationInDays}
                         onChange={onChange}
+                        placeholder={"Duração em dias"}
                         type="number"
                         required
-
+                        min={50}
                     />
                 </form>
 

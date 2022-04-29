@@ -1,7 +1,7 @@
 import  styled from "styled-components"
 
 
-export const FormContainer = styled.div`
+export const FormContainer = styled.form`
     width: 70vw;
     max-width: 500px;
     display: flex;
@@ -32,4 +32,16 @@ export const DivButtons = styled.div`
     justify-content: center;
     margin: 3em;
     
+`
+export const InputLabel = styled.input`
+    width: 25em;
+    margin: 2px;
+    padding: 10px;
+    border-radius: 1em;
+`
+export const SelectLabel = styled.select`
+    width: 25em;
+    margin: 2px;
+    padding: 10px;
+    border-radius: 1em;
 `

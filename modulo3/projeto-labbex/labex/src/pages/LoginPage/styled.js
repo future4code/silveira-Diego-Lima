@@ -25,9 +25,14 @@ export const LoginContainer = styled.div`
     background-color: green;
     color: black;
     `
-
 export const Titulo = styled.div`
     width: 70vw;
     font-size: 2em;
     display: flex;
 ` 
+export const InputLabel = styled.input`
+    width: 25em;
+    margin: 2px;
+    padding: 10px;
+    border-radius: 1em;
+`
