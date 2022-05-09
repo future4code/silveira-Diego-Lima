@@ -9,9 +9,8 @@ export const PlaylistCard = styled.div`
     margin: 10px;
     width: 25em;
     background-color: #d9e3f0;
-    
+   
 `
-
 export const BotaoDelete = styled.button`
   background-color: white;  
  &:hover{ background: red}
@@ -21,9 +20,7 @@ export const BotaoDelete = styled.button`
   border: 1px solid black;
   height: 3em;
   width: 3em;
- 
-   `
-
+`
 export const BotaoAcessar = styled.button`
    background: green;
    &:hover{ background: black}
@@ -34,7 +31,6 @@ export const BotaoAcessar = styled.button`
   height: 3em;
   width: 15em;
   `
-  
 
 export const BotaoCriar = styled.button`
    background-color: #d9e3f0; 
@@ -61,11 +57,10 @@ export const DivInput = styled.div`
     padding-bottom: 2em;
     
 `
-
 export const Input = styled.input`
    background-color: #d9e3f0; 
     color  : green;
-   border-radius: 15px;    
+     border-radius: 15px;    
     padding: 10px;
     height: 3em;
     width: 15em;
