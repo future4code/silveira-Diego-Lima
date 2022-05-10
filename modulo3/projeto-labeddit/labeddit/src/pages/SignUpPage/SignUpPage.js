@@ -1,12 +1,13 @@
 import React from "react";
+import { TelaCadastro } from "../../global/GlobalStyled";
 
 
 const SignUpPage = () => {
 
     return (
-        <div>
+        <TelaCadastro>
             FormPage!!!!!!
-        </div>
+        </TelaCadastro>
     )
 
 }

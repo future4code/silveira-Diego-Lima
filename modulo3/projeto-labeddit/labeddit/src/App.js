@@ -1,5 +1,6 @@
 import React from "react";
-import { GlobalStyle } from "./pages/LoginPage/styled";
+import { GlobalStyle } from "./global/GlobalStyled";
+
 import { Router } from "./routes/Router";
 
 const App = () => {

@@ -1,12 +1,13 @@
 import React from "react";
+import { TelaPost } from "../../global/GlobalStyled";
 
 
 const PostPage = () => {
 
     return (
-        <div>
+        <TelaPost>
             PostPage!!!!!!
-        </div>
+        </TelaPost>
     )
 
 }
