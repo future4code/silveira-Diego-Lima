@@ -1,12 +1,11 @@
-
+export const goToLogin = (navigate) => {
+    navigate("/")
+}
 export const goToSignUp = (navigate) => {
     navigate("/cadastro")
 }
-export const goToLogin = (navigate) => {
-    navigate("/login")
-}
 export const goToPost = (navigate) => {
-    navigate("/post")
+    navigate(`/post/`)
 }
 export const goToFeed= (navigate) => {
     navigate("/feed")

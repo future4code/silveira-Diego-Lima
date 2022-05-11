@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { createGlobalStyle } from 'styled-components'
+import Button from '@material-ui/core/Button';
 
 
 export const GlobalStyle = createGlobalStyle`
@@ -16,6 +17,7 @@ export const TelaLogin = styled.div`
     top: -464px;
     border-radius: 0px;
     background: #FFFFFF;
+    border: 1px solid black;
 `
 export const TelaCadastro = styled.div`
     height: 926px;
@@ -24,6 +26,7 @@ export const TelaCadastro = styled.div`
     top: -464px;
     border-radius: 0px;
     background: #FFFFFF;
+    border: 1px solid black;
 
 `
 export const TelaFeed = styled.div`
@@ -33,6 +36,7 @@ export const TelaFeed = styled.div`
     top: -464px;
     border-radius: 0px;
     background: #FFFFFF;
+    border: 1px solid black;
 
 `
 export const TelaPost = styled.div`
@@ -42,4 +46,26 @@ export const TelaPost = styled.div`
     top: -464px;
     border-radius: 0px;
     background: #FFFFFF;
+    border: 1px solid black;
 `
+
+export const StyledButton = styled(Button)`
+    background: linear-gradient(90deg, #FF6489 0%, #F9B24E 100%);
+    width: 26em;
+    border-radius: 15em;
+   
+`
+export const SignUpButton = styled(Button)`
+    border: 1px solid #FE7E02;
+    border-radius: 2em;
+`
+
+export const LinhaDiv = styled.div`
+    margin: 1.5em;
+    border: 1px solid  #F9B24E ;
+    border-image-source: linear-gradient(90deg, #FF6489 0%, #F9B24E 100%),linear-gradient(0deg, #ACACAC, #ACACAC);
+    
+`
+
+
+
