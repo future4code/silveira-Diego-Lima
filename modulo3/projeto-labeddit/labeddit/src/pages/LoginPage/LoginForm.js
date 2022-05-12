@@ -3,15 +3,18 @@ import { FormContainer } from "./styled"
 import { StyledButton } from "../../global/GlobalStyled";
 import TextField from '@material-ui/core/TextField';
 import useForm from "../../hooks/useForm"
+import { login } from "../../services/user";
+import { useNavigate } from "react-router-dom";
 
 
 
 const LoginForm = () => {
     const [form, onChange, clear] = useForm({ email: "", password: "" })
+    const navigate = useNavigate()
+    
     const onSubmitForm = (event) => {
-        console.log(form)
-        event.preventDefault()
-        
+        event.preventDefault()        
+        login(form, clear, navigate)        
     }
 
     return (
@@ -32,7 +35,7 @@ const LoginForm = () => {
                 type={"password"}
 
             />
-            <StyledButton variant="contained" color="primary" margin="normal" type={'submit'}>
+            <StyledButton type={'submit'} variant="contained" color="primary" margin="normal" >
                 Continuar
             </StyledButton>
 

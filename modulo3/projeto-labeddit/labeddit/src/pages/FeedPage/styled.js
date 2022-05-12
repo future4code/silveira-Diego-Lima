@@ -10,3 +10,16 @@ export const MainContainer = styled.div`
     max-height: 100vh ;
     background-color: grey;
 `
+
+export const PostContainer = styled.input`
+    display: flex;
+    justify-items: center;
+    margin-top: 2em;
+    height: 131px;
+    width: 364px;
+    left: 30px;
+    top: 124px;
+    border-radius: 12px;
+    background: #EDEDED;
+`
+

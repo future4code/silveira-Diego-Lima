@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Button from '@material-ui/core/Button';
+
 
 
 export const MainContainer = styled.div`
@@ -20,7 +20,7 @@ export const UpperContent = styled.div`
     align-items: center;
     
 `
-export const FormContainer = styled.div`
+export const FormContainer = styled.form`
     display: flex;
     justify-content: center;
     flex-direction: column;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import {StyledToolbar, LogoImage} from "./styled"
 import Button from '@material-ui/core/Button';
@@ -10,8 +10,23 @@ import logo from "../../assets/labenu.png"
 
 
 const Header = () => {
-
   const navigate = useNavigate()
+  const token = localStorage.getItem("token")
+  const [botaoDireito, setBotaoDireito] = useState (token ? "Logout" : "Login")
+
+  const logout = () => {
+    localStorage.removeItem("token")
+  }
+
+  const acaoBotaoDireito = () => {
+    if (token){
+      logout()
+      setBotaoDireito("Login")
+      goToLogin(navigate)
+    }else {
+      goToLogin(navigate)
+    }
+  }
 
   return (
 
@@ -19,7 +34,7 @@ const Header = () => {
       <StyledToolbar>
       
         <LogoImage src={logo}/> 
-        <Button onClick={() => goToLogin(navigate)}>Login</Button>
+        <Button onClick={acaoBotaoDireito}>{botaoDireito}</Button>
       
       </StyledToolbar>
     </AppBar>

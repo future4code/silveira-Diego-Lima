@@ -9,7 +9,7 @@ export const MainContainer = styled.div`
     max-height: 100vh ;
     background-color: grey;
 `
-export const FormContainer = styled.div`
+export const FormContainer = styled.form`
     display: flex;
     justify-content: center;
     flex-direction: column;

@@ -3,15 +3,19 @@ import { StyledButton, } from "../../global/GlobalStyled";
 import { FormContainer } from "./styled"
 import TextField from '@material-ui/core/TextField';
 import useForm from "../../hooks/useForm"
+import { signUp } from "../../services/user";
+import { useNavigate } from "react-router-dom";
 
 
 
 const SignUpForm = () => {
     const [form, onChange, clear] = useForm({ username: "", email: "", password: "" })
 
+    const navigate = useNavigate()
     const onSubmitForm = (event) => {
         console.log(form)
         event.preventDefault()
+        signUp(form, clear, navigate)
         
     }
 

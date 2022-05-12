@@ -30,6 +30,9 @@ export const TelaCadastro = styled.div`
 
 `
 export const TelaFeed = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     height: 1080px;
     width: 428px;
     left: 540px;
@@ -40,6 +43,9 @@ export const TelaFeed = styled.div`
 
 `
 export const TelaPost = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     height: 1080px;
     width: 428px;
     left: 1004px;
@@ -52,12 +58,12 @@ export const TelaPost = styled.div`
 export const StyledButton = styled(Button)`
     background: linear-gradient(90deg, #FF6489 0%, #F9B24E 100%);
     width: 26em;
-    border-radius: 15em;
+    border-radius: 15em !important;
    
 `
 export const SignUpButton = styled(Button)`
     border: 1px solid #FE7E02;
-    border-radius: 2em;
+    border-radius: 15em !important;
 `
 
 export const LinhaDiv = styled.div`

@@ -4,8 +4,8 @@ export const goToLogin = (navigate) => {
 export const goToSignUp = (navigate) => {
     navigate("/cadastro")
 }
-export const goToPost = (navigate) => {
-    navigate(`/post/`)
+export const goToPost = (navigate, id) => {
+    navigate(`/post/${id}`)
 }
 export const goToFeed= (navigate) => {
     navigate("/feed")

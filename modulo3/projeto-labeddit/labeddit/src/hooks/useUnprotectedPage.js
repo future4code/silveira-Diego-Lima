@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router";
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { goToFeed} from "../routes/coordinator";
 
 
 const useUnprotectdPage = () => {
     const navigate = useNavigate()
-    useEffect(() => {
+    useLayoutEffect(() => {
         const token = localStorage.getItem('token')
         if (token) {
             goToFeed(navigate)
