@@ -10,5 +10,6 @@ export const  StyledToolbar = styled(Toolbar)`
 `
 export const LogoImage = styled.img`
     width: 4em;
+    cursor: pointer;
     
 `

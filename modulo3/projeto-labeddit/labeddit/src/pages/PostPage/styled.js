@@ -30,3 +30,11 @@ export const CommentContainer = styled.div`
     background: #EDEDED;
     margin: 10px;
 `
+
+export const FormContainer = styled.form`
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: space-around;
+    `

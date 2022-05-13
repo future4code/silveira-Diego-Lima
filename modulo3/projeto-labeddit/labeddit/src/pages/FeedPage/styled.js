@@ -22,4 +22,21 @@ export const PostContainer = styled.input`
     border-radius: 12px;
     background: #EDEDED;
 `
-
+export const FormContainer = styled.form`
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: space-around;
+    `
+export const FeedContainer = styled.div`
+height: 167px;
+width: 364px;
+left: 0px;
+top: 0px;
+border-radius: 12px;
+padding: 9px, 10px, 9px, 10px;
+background: #EDEDED;
+margin: 10px;
+padding: 5px;
+`
