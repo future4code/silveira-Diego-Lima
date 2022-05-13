@@ -1,7 +1,6 @@
 import styled from "styled-components"
 
 export const FeedContainer = styled.div`
-    height: 167px;
     width: 364px;
     left: 0px;
     top: 0px;

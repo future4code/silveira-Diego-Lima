@@ -1,21 +1,22 @@
-import React from "react";
+import React, {useState} from "react";
 import { FormContainer } from "./styled"
 import { StyledButton } from "../../global/GlobalStyled";
 import TextField from '@material-ui/core/TextField';
 import useForm from "../../hooks/useForm"
 import { createPost } from "../../services/user";
-import { useNavigate } from "react-router-dom";
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 
 
 const AddPost = (props) => {
     const [form, onChange, clear] = useForm({ title: "", body: "" })
-    const navigate = useNavigate()
+    const [isLoading, setIsLoading] = useState(false)
+    
     
     
     const onSubmitForm = (event) => {
         event.preventDefault()        
-        createPost(form, clear,props.getPost)        
+        createPost(form, clear,props.getPost, setIsLoading)        
     }
 
     return (
@@ -37,7 +38,7 @@ const AddPost = (props) => {
 
             />
             <StyledButton type={'submit'} variant="contained" color="primary" margin="normal" >
-                Postar
+            {isLoading ? <CircularProgress color={"inherit"} size={24}/> : <>Postar</>}
             </StyledButton>
 
         </FormContainer>

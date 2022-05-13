@@ -1,21 +1,23 @@
-import React from "react";
+import React, {useState} from "react";
 import { StyledButton, } from "../../global/GlobalStyled";
 import { FormContainer } from "./styled"
 import TextField from '@material-ui/core/TextField';
 import useForm from "../../hooks/useForm"
 import { signUp } from "../../services/user";
 import { useNavigate } from "react-router-dom";
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 
 
 const SignUpForm = () => {
     const [form, onChange, clear] = useForm({ username: "", email: "", password: "" })
+    const [isLoading, setIsLoading] = useState(false)
 
     const navigate = useNavigate()
     const onSubmitForm = (event) => {
-        console.log(form)
+        
         event.preventDefault()
-        signUp(form, clear, navigate)
+        signUp(form, clear, navigate, setIsLoading)
         
     }
 
@@ -49,7 +51,7 @@ const SignUpForm = () => {
             <p>Ao continuar, você concorda com o nosso Contrato de <br /> usuário, e nossa Política de Privacidade</p>
             <p> Eu concordo em receber emails sobre coisas legais <br /> no Labeddit </p>
             <StyledButton variant="contained" color="primary" margin="normal" type={'submit'}>
-                Cadastrar
+            {isLoading ? <CircularProgress color={"inherit"} size={24}/> : <>Cadastrar</>}
             </StyledButton>
 
         </FormContainer>
