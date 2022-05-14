@@ -75,4 +75,10 @@ export const ReactPaginateContainer = styled(ReactPaginate)`
 
   }  
 `
-
+export const ContainerOnTop = styled.div`
+    width: 364px;
+    border-radius: 12px;
+    background: #EDEDED;
+    margin: 10px;
+    padding: 10px;
+`

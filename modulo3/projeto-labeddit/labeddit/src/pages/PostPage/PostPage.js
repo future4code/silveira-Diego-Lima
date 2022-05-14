@@ -6,12 +6,14 @@ import { BASE_URL } from "../../constants/urls";
 import { TelaPost, StyledButton } from "../../global/GlobalStyled";
 import useProtectdPage from "../../hooks/useProtectPage";
 import useRequestData from "../../hooks/useRequestData";
-import { MainContainer, FormContainer, ReactPaginateContainer } from "./styled"
+import { MainContainer, FormContainer, ReactPaginateContainer, Autor, PostContent, ButtonsContainer, ContainerOnTop } from "./styled"
 import useForm from "../../hooks/useForm"
 import TextField from '@material-ui/core/TextField';
 import { createComment } from "../../services/user";
 import CommentContainer from "../PostPage/CommentCard"
 import CircularProgress from '@material-ui/core/CircularProgress'
+import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 
 
 const PostPage = () => {
@@ -20,9 +22,10 @@ const PostPage = () => {
     const [form, onChange, clear] = useForm({ body: "" })
     const [isLoading, setIsLoading] = useState(false)
     const comments = useRequestData([], `${BASE_URL}/posts/${params.id}/comments`)[0]
+    const [feedPost, getPost] = useRequestData([], `${BASE_URL}/posts`)
     const [pageNumber, setPageNumber] = useState(0);
 
-    const commentsPerPage = 5;
+    const commentsPerPage = 4;
     const pagesVisited = pageNumber * commentsPerPage;
 
 
@@ -31,6 +34,22 @@ const PostPage = () => {
         createComment(form, clear, params.id, setIsLoading)
 
     }
+
+    const PostComment = feedPost && feedPost.map((post) => {
+        if (post.id === params.id)
+            return (
+                <ContainerOnTop key={post.id}>
+                    <Autor>Enviado por: {post.username}</Autor>
+                    <PostContent>{post.title}</PostContent>
+                    <PostContent>{post.body}</PostContent>
+                    <ButtonsContainer>
+                        <ThumbUpAltOutlinedIcon color="primary" />
+                        {post.voteSum}
+                        <ThumbDownIcon color="primary" />
+                    </ButtonsContainer>
+                </ContainerOnTop>
+            )
+    })
 
     const commentsCard = comments && comments.slice(pagesVisited, pagesVisited + commentsPerPage).map((comments) => {
         return (
@@ -53,6 +72,7 @@ const PostPage = () => {
         <MainContainer>
             <TelaPost>
                 <Header />
+                {PostComment}
                 <FormContainer onSubmit={onSubmitForm}>
                     <TextField id="outlined-basic" label="Digite seu texto" variant="outlined" size="small" margin="normal"
                         name={"body"}
