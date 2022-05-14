@@ -10,3 +10,16 @@ export const FeedContainer = styled.div`
     margin: 10px;
     padding: 5px;
 `
+
+export const ButtonsContainer = styled.div`
+    display: flex;
+    justify-content: space-around;
+
+`
+export const Autor = styled.p`
+    color: #6F6F6F;
+    size: 12px;
+`
+export const PostContent= styled.p`
+   size: 20px;
+`

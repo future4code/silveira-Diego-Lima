@@ -1,7 +1,9 @@
 import React from 'react';
-import { CommentContainer } from "./styled"
+import { CommentContainer, ButtonsContainer, Autor, PostContent } from "./styled"
 import { BASE_URL } from '../../constants/urls';
 import axios from 'axios';
+import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 
 
 const CommentCard = (props) => {
@@ -61,13 +63,13 @@ const CommentCard = (props) => {
     return (
 
         <CommentContainer>
-            <p>Enviado por: {props.username}</p>
-            <p>{props.body}</p>
-            <div>
-                <button onClick={() => handleLike(props.id, props.userVote)}>LIKE</button>
-                votos {props.votos}
-                <button onClick={() => handleDesLike(props.id, props.userVote)} >DESLIKE</button>
-            </div>
+            <Autor>Enviado por: {props.username}</Autor>
+            <PostContent>{props.body}</PostContent>
+            <ButtonsContainer>
+                <ThumbUpAltOutlinedIcon color="primary" cursor="pointer" onClick={() => handleLike(props.id, props.userVote)}>LIKE</ThumbUpAltOutlinedIcon>
+                 {props.votos}
+                <ThumbDownIcon color="primary" cursor="pointer" onClick={() => handleDesLike(props.id, props.userVote)} >DESLIKE</ThumbDownIcon>
+            </ButtonsContainer>
 
         </CommentContainer>
 

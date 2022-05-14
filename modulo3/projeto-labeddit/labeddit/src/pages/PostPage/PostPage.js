@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import Loading from "../../components/Loading/Loading"
@@ -6,7 +6,7 @@ import { BASE_URL } from "../../constants/urls";
 import { TelaPost, StyledButton } from "../../global/GlobalStyled";
 import useProtectdPage from "../../hooks/useProtectPage";
 import useRequestData from "../../hooks/useRequestData";
-import { MainContainer, FormContainer } from "./styled"
+import { MainContainer, FormContainer, ReactPaginateContainer } from "./styled"
 import useForm from "../../hooks/useForm"
 import TextField from '@material-ui/core/TextField';
 import { createComment } from "../../services/user";
@@ -19,7 +19,11 @@ const PostPage = () => {
     const params = useParams()
     const [form, onChange, clear] = useForm({ body: "" })
     const [isLoading, setIsLoading] = useState(false)
-    const comments = useRequestData([], `${BASE_URL}/posts/${params.id}/comments`)[0]   
+    const comments = useRequestData([], `${BASE_URL}/posts/${params.id}/comments`)[0]
+    const [pageNumber, setPageNumber] = useState(0);
+
+    const commentsPerPage = 5;
+    const pagesVisited = pageNumber * commentsPerPage;
 
 
     const onSubmitForm = (event) => {
@@ -28,18 +32,22 @@ const PostPage = () => {
 
     }
 
-    const commentsCard = comments && comments.map((comments) => {
+    const commentsCard = comments && comments.slice(pagesVisited, pagesVisited + commentsPerPage).map((comments) => {
         return (
             <CommentContainer key={comments.id}
                 username={comments.username}
                 userVote={comments.userVote}
                 body={comments.body}
                 votos={comments.voteSum}
-                id={comments.id}                
-            />         
+                id={comments.id}
+            />
         )
     })
+    const pageCount = Math.ceil(comments.length / commentsPerPage)
 
+    const changePage = ({ selected }) => {
+        setPageNumber(selected);
+    };
 
     return (
         <MainContainer>
@@ -55,10 +63,21 @@ const PostPage = () => {
 
                     />
                     <StyledButton type={'submit'} variant="contained" color="primary" margin="normal" >
-                    {isLoading ? <CircularProgress color={"inherit"} size={24}/> : <>Responder</>}
+                        {isLoading ? <CircularProgress color={"inherit"} size={24} /> : <>Responder</>}
                     </StyledButton>
                 </FormContainer>
-                {commentsCard.length > 0 ? commentsCard : <Loading/> }
+                {commentsCard.length > 0 ? commentsCard : <Loading />}
+                <ReactPaginateContainer
+                    previousLabel={"Previous"}
+                    nextLabel={"Next"}
+                    pageCount={pageCount}
+                    onPageChange={changePage}
+                    containerClassName={"paginationButtons"}
+                    previousLinkClassName={"previousButton"}
+                    nextLinkClassName={"nextButton"}
+                    disabledClassName={"paginationDisabled"}
+                    activeClassName={"paginationActive"}
+                />
             </TelaPost>
         </MainContainer>
     )

@@ -69,7 +69,7 @@ export const SignUpButton = styled(Button)`
 export const LinhaDiv = styled.div`
     margin: 1.5em;
     border: 1px solid  #F9B24E ;
-    border-image-source: linear-gradient(90deg, #FF6489 0%, #F9B24E 100%),linear-gradient(0deg, #ACACAC, #ACACAC);
+    border-image-source: linear-gradient(90deg, #FF6489 0%, #F9B24E 100%)
     
 `
 

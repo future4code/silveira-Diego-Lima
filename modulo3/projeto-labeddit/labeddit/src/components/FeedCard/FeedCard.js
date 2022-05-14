@@ -1,10 +1,12 @@
 import React from 'react';
-import { FeedContainer } from "./styled"
+import { FeedContainer, ButtonsContainer, Autor, PostContent } from "./styled"
 import { useNavigate } from "react-router-dom";
 import { goToPost } from "../../routes/coordinator"
 import { BASE_URL } from '../../constants/urls';
 import axios from 'axios';
-
+import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+import InsertCommentOutlinedIcon from '@material-ui/icons/InsertCommentOutlined';
 
 const FeedCard = (props) => {
   const getPost = props.getPost
@@ -71,17 +73,16 @@ const FeedCard = (props) => {
   return (
 
     <FeedContainer>
-      <p>Enviado por: {props.username}</p>
+      <Autor>Enviado por: {props.username}</Autor>
       <p>{props.titulo}</p>
-      <p>{props.post}</p>
-      <div>
-        <button onClick={() => handleLike(props.id, props.userVote)}>LIKE</button>
-        votos {props.votos}
-        <button onClick={() => handleDesLike(props.id, props.userVote)} >DESLIKE</button>
-      </div>
-      comentarios {props.comentarios}
-      <button onClick={() => onClickCard(props.id)} >Detalhes</button>
-
+      <PostContent>{props.post}</PostContent>
+      <ButtonsContainer>
+        <ThumbUpAltOutlinedIcon color="primary" cursor="pointer" onClick={() => handleLike(props.id, props.userVote)}></ThumbUpAltOutlinedIcon>
+         {props.votos}
+        <ThumbDownIcon color="primary" cursor="pointer" onClick={() => handleDesLike(props.id, props.userVote)} ></ThumbDownIcon>
+        <InsertCommentOutlinedIcon color="primary" cursor="pointer" onClick={() => onClickCard(props.id)}></InsertCommentOutlinedIcon>{props.comentario}
+      </ButtonsContainer>
+      
     </FeedContainer>
 
   );
