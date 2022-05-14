@@ -26,7 +26,7 @@ const FeedPage = () => {
         return (
             <FeedCard
                 key={post.id}
-                // onClick={() => onClickCard(post.id)}
+                
                 id={post.id}
                 username={post.username}
                 titulo={post.title}

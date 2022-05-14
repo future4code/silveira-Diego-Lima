@@ -21,8 +21,8 @@ const PostPage = () => {
     const params = useParams()
     const [form, onChange, clear] = useForm({ body: "" })
     const [isLoading, setIsLoading] = useState(false)
-    const comments = useRequestData([], `${BASE_URL}/posts/${params.id}/comments`)[0]
-    const [feedPost, getPost] = useRequestData([], `${BASE_URL}/posts`)
+    const [comments, getComments] = useRequestData([], `${BASE_URL}/posts/${params.id}/comments`)
+    const [feedPost ] = useRequestData([], `${BASE_URL}/posts`)
     const [pageNumber, setPageNumber] = useState(0);
 
     const commentsPerPage = 4;
@@ -31,7 +31,7 @@ const PostPage = () => {
 
     const onSubmitForm = (event) => {
         event.preventDefault()
-        createComment(form, clear, params.id, setIsLoading)
+        createComment(form, clear, params.id, setIsLoading, getComments)
 
     }
 
@@ -59,6 +59,7 @@ const PostPage = () => {
                 body={comments.body}
                 votos={comments.voteSum}
                 id={comments.id}
+                getComments={getComments}
             />
         )
     })
@@ -72,7 +73,7 @@ const PostPage = () => {
         <MainContainer>
             <TelaPost>
                 <Header />
-                {PostComment}
+                {PostComment.length > 0 ? PostComment : <Loading/>}
                 <FormContainer onSubmit={onSubmitForm}>
                     <TextField id="outlined-basic" label="Digite seu texto" variant="outlined" size="small" margin="normal"
                         name={"body"}

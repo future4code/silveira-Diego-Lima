@@ -7,6 +7,7 @@ import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 
 
 const CommentCard = (props) => {
+    const getComments = props.getComments
   
     const handleVote = (postId, direction) => {
         const headers = {
@@ -21,6 +22,7 @@ const CommentCard = (props) => {
             axios.post(url, body, headers)
                 .then((res) => {
                     console.log(res)
+                    getComments()
                     
                 }).catch((err) => {
                     console.log(err)
@@ -29,6 +31,7 @@ const CommentCard = (props) => {
             axios.put(url, body, headers)
                 .then((res) => {
                     console.log(res)
+                    getComments()
                     
                 }).catch((err) => {
                     console.log(err)
@@ -37,6 +40,7 @@ const CommentCard = (props) => {
             axios.delete(url, headers)
                 .then((res) => {
                     console.log(res)
+                    getComments()
                     
                 }).catch((err) => {
                     console.log(err)

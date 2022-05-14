@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { StyledButton, } from "../../global/GlobalStyled";
 import { FormContainer } from "./styled"
 import TextField from '@material-ui/core/TextField';
@@ -15,10 +15,10 @@ const SignUpForm = () => {
 
     const navigate = useNavigate()
     const onSubmitForm = (event) => {
-        
+
         event.preventDefault()
         signUp(form, clear, navigate, setIsLoading)
-        
+
     }
 
 
@@ -49,9 +49,8 @@ const SignUpForm = () => {
 
             />
             <p>Ao continuar, você concorda com o nosso Contrato de <br /> usuário, e nossa Política de Privacidade</p>
-            <p> Eu concordo em receber emails sobre coisas legais <br /> no Labeddit </p>
             <StyledButton variant="contained" color="primary" margin="normal" type={'submit'}>
-            {isLoading ? <CircularProgress color={"inherit"} size={24}/> : <>Cadastrar</>}
+                {isLoading ? <CircularProgress color={"inherit"} size={24} /> : <>Cadastrar</>}
             </StyledButton>
 
         </FormContainer>

@@ -16,3 +16,8 @@ export const FormContainer = styled.form`
     flex-wrap: wrap;
     align-content: space-around;
     `
+export const Titulo =styled.h1`
+    display: flex;
+    justify-content: center;
+
+`    

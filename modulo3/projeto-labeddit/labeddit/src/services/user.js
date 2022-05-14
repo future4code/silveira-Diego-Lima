@@ -50,7 +50,7 @@ export const createPost = (body, clear, getPosts, setIsLoading) => {
     })
 }
 
-export const createComment = (body, clear, params, setIsLoading) => {
+export const createComment = (body, clear, params, setIsLoading, getComments) => {
     setIsLoading(true)
     axios.post(`${BASE_URL}/posts/${params}/comments`, body, {
         headers: {
@@ -59,8 +59,9 @@ export const createComment = (body, clear, params, setIsLoading) => {
     }).then((res) => {
         alert(res.data)
         clear();
+        getComments()
         setIsLoading(false)
-        // getComments()     
+            
 
 
     }).catch((err) => {

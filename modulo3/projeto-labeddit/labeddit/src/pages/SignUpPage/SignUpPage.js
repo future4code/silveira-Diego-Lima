@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../../components/Header/Header";
 import { TelaCadastro, } from "../../global/GlobalStyled";
-import { MainContainer} from "./styled"
+import { MainContainer, Titulo} from "./styled"
 import SignUpForm from "./SignUpForm";
 import useUnprotectdPage from "../../hooks/useUnprotectedPage";
 
@@ -14,7 +14,7 @@ const SignUpPage = () => {
         <MainContainer>
             <TelaCadastro>
                 <Header />
-                <h1>Olá, boas vindas ao LabEddit ;)</h1>
+                <Titulo>Bem Vindo ao LabEddit</Titulo>
                 <SignUpForm />
             </TelaCadastro>
         </MainContainer>
