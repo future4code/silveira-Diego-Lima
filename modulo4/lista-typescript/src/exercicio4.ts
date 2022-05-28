@@ -17,14 +17,12 @@ const colaboradores: Colaboradores[]  = [
 	{ nome: "Paola" , salário: 3500, setor: SETOR.MARKETING, presencial: true }
 ]    
 
-const filtrarColaboradores = (array: Colaboradores[]) => {
+function filtrarColaboradores (array: Colaboradores[]) : Colaboradores[]  {
     const filtro = array.filter((pessoa) => {
 
         return pessoa.setor === SETOR.MARKETING && pessoa.presencial
     })
-
-
-
+	
+	return filtro
 }
-
 console.log(filtrarColaboradores(colaboradores))
