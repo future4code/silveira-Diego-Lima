@@ -1,6 +1,6 @@
 import express ,{Request , Response} from 'express'
 import cors from "cors";
-import { usuarios } from './usuarios';
+import { usuarios, posts } from './baseDados';
 
 const app = express()
 
@@ -18,4 +18,15 @@ app.get("/", (req: Request, res: Response) => {
 app.get("/users", (req: Request, res: Response) => {         
     
     res.send(usuarios)
+})
+app.get("/posts", (req: Request, res: Response) => {        
+    
+    res.send(posts)
+})
+app.get("/posts/:id", (req: Request, res: Response) => {  
+    if (Number(req.params.id) ) {
+        res.send(posts)
+    }      
+    
+    res.send(posts)
 })
