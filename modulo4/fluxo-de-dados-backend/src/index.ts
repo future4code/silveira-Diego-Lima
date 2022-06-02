@@ -48,9 +48,14 @@ app.delete("produto/delete/:id", (req: Request, res: Response) => {
     if (!id) {
       throw new Error("ID não encontrado")
     }   
-  const indexProduto = produtos.findIndex(produto => produto.id === id)
-  produtos.slice(indexProduto, 1)
+  const indexDelete = produtos.findIndex((produto:Produtos) => {
+    return produto.id === id })
+    if (!indexDelete) {
+      throw new Error("Produto não encontrado")
+    }
+  const produtoRemovido = produtos.slice(indexDelete, 1)
 
+  res.status(200).send(produtoRemovido)
 })
 
 
