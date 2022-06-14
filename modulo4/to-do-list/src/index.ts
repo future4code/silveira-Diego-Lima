@@ -149,9 +149,9 @@ app.get("/task/:id" , async (req: Request, res: Response) => {
     WHERE task_id = ${id};
     `)
     let dataAmericana: string = task[0][0].limitDate
- 
-    let dataBrasileira: string = dataAmericana.split('/').reverse().join('-')
-    console.log(dataBrasileira)
+
+    // let dataBrasileira: string = dataAmericana.split('-').reverse().join('/')
+    // console.log(dataBrasileira)
     // const dataCorrigida = task[0][0].limitDate : dataBrasileira
 
     res.status(200).send(task[0][0])
