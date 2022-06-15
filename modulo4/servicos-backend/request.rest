@@ -1,0 +1,6 @@
+
+GET http://localhost:3003/endereco/80060010
+
+###
+
+POST http://localhost:3003/user/?cep=80630065&numero=1389&complemento=AP03
