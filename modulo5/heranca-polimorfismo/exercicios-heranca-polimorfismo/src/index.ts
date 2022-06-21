@@ -225,7 +225,7 @@ class CommercialClient extends Commerce implements Client {
 
 // Exercício 6
 
-class IndustrialClient  extends Industry implements Client {
+class IndustrialClient extends Industry implements Client {
     constructor(
         public name: string,
         public registrationNumber: number,
@@ -243,3 +243,6 @@ class IndustrialClient  extends Industry implements Client {
     }
 
 }
+// filha de industry porque é um tipo de classe espefico para este ramo.
+// Client porque apesar de ser de setores diferentes todos são clientes da companhia de energia
+// porque não há necessidade de alteração dos dados informados. nome não muda, nem, cep, nem cpf ou cnpj.
