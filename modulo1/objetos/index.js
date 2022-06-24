@@ -56,4 +56,21 @@ function adicionarFruta(objeto){
 adicionarFruta(fruta)
 adicionarFruta(fruta2)
 adicionarFruta(fruta3)
-console.log(carrinho)
+console.log(carrinho);
+
+
+// function find_max(nums) {
+//     2 let max_num = Number.NEGATIVE_INFINITY; // smaller than all other numbers
+//     3 for (let num of nums) {
+//     4 if (num > max_num) {
+//     5 // (Fill in the missing line here)
+//     6 }
+//     7 }
+//     8 return max_num;
+//     9 }
+
+//     find_max(nums)
+
+//     nums=[1,2,3,4,6,5,8,125,21515,1512]
+
+//     console.log(find_max)

@@ -66,3 +66,7 @@ operacoes = numero1/numero2
 console.log(`Divisão: ${opercacoes}.`)
 return operacoes
 }
+
+
+
+

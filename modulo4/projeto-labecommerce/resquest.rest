@@ -1,0 +1,40 @@
+
+POST http://localhost:3003/user
+Content-Type: application/json
+
+{
+    "name": "Fred",
+    "email": "frodo@gmail.com",
+    "password": "123456"
+}
+
+###
+
+GET http://localhost:3003/users
+Content-Type: application/json
+
+###
+
+POST http://localhost:3003/product
+Content-Type: application/json
+
+{
+    "name": "Caneta",
+    "price": 12.99,
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0ejjWoKmEYQpqmhoQkHQhbPBDzfn63tRNjg&usqp=CAU"
+}
+
+###
+GET http://localhost:3003/products
+Content-Type: application/json
+
+###
+
+POST http://localhost:3003/purchases
+Content-Type: application/json
+
+{   
+    "userId":"1655598726689",
+    "productId":"1655601619707",
+    "quantity":2
+}
