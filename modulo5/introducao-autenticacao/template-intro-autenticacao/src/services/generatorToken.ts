@@ -18,7 +18,6 @@ export const generateToken = (input: AuthenticationData): string => {
   }
 
 
-
   const getData = (token: string): AuthenticationData => {
     const payload = jwt.verify(token, process.env.JWT_KEY as string) as any;
     const result = {
