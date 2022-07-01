@@ -1,22 +1,21 @@
 import { Request, Response } from "express"
-import { UserDataBase } from "../data/UserDataBase"
+import { RecipeDataBase } from "../data/RecipeDataBase"
 
 
-
-export async function getProfileById(req: Request, res: Response) {
+export async function getRecipeById(req: Request, res: Response) {
     let errorCode: number = 400
     try {
         const id = req.params.id as string
         const token = req.headers.authorization
         if (!token || !id) {
             errorCode = 422
-            throw new Error("Esse endpoint exige uma autorização através do headers e 'ID' do usuário por params")
+            throw new Error("Esse endpoint exige uma autorização através do headers e 'ID' da receita por params")
         }
 
-        const userDataBase = new UserDataBase()
-        const user = await userDataBase.getUserProfile(id)
+        const recipeDataBase = new RecipeDataBase()
+        const recipe = await recipeDataBase.getRecipe(id)
 
-        res.status(200).send(user)
+        res.status(200).send(recipe)
     } catch (error: any) {
         res.status(errorCode).send({ message: error.message })
         res.status(400).send({ message: error.message || error.sqlMessage })

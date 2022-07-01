@@ -12,11 +12,16 @@ export async function getProfile(req: Request, res: Response) {
             throw new Error("Esse endpoint exige uma autorização através do headers")
         }
         const authenticator = new Authenticator()
-        const tokenData = authenticator.getTokenData(token)
-        console.log(tokenData.id)
+        const tokenData = authenticator.getTokenData(token) 
+        
+
+        if(!tokenData){
+            errorCode = 401
+            throw new Error("Token inválido")
+        }
         
         const userDataBase = new UserDataBase()
-        const user = await userDataBase.getProfile(tokenData.id)
+        const user = await userDataBase.getUserProfile(tokenData.id)
 
         res.status(200).send(user)
     } catch (error: any) {

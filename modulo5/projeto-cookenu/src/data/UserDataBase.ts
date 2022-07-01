@@ -27,7 +27,7 @@ export class UserDataBase extends BaseDataBase {
             throw new Error(error.sqlMessage || error.message)
         }
     }
-    public async getProfile(id: string): Promise<Users> {
+    public async getUserProfile(id: string): Promise<Users> {
         try {
             const user = await BaseDataBase.connection("cookenu_users")
                 .select('id', 'name', 'email')
