@@ -1,4 +1,5 @@
 import app from "./app"
+import { followUser } from "./endpoints/followUser"
 import { getProfile } from "./endpoints/getProfile"
 import { getProfileById } from "./endpoints/getProfileById"
 import { getRecipeById } from "./endpoints/getRecipeById"
@@ -20,5 +21,4 @@ app.post("/login", login)
 
 app.post("/recipe", postRecipe)
 
-const createdAt = new Date()
-console.log(createdAt)
+app.post("/user/follow", followUser)

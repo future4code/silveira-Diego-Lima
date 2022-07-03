@@ -4,14 +4,15 @@ import Authenticator from "../services/Authenticator"
 
 
 
-export async function getProfileById(req: Request, res: Response) {
+export async function followUser(req: Request, res: Response) {
     let errorCode: number = 400
     try {
-        const id = req.params.id as string
         const token = req.headers.authorization
-        if (!token || !id) {
+        const {idSeguido} = req.body
+        
+        if (!token || !idSeguido) {
             errorCode = 422
-            throw new Error("Esse endpoint exige uma autorização através do headers e 'ID' do usuário por params")
+            throw new Error("Esse endpoint exige uma autorização através do headers e 'ID' do usuário a ser seguido")
         }
         const authenticator = new Authenticator()
         const tokenData = authenticator.getTokenData(token)         
@@ -19,12 +20,17 @@ export async function getProfileById(req: Request, res: Response) {
         if(!tokenData){
             errorCode = 401
             throw new Error("Token inválido")
-        }
-        
-        const userDataBase = new UserDataBase()
-        const user = await userDataBase.getUserProfile(id)
+        }        
+        const userAlreadyExist = await new UserDataBase().getUserProfile(idSeguido)
 
-        res.status(200).send(user)
+        if(!userAlreadyExist){
+            errorCode = 404
+            throw new Error(`Usuário ${idSeguido} não encontrado !`)
+        }
+
+        await new UserDataBase().followUser(tokenData.id, idSeguido)
+
+        res.status(200).send({message:`Usuário seguindo pessoa com id ${idSeguido} com sucesso`})
     } catch (error: any) {
         res.status(errorCode).send({ message: error.message })
         res.status(400).send({ message: error.message || error.sqlMessage })

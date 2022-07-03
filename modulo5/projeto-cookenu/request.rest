@@ -14,18 +14,27 @@ POST http://localhost:3003/login
 Content-Type: application/json
 
 {
-    "email":"thor@avengers.com",
+    "email":"diego.lima@email.com",
     "password":"DlSdas@!125ds5"
 }
 
 ### Pegar próprio perfil
-@token = {{login.response.body.token}}
 
 GET http://localhost:3003/user/profile
-Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImUzMmU4NGJmLTYwOTItNGI3MS04ZjgyLTFkYzFjY2Y4ZWMzYyIsImlhdCI6MTY1NjcwMjQ1NiwiZXhwIjoxNjU2NzEzMjU2fQ.KSACklAO-uUVS21NsnYg2e_7Y4I4ELGKkMy4QED-6VU
+Authorization: {{login.response.body.token}}
+
 
 ###Pegar perfil de outro usuário
 GET http://localhost:3003/user/e32e84bf-6092-4b71-8f82-1dc1ccf8ec3c
+Authorization: {{login.response.body.token}}
+
+###
+POST http://localhost:3003/user/follow
+Authorization: {{login.response.body.token}}
 Content-Type: application/json
-Authorization: {{token}}
+
+{
+    "idSeguido":"e32e84bf-6092-4b71-8f82-1dc1ccf8ec3c"
+}
+
+

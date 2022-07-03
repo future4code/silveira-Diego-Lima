@@ -38,5 +38,16 @@ export class UserDataBase extends BaseDataBase {
             throw new Error(error.sqlMessage || error.message)
         }
     }
+    public async followUser(id_seguir: string, id_seguido: string): Promise<void> {
+        try {
+            await BaseDataBase.connection("cookenu_users_follow")
+                .insert({
+                    id_seguir,
+                    id_seguido
+                })
 
+        } catch (error: any) {
+            throw new Error(error.sqlMessage || error.message)
+        }
+    }
 }
