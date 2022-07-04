@@ -1,0 +1,29 @@
+
+POST http://localhost:3003/signup
+Content-Type: application/json
+
+{
+	"name": "Teste",
+	"email": "michael@dundermifflin.com",
+	"password": "theboss",
+	"role": "NORMAL"
+}
+###
+# @name login
+POST http://localhost:3003/login
+Content-Type: application/json
+
+{
+	"email": "michael@dundermifflin.com",
+	"password": "theboss"
+}
+
+### Pegar todos os perfis
+
+GET http://localhost:3003/all
+Authorization: {{login.response.body.token}}
+
+### Deletar usuario
+
+DELETE  http://localhost:3003/2b47fae7-0293-4515-ae5c-c6fda40cf45b
+Authorization: {{login.response.body.token}}
