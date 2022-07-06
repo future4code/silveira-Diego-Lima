@@ -1,11 +1,13 @@
 import app from "./app"
-import UserController from "./UserController"
+import { postRouter } from "./routes/postRouter"
+import { userRouter } from "./routes/userRouter"
 
 
-const userController = new UserController()
 
+app.use("/user", userRouter)
 
-app.post("/signup", userController.signUp)
+app.use("/user", userRouter)
 
-app.post("/login", userController.login)
+app.use("/post", postRouter)
 
+app.use("/post", postRouter)

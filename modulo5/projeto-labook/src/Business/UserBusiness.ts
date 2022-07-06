@@ -1,7 +1,7 @@
 import { UserData } from "../data/UserData"
 import { userInput, userLogin } from "../model/types"
 import { Users } from "../model/Users"
-import Authenticator from "../services/Authenticator"
+import { Authenticator } from "../services/Authenticator"
 import { HashManager } from "../services/HashManager"
 import { IdGenerator } from "../services/IdGenerator"
 
@@ -31,7 +31,7 @@ class UserBusiness {
         await new UserData().createUser(newUser)
 
         const authenticator = new Authenticator()
-        const token = authenticator.generate({ id })
+        const token = authenticator.generateToken({id})
 
         return token
 
@@ -54,7 +54,7 @@ class UserBusiness {
             throw new Error("Credenciais de acesso inválidas");
         }
         const authenticator = new Authenticator()
-        const token = authenticator.generate({ id: user.getId()})
+        const token = authenticator.generateToken({ id: user.getId()})
 
         return token
     }

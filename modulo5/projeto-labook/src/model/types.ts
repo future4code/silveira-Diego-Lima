@@ -2,7 +2,7 @@
 export type userInput = {
     name: string,
     email: string,
-    password: string    
+    password: string
 }
 
 export type userLogin = {
@@ -13,13 +13,19 @@ export type userLogin = {
 enum POST_TYPES {
     NORMAL = "normal",
     EVENT = "event"
- }
- 
- type post = {
+}
+
+export type Post = {
     id: string,
     photo: string,
     description: string,
     type: POST_TYPES,
     createdAt: Date,
     authorId: string
- }
+}
+
+export type PostInput = {
+    photo: string,
+    description: string,
+    type: POST_TYPES
+}

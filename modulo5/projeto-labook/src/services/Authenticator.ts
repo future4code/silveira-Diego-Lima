@@ -6,27 +6,24 @@ dotenv.config()
 export interface authenticationData {
     id: string,
 }
-export default class Authenticator {
-    public generate(input: authenticationData): string {
-        const token = jwt.sign(input, process.env.JWT_KEY as string, {
-            expiresIn: "3h"
-        });
-        return token
+export class Authenticator {
+    generateToken = (
+        payload: authenticationData
+    ): string => {
+        return jwt.sign(
+            payload,
+            process.env.JWT_KEY as string,
+            {
+                expiresIn: "3h"
+            }
+        )
     }
-
-    public getTokenData = (token: string): authenticationData | null => {
-        try {
-            const tokenData = jwt.verify(
-                token,
-                process.env.JWT_KEY as string
-            ) as any
-
-            return tokenData
-
-        } catch (error) {
-            console.log(error)
-            return null
-        }
-
+    getTokenData = (
+        token: string
+    ): authenticationData => {
+        return jwt.verify(
+            token,
+            process.env.JWT_KEY as string
+        ) as authenticationData
     }
-}   
+}
