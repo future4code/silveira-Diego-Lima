@@ -1,49 +1,60 @@
 import { Request, Response } from "express"
 import PostBusiness from "../Business/PostBusiness"
-import { Post, PostInput } from "../model/types"
+import { PostInputDTO } from "../model/Posts"
 
-class PostController {
-    async createPost(req: Request, res: Response) {
+
+export default class PostController {
+
+    constructor(
+        private postBusiness: PostBusiness
+    ) { }
+
+    public createPost = async (req: Request, res: Response) => {
+
         try {
             const { photo, description, type } = req.body
 
             const token: string = req.headers.authorization as string
 
-            const postBussiness = new PostBusiness()
-
-            const newPost: PostInput = {
+            const newPost: PostInputDTO = {
                 photo,
                 description,
                 type
             }
 
-            const post = await postBussiness.create(newPost, token)
+            const post = await this.postBusiness.create(newPost, token)
 
-            res.status(201).send({ message: "Post criado com sucesso" })
+            res.status(201).send({ message: "Post criado com sucesso", post })
 
         } catch (error: any) {
-            res.status(500).send({ message: error.message })
+            if (res.statusCode === 200) {
+                res.status(500).send({ message: error.message })
+            } else {
+                res.status(res.statusCode).send({ message: error.sqlMessage || error.message })
+            }
         }
 
     }
-    async getPost(req: Request, res: Response) {
+    public getPost = async (req: Request, res: Response) => {
         try {
             const token: string = req.headers.authorization as string
             const id = req.params.id as string
 
-            const postBussiness = new PostBusiness()
-
-            const post = await postBussiness.getPostById(id, token)
+            
+            const post = await this.postBusiness.getPostById(id, token)
 
 
             res.status(200).send(post)
 
         } catch (error: any) {
-            res.status(500).send({ message: error.message })
+            if (res.statusCode === 200) {
+                res.status(500).send({ message: error.message })
+            } else {
+                res.status(res.statusCode).send({ message: error.sqlMessage || error.message })
+            }
         }
     }
 
 
 }
 
-export default PostController

@@ -1,10 +1,15 @@
+
+export enum POST_TYPES {
+    NORMAL = "normal",
+    EVENT = "event"
+}
 export class Posts {
 
     constructor(
         private id: string,
         private photo: string,
         private description: string,
-        private type: string,
+        private type: POST_TYPES,
         private created_at: Date,
         private author_id: string
     ) { }
@@ -20,4 +25,20 @@ export class Posts {
     static toPostModel(data: any): Posts {
         return new Posts(data.id, data.photo, data.description, data.type, data.created_at, data.author_id);
     }
+}
+
+
+export interface Post {
+    id: string,
+    photo: string,
+    description: string,
+    type: POST_TYPES,
+    createdAt: Date,
+    authorId: string
+}
+
+export type PostInputDTO = {
+    photo: string,
+    description: string,
+    type: POST_TYPES
 }

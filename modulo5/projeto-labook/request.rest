@@ -23,13 +23,13 @@ Authorization: {{login.response.body.token}}
 Content-Type: application/json 
 
 {
-    "photo": "rodrigo12@email.com",
-    "description": "1223145153",
+    "photo": "",
+    "description": "Teste final",
     "type": "normal"
 }
 
 ### Pegar post por ID 
 
-GET http://localhost:3003/post/939d9abc-edec-4463-9818-55d76cefe235
+GET http://localhost:3003/post/0e60932d-dce5-4675-9248-7c597e660dd6
 Authorization: {{login.response.body.token}}
 

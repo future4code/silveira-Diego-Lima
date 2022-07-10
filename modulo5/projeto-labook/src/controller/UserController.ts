@@ -1,48 +1,58 @@
 import { Request, Response } from "express";
 import UserBusiness from "../Business/UserBusiness";
-import { userInput, userLogin } from "../model/types";
+import { userInputDTO, userLoginDTO } from "../model/Users";
 
 
-class UserController {
-    async signUp(req: Request, res: Response) {
+
+export default class UserController {
+
+    constructor(
+        private userBusiness: UserBusiness
+    ) { }
+
+    public signUp = async (req: Request, res: Response) => {
         try {
-            const { name, email, password} = req.body
-            const userBusiness = new UserBusiness()
+            const { name, email, password } = req.body
 
-            const newUser: userInput = {
+            const newUser: userInputDTO = {
                 name,
                 email,
-                password                
+                password
             }
 
-            const token = await userBusiness.signup(newUser)
+            const token = await this.userBusiness.signup(newUser)
 
             res.status(201).send({ message: "Usuário cadastrado com sucesso", token })
 
         } catch (error: any) {
-            res.status(500).send({ message: error.message })
+            if (res.statusCode === 200) {
+                res.status(500).send({ message: error.message })
+            } else {
+                res.status(res.statusCode).send({ message: error.sqlMessage || error.message })
+            }
         }
 
     }
-    async login(req: Request, res: Response) {
+    public login = async (req: Request, res: Response) => {
         try {
             const { email, password } = req.body
-            const userBusiness = new UserBusiness()
-            const user: userLogin = {
+
+            const user: userLoginDTO = {
                 email,
                 password,
             }
 
-            const token = await userBusiness.login(user)
+            const token = await this.userBusiness.login(user)
 
-            res.status(201).send({ message: "Usuário logado com sucesso", token })
+            res.status(200).send({ message: "Usuário logado com sucesso", token })
 
         } catch (error: any) {
-            res.status(500).send({ message: error.message })
+            if (res.statusCode === 200) {
+                res.status(500).send({ message: error.message })
+            } else {
+                res.status(res.statusCode).send({ message: error.sqlMessage || error.message })
+            }
         }
     }
-    
-    
-}
 
-export default UserController
+}
