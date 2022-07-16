@@ -1,0 +1,35 @@
+POST http://localhost:3003/user/signup 
+Content-Type: application/json 
+
+{
+    "name": "Rodrigo12",
+    "email": "rodrigo12@email.com",
+    "password": "1223145153"
+}
+
+### Login do usuário
+# @name login
+POST http://localhost:3003/user/login 
+Content-Type: application/json 
+
+{
+    "email": "rodrigo12@email.com",
+    "password": "1223145153" 
+}
+### Postar 
+
+POST http://localhost:3003/post/create
+Authorization: {{login.response.body.token}}
+Content-Type: application/json 
+
+{
+    "photo": "",
+    "description": "Teste final",
+    "type": "normal"
+}
+
+### Pegar post por ID 
+
+GET http://localhost:3003/post/0e60932d-dce5-4675-9248-7c597e660dd6
+Authorization: {{login.response.body.token}}
+

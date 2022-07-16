@@ -1,7 +1,5 @@
 import { Request, Response } from "express";
 import UserBusiness from "../Business/UserBusiness";
-import { UserData } from "../data/UserData";
-import Authenticator from "../services/Authenticator";
 import { userInput, userLogin } from "../types";
 
 class UserController {
