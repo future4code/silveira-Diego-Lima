@@ -1,48 +1,78 @@
 
 import { DogDatabase } from "../data/DogDatabase";
 import { CustomError } from "../error/CustomError";
+import CalculatePrice from "../model/CalculatePrice";
 import { DogInputDTO, DogWalking } from "../model/DogWalking";
+import Filter from "../model/Filter";
 import IdGenerator from "../services/IdGenerator";
 
 export class DogBusiness {
     constructor(
         private dogDatabase: DogDatabase,
-        private idGeneratator: IdGenerator
+        private idGeneratator: IdGenerator,
+        private calculatePrice: CalculatePrice,
+        private filter: Filter
     ) { }
 
     public createWalk = async (dog: DogInputDTO) => {
 
         try {
-            const { data, preço, duração, latitute, longitude, pets, inicio, fim } = dog;
-            if (!data || !preço || !duração || !latitute || !longitude || !pets || !inicio || !fim) {
-                throw new CustomError(422, " Fill up all the fields 'name', 'email', 'password' and 'role' ");
+            const { data, duração, latitude, longitude, pets, inicio, fim } = dog;
+            if (!data || !duração || !latitude || !longitude || !pets || !inicio || !fim) {
+                throw new CustomError(422, " Preencha todos os campos com 'data', 'duração', 'latitude', 'longitude', 'pets', 'inicio', e 'fim' ");
             }
-           
-       
+            const revetedData = data.split('/').reverse().join('-')
+
+            const price = this.calculatePrice.calculate(duração, pets)
+
             const id = this.idGeneratator.generate();
 
-            const status= ""
+            const status = "Agendado"
 
-            const newUser = new DogWalking(id,status,data,preço,duração,latitute,longitude,pets,inicio,fim)
+            const newWalk = new DogWalking(id, status, revetedData, price, duração, latitude, longitude, pets, inicio, fim)
 
-            await this.dogDatabase.createUser(newUser);
+            await this.dogDatabase.createDogWalking(newWalk);
 
-            
-
-            return {message:"Dog Walking criada com sucesso"};
 
         } catch (error: any) {
-            if (error.message.includes("key 'email'")) {
-                throw new CustomError(409, "Email already in use")
+            throw new CustomError(error.statusCode, error.message);
+        }
+    }
+    public getWalking = async (filtro: string) => {
+
+        try {
+
+            if (filtro) {
+                const filtroValidado = this.filter.calculate(filtro)
+
+                const lista = await this.dogDatabase.getWalkingWithFilter(filtroValidado);
+
+                if (lista.length < 1) {
+                    throw new CustomError(404, "Não foi possivel encontrar a lista")
+                }
+                return lista
             }
-            throw new CustomError(error.statusCode, error.message)
+            if (!filtro) {
+
+                const lista = await this.dogDatabase.getWalkingWithoutFilter()
+
+                if (lista.length < 1) {
+                    throw new CustomError(404, "Não foi possivel encontrar a lista")
+                }
+                return lista
+            }
+
+        } catch (error: any) {
+            throw new CustomError(error.statusCode, error.message);
         }
     }
 
-    
+
 }
 
 export default new DogBusiness(
     new DogDatabase(),
-    new IdGenerator()
+    new IdGenerator(),
+    new CalculatePrice(),
+    new Filter()
 )

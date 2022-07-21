@@ -1,21 +1,24 @@
-### Cadastro de usuario
-POST http://localhost:3003/user/signup
+### Cadastrar Passeio
+POST http://localhost:3003/dog/create
 Content-Type: application/json
 
 {   
-    "name": "Diego", 
-    "email":"diego@email.com",
-    "password":"123456",
-    "role": "ADMIN"   
+    "data": "22/07/2022",
+    "duração": "60",
+    "latitude": "25º25'48''Sul",
+    "longitude": "49º16'15'' Oeste",
+    "pets": 3,
+    "inicio": 15,
+    "fim":1530
 }
 
-### Login do usuário
-# @name login
-POST http://localhost:3003/user/login
+### Pegar Lista de Passeios
+GET http://localhost:3003/dog/list
 Content-Type: application/json
 
 {
-    "email":"diego@email.com",
-    "password":"123456"
+    "filtro": "sim"
+
 }
+
 

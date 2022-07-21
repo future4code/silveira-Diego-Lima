@@ -3,10 +3,10 @@ export class DogWalking {
     constructor(
         private id: string,
         private status: string,
-        private data: Date,
+        private data: string,
         private preço: number,
         private duração: string,
-        private latitute: string,
+        private latitude: string,
         private longitude: string,
         private pets: number,
         private inicio: number,
@@ -18,7 +18,7 @@ export class DogWalking {
     public getData = () => this.data
     public getPreço = () => this.preço
     public getDuração = () => this.duração
-    public getLatitute = () => this.latitute
+    public getLatitute = () => this.latitude
     public getLongitude = () => this.longitude
     public getPets = () => this.pets
     public getInicio = () => this.inicio
@@ -26,23 +26,17 @@ export class DogWalking {
 
     
     static toDogModel(dog: any) {
-        return new DogWalking(dog.id, dog.status, dog.data, dog.preço, dog.duração, dog.latitute, dog.longitude, dog.pets, dog.inicio, dog.fim);
+        return new DogWalking(dog.id, dog.status, dog.data, dog.preço, dog.duração, dog.latitude, dog.longitude, dog.pets, dog.inicio, dog.fim);
     }
 }
 
 export interface DogInputDTO {
-    data: Date,
-    preço: number,
+    data: string,
     duração: string,
-    latitute: string,
+    latitude: string,
     longitude: string,
     pets: number,
     inicio: number,
     fim: number
-}
-
-export interface LoginInputDTO {
-    email: string;
-    password: string;
 }
 

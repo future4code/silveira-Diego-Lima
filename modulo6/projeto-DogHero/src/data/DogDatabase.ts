@@ -5,7 +5,7 @@ export class DogDatabase extends BaseDatabase {
 
     private static TABLE_NAME = "Dog_Walking";
 
-    public async createUser(dog: DogWalking): Promise<void> {
+    public async createDogWalking(dog: DogWalking): Promise<void> {
 
         try {
             await this.getConnection()
@@ -27,7 +27,32 @@ export class DogDatabase extends BaseDatabase {
             throw new Error(error.sqlMessage || error.message);
         }
     }
+    public async getWalkingWithFilter(filtro: string): Promise<DogWalking[]> {
 
+        try {
+            const result = await this.getConnection()
+                .select('*')
+                .from(DogDatabase.TABLE_NAME)
+                .where('data', '>', `${filtro}`)
+
+
+            return result.map(dog => DogWalking.toDogModel(dog))
+        } catch (error: any) {
+            throw new Error(error.sqlMessage || error.message);
+        }
+    }
+    public async getWalkingWithoutFilter(): Promise<DogWalking[]> {
+
+        try {
+            const result = await this.getConnection()
+                .select('*')
+                .from(DogDatabase.TABLE_NAME)
+
+            return result.map(dog => DogWalking.toDogModel(dog))
+        } catch (error: any) {
+            throw new Error(error.sqlMessage || error.message);
+        }
+    }
 }
 
 export default new DogDatabase()
