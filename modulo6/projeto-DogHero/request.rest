@@ -3,22 +3,30 @@ POST http://localhost:3003/dog/create
 Content-Type: application/json
 
 {   
-    "data": "22/07/2022",
-    "duração": "60",
+    "data": "23/07/2022",
+    "duracao": "80",
     "latitude": "25º25'48''Sul",
     "longitude": "49º16'15'' Oeste",
     "pets": 3,
-    "inicio": 15,
-    "fim":1530
+    "inicio": 17.5,
+    "fim":18
 }
 
 ### Pegar Lista de Passeios
-GET http://localhost:3003/dog/list
+GET http://localhost:3003/dog/index
 Content-Type: application/json
 
 {
-    "filtro": "sim"
+    "filtro": "sim",
+    "pagina": "3"
 
 }
 
+### Pegar duração real de um passeio
+GET http://localhost:3003/dog/show
+Content-Type: application/json
 
+{
+    "id": "1bc41629-5462-4512-99de-f69f13136933"
+
+}

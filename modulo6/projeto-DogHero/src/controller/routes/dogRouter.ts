@@ -1,12 +1,14 @@
 import express from "express";
-import DogController from "../DogController";
+import dogController from "../DogController";
 
 
 
 export const dogRouter = express.Router();
 
 
-dogRouter.get("/list", DogController.getIndex);
+dogRouter.get("/index", dogController.getIndex);
 
-dogRouter.post("/create", DogController.create);
+dogRouter.post("/create", dogController.create);
+
+dogRouter.get("/show", dogController.getShow);
 

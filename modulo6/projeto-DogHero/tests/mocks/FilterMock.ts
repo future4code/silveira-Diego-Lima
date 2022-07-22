@@ -1,4 +1,4 @@
-export default class Filter {
+export default class FilterMock {
     calculate(filtro: string): string {
 
         if (filtro === "sim") {

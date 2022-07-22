@@ -9,10 +9,10 @@ export class DogController {
     public create = async (req: Request, res: Response) => {
         try {
 
-            const { data, duração, latitude, longitude, pets, inicio, fim } = req.body
+            const { data, duracao, latitude, longitude, pets, inicio, fim } = req.body
             const input: DogInputDTO = {
                 data,
-                duração,
+                duracao,
                 latitude,
                 longitude,
                 pets,
@@ -20,9 +20,9 @@ export class DogController {
                 fim
             }
 
-            await dogBusiness.createWalk(input);
+            const walking = await dogBusiness.createWalk(input);
 
-            res.status(201).send({ message: "Dog Walking criada com sucesso" });
+            res.status(201).send({ message: "Dog Walking criada com sucesso", walking });
 
         } catch (error: any) {
             const { statusCode, message } = error
@@ -34,9 +34,9 @@ export class DogController {
     }
     public getIndex = async (req: Request, res: Response) => {
         try {
-            const { filtro } = req.body
+            const { filtro, pagina } = req.body
 
-            const list = await dogBusiness.getWalking(filtro)
+            const list = await dogBusiness.getWalking(filtro,pagina)
 
             res.status(200).send({ list });
 
@@ -48,5 +48,23 @@ export class DogController {
             await BaseDatabase.destroyConnection();
         }
     }
+    public getShow = async (req: Request, res: Response) => {
+
+        try {
+            const id = req.body
+
+            const passeio = await dogBusiness.getShowById(id)
+
+            res.status(200).send({ message: `${passeio} min` });
+
+        } catch (error: any) {
+            const { statusCode, message } = error
+            res.status(statusCode || 400).send({ message });
+
+        } finally {
+            await BaseDatabase.destroyConnection();
+        }
+    }
+
 }
 export default new DogController()

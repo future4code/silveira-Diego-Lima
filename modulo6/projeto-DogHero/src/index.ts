@@ -10,9 +10,6 @@ app.use(cors());
 
 app.use("/dog", dogRouter)
 
-app.use("/dog", dogRouter)
-
-
 
 
 const server = app.listen(process.env.PORT || 3003, () => {

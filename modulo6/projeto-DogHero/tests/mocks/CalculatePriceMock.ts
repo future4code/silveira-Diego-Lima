@@ -1,6 +1,7 @@
-import { CustomError } from "../error/CustomError"
+import { CustomError } from "../../src/error/CustomError"
 
-export default class CalculatePrice {
+export class CalculatePriceMock {
+
     calculate(duração: string, pets: number): number {
 
         if (duração === "30") {
@@ -15,5 +16,3 @@ export default class CalculatePrice {
         }
     }
 }
-
-
