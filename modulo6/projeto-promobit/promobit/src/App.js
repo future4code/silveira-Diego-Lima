@@ -3,8 +3,6 @@ import Router from "./routes/Router";
 import GlobalState from "./global/GlobalState";
 
 
-
-
 const App = () => {
   return (
 
