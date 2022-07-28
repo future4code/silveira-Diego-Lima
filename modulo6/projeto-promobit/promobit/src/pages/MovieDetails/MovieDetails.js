@@ -14,8 +14,7 @@ const MovieDetails = () => {
 
 
 
-    console.log(credits.crew)
-
+    
     const directorFilter = credits.crew && credits.crew.filter((movie) => {
         return movie.name && movie.job === "Director"
     })

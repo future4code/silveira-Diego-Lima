@@ -1,7 +1,9 @@
 import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import CardMovie from '../../components/CardMovie'
 import { GlobalStateContext } from '../../global/GlobalStateContext'
 import { goToMovieDetails } from '../../routes/coordinator'
+import { ContainerCardMovies, Header } from './styled'
 
 
 
@@ -19,19 +21,25 @@ const HomePage = () => {
 
     const feedMovies = moviePopularList && moviePopularList.map((movie) => {
         return (
-            <div key={movie.id}>
+            <CardMovie key={movie.id}>
 
                 <img src={urlImage + movie.poster_path} onClick={() => onClickCard(movie.id)} alt="poster do filme"/>
                 <p>{movie.title}</p>
                 <p>{movie.release_date}</p>
-            </div>
+            </CardMovie>
         )
     })
 
 
     return (
         <div>
+            <Header>
+
+            </Header>
+            <ContainerCardMovies>
             {feedMovies}
+            </ContainerCardMovies>
+            
         </div>
     )
 }
