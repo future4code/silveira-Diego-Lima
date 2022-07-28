@@ -5,12 +5,7 @@ import axios from "axios";
 const useRequestData = (initialData, url) => {
     const [data, setData] = useState(initialData)
     const getData = () => {
-        axios.get(url, {
-            params: {
-                api_key: 'c3fedfe220200db64b12b268d8e63d51'
-            }
-
-        })
+        axios.get(url)
             .then((res) => {
                 setData(res.data)
 
