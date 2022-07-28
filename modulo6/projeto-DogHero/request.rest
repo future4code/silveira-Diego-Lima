@@ -3,8 +3,8 @@ POST http://localhost:3003/dog/create
 Content-Type: application/json
 
 {   
-    "data": "23/07/2022",
-    "duracao": "80",
+    "data": "24/07/2022",
+    "duracao": "30",
     "latitude": "25º25'48''Sul",
     "longitude": "49º16'15'' Oeste",
     "pets": 3,
@@ -27,6 +27,6 @@ GET http://localhost:3003/dog/show
 Content-Type: application/json
 
 {
-    "id": "1bc41629-5462-4512-99de-f69f13136933"
+    "id": "14d73f98-6890-4c88-9e0b-36139b5be5ac"
 
 }
