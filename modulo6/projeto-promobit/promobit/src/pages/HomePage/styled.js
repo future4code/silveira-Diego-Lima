@@ -1,20 +1,26 @@
 import styled from "styled-components"
 
 export const Header = styled.header`
-background-color: #38abed;
-color: yellow;
+background-color: #2D0C5E;
+color: #FFFFFF;
 font-family: 'Bebas Neue', cursive;
 font-size: larger;
-margin: 0 auto;
+margin: 0;
 height: 125px;
 `
 
+export const Titulo = styled.h2`
+    display: flex;
+    justify-content: center;
+`
+
+
 export const ContainerCardMovies = styled.div`
 display: grid;
-    grid-template-columns: repeat(auto-fit, 25em);
+    grid-template-columns: repeat(auto-fit, 20em);
     justify-content: center;
     grid-gap: 1em;
-    width: 0 auto;
-   min-height: 900px;
-   background-color: yellow;
+    width: 60 auto;
+   min-height: 90px;
+   background-color: #E5E5E5;
 `

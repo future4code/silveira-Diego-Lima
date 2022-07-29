@@ -1,5 +1,8 @@
+import { CardMedia, Typography } from '@mui/material'
 import React from 'react'
-import { goToMovieDetails } from '../Routes/coordinator'
+import { useNavigate } from 'react-router'
+import { goToMovieDetails } from '../routes/coordinator'
+import { CardEstilizado} from './styled'
 
 const CardMovie = (props) => {
     const navigate = useNavigate()
@@ -8,33 +11,30 @@ const CardMovie = (props) => {
         goToMovieDetails(navigate, id)
     }
 
+    const urlImage = "https://image.tmdb.org/t/p/w500"
+
     return (
-        <CardEstilizado onClick={() => onClickCard(props.item.id)} sx={{
+        <CardEstilizado onClick={() => onClickCard(props.movie.id)} sx={{
             width: 300,
             maxWidth: 350
         }}>
             <CardMedia
-                key={props.item.id}
+                key={props.movie.id}
                 component="img"
-                height="140"
-                image={props.item.logoUrl}
-                alt="restaurant"
+                height="500"
+                image={urlImage + props.movie.poster_path}
+                alt="movie"
             />
-            <CardContent>
+            <div>
                 <Typography gutterBottom variant="h5" component="div">
-                    {props.item.name}
+                    {props.movie.title}
                 </Typography>
                 <Typography variant="body2">
-                    {props.item.description}
+                    {props.movie.release_date}
                 </Typography>
-            </CardContent>
+            </div>
 
-            <DivFrete>
-                <p>tempo de entrega {props.item.deliveryTime} minutos </p>
-                <p>frete R${props.item.shipping}</p>
-            </DivFrete>
         </CardEstilizado>
-
 
     );
 

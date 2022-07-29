@@ -1,17 +1,18 @@
-import { createTheme } from '@material-ui/core/styles';
+import { createTheme } from '@mui/material/styles';
 import { primaryColor, neutralColor } from './colors';
+import { red } from '@mui/material/colors'
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: primaryColor,
-      contrastText: "black",
-    },
-    text: {
-        primary: neutralColor,
+      main: primaryColor
+
     },
     secondary: {
       main: neutralColor,
+    },
+    error: {
+      main: red.A400,
     },
   },
 });

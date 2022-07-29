@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import CardMovie from '../../components/CardMovie'
 import { GlobalStateContext } from '../../global/GlobalStateContext'
 import { goToMovieDetails } from '../../routes/coordinator'
-import { ContainerCardMovies, Header } from './styled'
+import { ContainerCardMovies, Header, Titulo } from './styled'
 
 
 
@@ -12,7 +12,7 @@ const HomePage = () => {
     const navigate = useNavigate()
 
     console.log(moviePopularList)
-    const urlImage = "https://image.tmdb.org/t/p/w500"
+
 
 
     const onClickCard = (id) => {
@@ -21,12 +21,9 @@ const HomePage = () => {
 
     const feedMovies = moviePopularList && moviePopularList.map((movie) => {
         return (
-            <CardMovie key={movie.id}>
-
-                <img src={urlImage + movie.poster_path} onClick={() => onClickCard(movie.id)} alt="poster do filme"/>
-                <p>{movie.title}</p>
-                <p>{movie.release_date}</p>
-            </CardMovie>
+            <CardMovie key={movie.id}
+                movie={movie}
+            />
         )
     })
 
@@ -34,12 +31,12 @@ const HomePage = () => {
     return (
         <div>
             <Header>
-
+                <Titulo>Milhões de filmes, séries e pessoas para descobrir. Explore já.</Titulo>
             </Header>
             <ContainerCardMovies>
-            {feedMovies}
+                {feedMovies}
             </ContainerCardMovies>
-            
+
         </div>
     )
 }
