@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import useRequestData from "../../hoocks/useRequestData"
 import { BASE_URL } from "../../constants/urls"
 import { CardMedia, Typography } from '@mui/material'
-import { CardContainer, CardDetails, CardImg, Trailer } from './styled'
-
+import { CardContainer, CardDetails, CardImg, CardRecommendations, CastContainer, Footer, PercentageVote, Titulo, VoteContainer } from './styled'
 
 
 const MovieDetails = () => {
@@ -12,13 +11,20 @@ const MovieDetails = () => {
     const [movieDetails, getMovieDetails] = useRequestData([], `${BASE_URL}/movie/${params.id}?api_key=c3fedfe220200db64b12b268d8e63d51&language=pt-BR`)
     const [credits, getCredits] = useRequestData([], `${BASE_URL}/movie/${params.id}/credits?api_key=c3fedfe220200db64b12b268d8e63d51&language=pt-BR`)
     const [videos, getVideos] = useRequestData([], `${BASE_URL}/movie/${params.id}/videos?api_key=c3fedfe220200db64b12b268d8e63d51&language=pt-BR`)
-    const [recommendations, getRecommendations] = useRequestData([], `${BASE_URL}/movie/${params.id}/recommendations?api_key=c3fedfe220200db64b12b268d8e63d51&language=pt-BR`)
+    const [recommendations, getRecommendations] = useRequestData([], `${BASE_URL}/movie/${params.id}/recommendations?api_key=c3fedfe220200db64b12b268d8e63d51&language=pt-BR&page=1`)
     const urlImage = "https://image.tmdb.org/t/p/w500"
-    const urlYT = "https://www.youtube.com/watch?v="
+    const urlYT = "https://www.youtube.com/embed/"
 
 
+    
 
-    console.log(recommendations)
+    
+    const vote = Math.round(Number(movieDetails.vote_average)*10)
+    
+    const data = movieDetails.release_date
+       
+    
+    
     const directorFilter = credits.crew && credits.crew.filter((movie) => {
         return movie.name && movie.job === "Director"
     })
@@ -79,16 +85,17 @@ const MovieDetails = () => {
     })
 
     const trailerFilter = videos.results && videos.results.filter((trailer) => {
-        return trailer.name === "Trailer Oficial Dublado"
+        return trailer.name === ("Trailer Dublado")
     })
     const CardTrailer = trailerFilter && trailerFilter.map((trailer) => {
         return (
             <div key={trailer.id}>
-                <iframe src={urlYT + trailer.key} />
+                <iframe width='1080' height='760' src={urlYT + trailer.key} />
 
             </div>
         )
     })
+    console.log(CardTrailer)
 
     const RecommendationsCard = recommendations.results && recommendations.results.map((recommendations) => {
         return (
@@ -104,8 +111,11 @@ const MovieDetails = () => {
 
         )
     })
-    RecommendationsCard.lenght
 
+    useEffect(() => {
+        
+
+    }, []);
 
 
     return (
@@ -114,7 +124,7 @@ const MovieDetails = () => {
                 <CardMedia
                     key={movieDetails.id}
                     component="img"
-                    height="400"
+                    height="500"
                     image={urlImage + movieDetails.poster_path}
                     alt="movie"
                 />
@@ -123,11 +133,12 @@ const MovieDetails = () => {
                         {movieDetails.title}
                     </Typography>
                     <Typography variant="body2">
-                        {movieDetails.release_date}(BR){MovieGenres}{movieDetails.runtime} min
+                        {data}(BR){MovieGenres}{movieDetails.runtime} min
                     </Typography>
-                    <div>
-                        {movieDetails.vote_average}
-                    </div>
+                    <VoteContainer>
+                        <PercentageVote />
+                        {vote} %
+                    </VoteContainer>
                     <h3>Sinopse</h3>
                     <Typography variant="body2">
                         {movieDetails.overview}
@@ -138,19 +149,19 @@ const MovieDetails = () => {
                 </div>
 
             </CardDetails>
-            <div>
-                <h3>Elenco Original </h3>
+            <Titulo>Elenco Original </Titulo>
+            <CastContainer>
                 {CastMovie}
-            </div>
+            </CastContainer>
             <div>
-                <h3>Trailer </h3>
+                <Titulo>Trailer </Titulo>
                 {CardTrailer}
             </div>
-            <div>
-                <h3>Recomendações </h3>
+            <Titulo>Recomendações </Titulo>
+            <CardRecommendations>
                 {RecommendationsCard}
-
-            </div>
+            </CardRecommendations>
+            <Footer />
         </div>
     )
 }

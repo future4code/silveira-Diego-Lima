@@ -1,23 +1,29 @@
-import React, { useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import CardMovie from '../../components/CardMovie'
-import { GlobalStateContext } from '../../global/GlobalStateContext'
-import { goToMovieDetails } from '../../routes/coordinator'
-import { ContainerCardMovies, Header, Titulo } from './styled'
+import { BASE_URL } from '../../constants/urls'
+import { ContainerCardMovies, FakeDiv, Header, ReactPaginateContainer, Titulo } from './styled'
 
 
 
 const HomePage = () => {
-    const { moviePopularList } = useContext(GlobalStateContext)
-    const navigate = useNavigate()
+    const [moviePopularList, setMoviePopularList] = useState([])
+    const [pageNumber, setPageNumber] = useState();
 
-    console.log(moviePopularList)
+    const getMoviePopular = () => {
 
+        axios.get(`${BASE_URL}/movie/popular?api_key=c3fedfe220200db64b12b268d8e63d51&language=pt-BR&page=${pageNumber}`)
+            .then((response) => {
+                setMoviePopularList(response.data.results);
+            }).catch((error) => console.log(error));
 
+    };
 
-    const onClickCard = (id) => {
-        goToMovieDetails(navigate, id)
-    }
+    useEffect(() => {
+        getMoviePopular();
+
+    }, [pageNumber]);
+
 
     const feedMovies = moviePopularList && moviePopularList.map((movie) => {
         return (
@@ -26,6 +32,10 @@ const HomePage = () => {
             />
         )
     })
+
+    const changePage = ({ selected }) => {
+        setPageNumber(selected + 1);
+    };
 
 
     return (
@@ -36,6 +46,17 @@ const HomePage = () => {
             <ContainerCardMovies>
                 {feedMovies}
             </ContainerCardMovies>
+            <ReactPaginateContainer
+                previousLabel={"Anterior"}
+                nextLabel={"Próxima"}
+                pageCount={50}
+                onPageChange={changePage}
+                containerClassName={"paginationButtons"}
+                previousLinkClassName={"previousButton"}
+                nextLinkClassName={"nextButton"}
+                disabledClassName={"paginationDisabled"}
+                activeClassName={"paginationActive"}
+            />
 
         </div>
     )
