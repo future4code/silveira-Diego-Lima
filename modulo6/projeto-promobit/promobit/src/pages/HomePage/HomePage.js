@@ -2,8 +2,8 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import CardMovie from '../../components/CardMovie'
 import { BASE_URL } from '../../constants/urls'
-import { ContainerCardMovies, FakeDiv, Header, ReactPaginateContainer, Titulo } from './styled'
-
+import { App, ContainerCardMovies, ContainerPages, Header, LogoContainer, ReactPaginateContainer, TagLogo, Titulo } from './styled'
+import Logo from "../../assests/tmdb.svg"
 
 
 const HomePage = () => {
@@ -39,13 +39,18 @@ const HomePage = () => {
 
 
     return (
-        <div>
+        <App>
             <Header>
+                <LogoContainer>
+                <TagLogo src={Logo} />
+                </LogoContainer>
+
                 <Titulo>Milhões de filmes, séries e pessoas para descobrir. Explore já.</Titulo>
             </Header>
             <ContainerCardMovies>
                 {feedMovies}
             </ContainerCardMovies>
+            <ContainerPages>
             <ReactPaginateContainer
                 previousLabel={"Anterior"}
                 nextLabel={"Próxima"}
@@ -57,8 +62,8 @@ const HomePage = () => {
                 disabledClassName={"paginationDisabled"}
                 activeClassName={"paginationActive"}
             />
-
-        </div>
+            </ContainerPages>
+        </App>
     )
 }
 
