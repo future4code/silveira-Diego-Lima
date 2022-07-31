@@ -2,8 +2,8 @@ import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import useRequestData from "../../hoocks/useRequestData"
 import { BASE_URL } from "../../constants/urls"
-import { CardMedia, Typography } from '@mui/material'
-import { App, Card, CardContainer, CardCrew, CardDetails, CardImg, CardImgPoster, CardInfo, CardMediaEstilizado, CardRecommendations, CastContainer, ContainerCrew, ContainerInfo, ContainerVideo, Footer, Genres, Info, LogoContainer, PercentageVote, PosterContainer, TagLogo, Titulo, Video, VoteContainer } from './styled'
+import { Typography } from '@mui/material'
+import { App, Card, CardContainer, CardCrew, CardDetails, CardImg, CardImgPoster, CardInfo,  CardRecommendations, CastContainer, ContainerCrew, ContainerInfo, ContainerVideo, Footer, Genres, Info, LogoContainer, PercentageVote, PosterContainer, TagLogo, Titulo, Video, VoteContainer } from './styled'
 import Logo from "../../assests/tmdb.svg"
 import { goBack } from '../../routes/coordinator'
 
