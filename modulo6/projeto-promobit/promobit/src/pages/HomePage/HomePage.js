@@ -6,6 +6,7 @@ import { App, ContainerCardMovies, ContainerPages, Header, LogoContainer, ReactP
 import Logo from "../../assests/tmdb.svg"
 
 
+
 const HomePage = () => {
     const [moviePopularList, setMoviePopularList] = useState([])
     const [pageNumber, setPageNumber] = useState();

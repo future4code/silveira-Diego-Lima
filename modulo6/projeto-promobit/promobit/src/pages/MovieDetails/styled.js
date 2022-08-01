@@ -135,3 +135,7 @@ export const Video = styled.iframe`
 width: 80%;
 `
 
+export const InfoCertication = styled.span`
+    padding: 5px;
+
+`

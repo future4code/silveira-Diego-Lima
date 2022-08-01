@@ -20,8 +20,7 @@ const CommentCard = (props) => {
 
         if (direction === 1) {
             axios.post(url, body, headers)
-                .then((res) => {
-                    console.log(res)
+                .then((res) => {                   
                     getComments()
                     
                 }).catch((err) => {
@@ -29,17 +28,16 @@ const CommentCard = (props) => {
                 })
         } else if (direction === -1) {
             axios.put(url, body, headers)
-                .then((res) => {
-                    console.log(res)
+                .then((res) => {                   
                     getComments()
                     
                 }).catch((err) => {
                     console.log(err)
+                  
                 })
         } else {
             axios.delete(url, headers)
-                .then((res) => {
-                    console.log(res)
+                .then((res) => {                    
                     getComments()
                     
                 }).catch((err) => {

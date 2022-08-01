@@ -27,7 +27,9 @@ export const signUp = (body, clear, navigate, setIsLoading) => {
             setIsLoading(false)
             goToFeed(navigate)
         })
-        .catch((err) => alert(err.response.data))
+        .catch((err) =>
+            alert(err.message)
+        )
 }
 
 export const createPost = (body, clear, getPosts, setIsLoading) => {
@@ -41,12 +43,12 @@ export const createPost = (body, clear, getPosts, setIsLoading) => {
         clear();
         setIsLoading(false)
         getPosts();
-        
+
 
     }).catch((err) => {
         alert(err.data)
         setIsLoading(false)
-        console.log(err)
+        
     })
 }
 
@@ -61,12 +63,12 @@ export const createComment = (body, clear, params, setIsLoading, getComments) =>
         clear();
         getComments()
         setIsLoading(false)
-            
+
 
 
     }).catch((err) => {
         alert(err.data)
         setIsLoading(false)
-        console.log(err)
+       
     })
 }

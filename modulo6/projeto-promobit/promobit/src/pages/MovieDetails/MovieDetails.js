@@ -3,9 +3,10 @@ import { useNavigate, useParams } from 'react-router-dom'
 import useRequestData from "../../hoocks/useRequestData"
 import { BASE_URL } from "../../constants/urls"
 import { Typography } from '@mui/material'
-import { App, Card, CardContainer, CardCrew, CardDetails, CardImg, CardImgPoster, CardInfo,  CardRecommendations, CastContainer, ContainerCrew, ContainerInfo, ContainerVideo, Footer, Genres, Info, LogoContainer, PercentageVote, PosterContainer, TagLogo, Titulo, Video, VoteContainer } from './styled'
+import { App, Card, CardContainer, CardCrew, CardDetails, CardImg, CardImgPoster, CardInfo,  CardRecommendations, CastContainer, ContainerCrew, ContainerInfo, ContainerVideo, Footer, Genres, Info, InfoCertication, LogoContainer, PercentageVote, PosterContainer, TagLogo, Titulo, Video, VoteContainer } from './styled'
 import Logo from "../../assests/tmdb.svg"
 import { goBack } from '../../routes/coordinator'
+
 
 
 const MovieDetails = () => {
@@ -23,17 +24,25 @@ const MovieDetails = () => {
     const onClickCard = () => {
         goBack(navigate)
     }
+    
 
     const vote = Math.round(Number(movieDetails.vote_average) * 10)
     const data = `${movieDetails.release_date}`
     const alteracao = data.split("-").reverse().join("/")
 
 
-    const resultado = date.results && date.results.filter((date) => {
+    const resultadoCertification = date.results && date.results.find((date) => {
         return date.iso_3166_1 === "BR"
     })
 
-
+    const certification = resultadoCertification && resultadoCertification.release_dates.map((movie)=>{
+        return (
+            <InfoCertication key={movie.certification}>
+                {movie.certification}
+            </InfoCertication>
+        )
+    })
+   
     const directorFilter = credits.crew && credits.crew.filter((movie) => {
         return movie.name && movie.job === "Director"
     })
@@ -106,7 +115,6 @@ const MovieDetails = () => {
         )
     })
 
-
     const RecommendationsCard = recommendations.results && recommendations.results.map((recommendations) => {
         return (
             <CardContainer key={recommendations.id}>
@@ -143,6 +151,7 @@ const MovieDetails = () => {
                             {movieDetails.title}
                         </Typography>
                         <ContainerInfo>
+                            <Info> Classificação:{certification} </Info>
                             <Info>{alteracao}(BR)</Info>
                             <Info>{MovieGenres}</Info>
                             <Info>{movieDetails.runtime} min </Info>
