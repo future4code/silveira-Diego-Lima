@@ -12,10 +12,9 @@ export default function GlobalState(props) {
             api_key: 'c3fedfe220200db64b12b268d8e63d51'
         }
     }
-
     const getMoviePopular = () => {
 
-        axios.get(`${BASE_URL}/movie/popular`, params)
+        axios.get(`${BASE_URL}/movie/popular?api_key=c3fedfe220200db64b12b268d8e63d51&language=pt-BR&page=1`)
             .then((response) => {
                 setMoviePopularList(response.data.results);
             }).catch((error) => console.log(error));

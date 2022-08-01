@@ -1,5 +1,5 @@
 import React from 'react'
-import { goToMovieDetails } from '../../Routes/coordinator'
+import { goToMovieDetails } from '../Routes/coordinator'
 
 const CardMovie = (props) => {
     const navigate = useNavigate()
