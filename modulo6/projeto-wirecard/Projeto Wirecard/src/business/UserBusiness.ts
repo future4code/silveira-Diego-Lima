@@ -41,7 +41,7 @@ export class UserBusiness {
 
             await this.userDatabase.createUser(newUser);
 
-            const accessToken = this.authenticator.generateToken({ id });
+            const accessToken = this.authenticator.generateToken({ id, email });
 
             return accessToken;
 
@@ -74,7 +74,7 @@ export class UserBusiness {
                 throw new CustomError(401, "Invalid Password!");
             }
 
-            const accessToken = this.authenticator.generateToken({ id: userFromDB.getId()});
+            const accessToken = this.authenticator.generateToken({ id: userFromDB.getId(), email: userFromDB.getEmail() });
 
             return accessToken;
 

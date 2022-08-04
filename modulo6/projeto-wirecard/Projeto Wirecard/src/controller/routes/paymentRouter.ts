@@ -4,6 +4,6 @@ import paymentController from "../PaymentController";
 export const paymentRouter = express.Router();
 
 
-paymentRouter.post("/register", paymentController.getBand);
+paymentRouter.post("/create", paymentController.paymentRegister);
 
-paymentRouter.get("/getband", paymentController.getBand)
+// paymentRouter.get("/getstatus", paymentController.getPaymentStatus)

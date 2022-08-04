@@ -2,7 +2,8 @@ import express, { Express } from "express";
 import cors from "cors";
 import { AddressInfo } from "net";
 import { userRouter } from "./controller/routes/userRouter";
-import { paymentRouter } from "./controller/routes/PaymentRouter";
+import { paymentRouter } from "./controller/routes/paymentRouter";
+
 
 const app: Express = express();
 app.use(express.json());
@@ -10,10 +11,6 @@ app.use(cors());
 
 
 app.use("/user", userRouter);
-
-app.use("/user", userRouter);
-
-app.use("/payment", paymentRouter);
 
 app.use("/payment", paymentRouter);
 

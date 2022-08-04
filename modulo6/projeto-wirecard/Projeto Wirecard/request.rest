@@ -22,24 +22,23 @@ Content-Type: application/json
 
 ### Registrar pagamento
 
-POST http://localhost:3003/payment/register
+POST http://localhost:3003/payment/create
 Authorization: {{login.response.body.token}}
 Content-Type: application/json
 
 {
-    "userId": "Bon Jovi",
-    "clientId": "Rock",
-    "amount": "Bon Jovi",
-    "type":"",
-    "cardHolderName":"",
-    "cardNumber":"",
-    "cardExpirationDate":"",
-    "cardCvv":"",
+    "clientId": "123456789",
+    "amount": 505.50,
+    "type":"credit card",
+    "cardHolderName":"DIEGO E LIMA",
+    "cardNumber":"6062827951520129",
+    "cardExpirationDate":"08/2025",
+    "cardCvv": 123
 }
 
 ### Pega informações da Banda por ID ou Name
 
-GET http://localhost:3003/band/getband
+GET http://localhost:3003/payment/getstatus
 Authorization: {{login.response.body.token}}
 Content-Type: application/json
 
