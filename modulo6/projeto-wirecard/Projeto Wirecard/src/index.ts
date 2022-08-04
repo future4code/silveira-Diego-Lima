@@ -1,9 +1,8 @@
 import express, { Express } from "express";
 import cors from "cors";
 import { AddressInfo } from "net";
-import { bandRouter } from "./controller/routes/bandRouter";
-import { showRouter } from "./controller/routes/showRouter";
 import { userRouter } from "./controller/routes/userRouter";
+import { paymentRouter } from "./controller/routes/PaymentRouter";
 
 const app: Express = express();
 app.use(express.json());
@@ -14,13 +13,11 @@ app.use("/user", userRouter);
 
 app.use("/user", userRouter);
 
-app.use("/band", bandRouter);
+app.use("/payment", paymentRouter);
 
-app.use("/band", bandRouter);
+app.use("/payment", paymentRouter);
 
-app.use("/show", showRouter);
 
-app.use("/show", showRouter);
 
 
 const server = app.listen(process.env.PORT || 3003, () => {

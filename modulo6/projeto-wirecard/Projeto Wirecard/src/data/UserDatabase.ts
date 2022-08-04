@@ -3,7 +3,7 @@ import { User } from "../model/User";
 
 export class UserDatabase extends BaseDatabase {
 
-  private static TABLE_NAME = "NOME_TABELAS_USUÁRIOS";
+  private static TABLE_NAME = "User_Wirecard";
 
   public async createUser(user: User): Promise<void> {
 
@@ -13,8 +13,8 @@ export class UserDatabase extends BaseDatabase {
           id: user.getId(),
           email: user.getEmail(),
           name: user.getName(),
-          password: user.getPassword(),
-          role: user.getRole()
+          cpf: user.getCpf(),
+          password: user.getPassword()
         })
         .into(UserDatabase.TABLE_NAME);
     } catch (error: any) {

@@ -6,7 +6,7 @@ import Authenticator from "../services/Authenticator";
 import { CustomError } from "../error/CustomError";
 
 
-export  class UserBusiness {
+export class UserBusiness {
     constructor(
         private userDatabase: UserDatabase,
         private authenticator: Authenticator,
@@ -15,11 +15,11 @@ export  class UserBusiness {
     ) { }
 
     public createUser = async (user: UserInputDTO) => {
-        
+
         try {
-            const { email, password, name, role } = user;
-            if (!email || !password || !name || !role) {
-                throw new CustomError(422, " Fill up all the fields 'name', 'email', 'password' and 'role' ");
+            const { email, password, name, cpf } = user;
+            if (!email || !password || !name || !cpf) {
+                throw new CustomError(422, " Fill up all the fields 'name', 'email' , 'cpf' and 'password'");
             }
             if (email.indexOf("@") === -1) {
                 throw new CustomError(422, "Email invalid");
@@ -37,11 +37,11 @@ export  class UserBusiness {
 
             const hashPassword = await this.hashManager.hash(password);
 
-            const newUser = new User(id, name, email, hashPassword, User.stringToUserRole(role))
+            const newUser = new User(id, name, email, hashPassword, cpf)
 
             await this.userDatabase.createUser(newUser);
 
-            const accessToken = this.authenticator.generateToken({ id, role });
+            const accessToken = this.authenticator.generateToken({ id });
 
             return accessToken;
 
@@ -74,13 +74,13 @@ export  class UserBusiness {
                 throw new CustomError(401, "Invalid Password!");
             }
 
-            const accessToken = this.authenticator.generateToken({ id: userFromDB.getId(), role: userFromDB.getRole() });
+            const accessToken = this.authenticator.generateToken({ id: userFromDB.getId()});
 
             return accessToken;
 
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message)
-         
+
         }
     }
 }
@@ -90,4 +90,4 @@ export default new UserBusiness(
     new Authenticator(),
     new HashManager(),
     new IdGenerator()
- )
+)

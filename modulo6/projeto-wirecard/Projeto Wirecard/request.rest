@@ -5,8 +5,9 @@ Content-Type: application/json
 {   
     "name": "Diego", 
     "email":"diego@email.com",
-    "password":"123456",
-    "role": "ADMIN"   
+    "cpf": "12345678910",
+    "password":"123456"
+          
 }
 
 ### Login do usuário
@@ -19,16 +20,21 @@ Content-Type: application/json
     "password":"123456"
 }
 
-### Registar banda no evento
+### Registrar pagamento
 
-POST http://localhost:3003/band/register
+POST http://localhost:3003/payment/register
 Authorization: {{login.response.body.token}}
 Content-Type: application/json
 
 {
-    "name": "Bon Jovi",
-    "genre": "Rock",
-    "responsible": "Bon Jovi"
+    "userId": "Bon Jovi",
+    "clientId": "Rock",
+    "amount": "Bon Jovi",
+    "type":"",
+    "cardHolderName":"",
+    "cardNumber":"",
+    "cardExpirationDate":"",
+    "cardCvv":"",
 }
 
 ### Pega informações da Banda por ID ou Name
@@ -40,24 +46,4 @@ Content-Type: application/json
 {
     "id":"",
     "name":"Bon Jovi"
-}
-###
-POST http://localhost:3003/show/register
-Authorization: {{login.response.body.token}}
-Content-Type: application/json
-
-{
-    "weekDay": "Saturday",
-    "startTime": 15,
-    "endTime": 23,
-    "bandId":"eb3c75d1-d397-4415-a780-621b815a6b9d"
-}
-
-###
-GET http://localhost:3003/show/getshow
-Content-Type: application/json
-
-{
-    "day":"Sunday"
-    
 }
