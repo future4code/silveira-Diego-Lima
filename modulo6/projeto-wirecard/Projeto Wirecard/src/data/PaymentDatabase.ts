@@ -35,6 +35,7 @@ export class PaymentDatabase extends BaseDatabase {
         .from(PaymentDatabase.TABLE_NAME)
         .join('User_Wirecard', 'User_Wirecard.id', '=', 'user_id')
         .where(id);
+        console.log(result[0])
       
       return result[0] && Payment.toStatusPaymentModel(result[0]);
 

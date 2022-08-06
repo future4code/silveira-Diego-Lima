@@ -6,7 +6,6 @@ import userBusiness from "../business/UserBusiness";
 
 export class UserController {
 
-
     public signup = async (req: Request, res: Response) => {
         try {
 
