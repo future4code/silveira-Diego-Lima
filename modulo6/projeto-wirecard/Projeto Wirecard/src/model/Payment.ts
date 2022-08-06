@@ -1,6 +1,6 @@
 export class Payment {
     constructor(
-        private id: string,
+        private payment_id: string,
         private status: string,
         private user_id: string,
         private client_id: string,
@@ -9,11 +9,15 @@ export class Payment {
         private cardHolderName?: string,
         private cardNumber?: string,
         private cardExpirationDate?: string,
-        private cardCvv?: number,
+        private cardCvv?: string,
+        private emissor?: string,
+        private name?: string,
+        private email?: string,
+        private cpf?: string
 
     ) { }
 
-    public getId = () => this.id
+    public getId = () => this.payment_id
     public getStatus = () => this.status
     public getUserId = () => this.user_id
     public getClientId = () => this.client_id
@@ -23,9 +27,14 @@ export class Payment {
     public getCardNumber = () => this.cardNumber
     public getExpirationDate = () => this.cardExpirationDate
     public getCvv = () => this.cardCvv
+    public getEmissor = () => this.emissor
+
 
     static toPaymentModel(payment: any) {
-        return new Payment(payment.id, payment.status, payment.user_id, payment.client_id, payment.amount, payment.type, payment.cardHolderName, payment.cardNumber, payment.cardExpirationDate, payment.cardCvv);
+        return new Payment(payment.payment_id, payment.status, payment.user_id, payment.client_id, payment.amount, payment.type, payment.card_holder_name, payment.card_number, payment.card_expiration_date, payment.card_cvv, payment.emissor);
+    }
+    static toStatusPaymentModel(payment: any) {
+        return new Payment(payment.payment_id, payment.status, payment.user_id, payment.client_id, payment.amount, payment.type, payment.card_holder_name, payment.card_number, payment.card_expiration_date, payment.card_cvv, payment.emissor, payment.name, payment.email, payment.cpf);
     }
 }
 
@@ -36,5 +45,5 @@ export interface PaymetInputDTO {
     cardHolderName?: string;
     cardNumber?: string;
     cardExpirationDate?: string;
-    cardCvv?: number
+    cardCvv?: string
 }

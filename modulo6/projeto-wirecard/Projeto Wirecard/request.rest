@@ -28,21 +28,20 @@ Content-Type: application/json
 
 {
     "clientId": "123456789",
-    "amount": 505.50,
+    "amount": 3000,
     "type":"credit card",
     "cardHolderName":"DIEGO E LIMA",
-    "cardNumber":"6062827951520129",
-    "cardExpirationDate":"08/2025",
-    "cardCvv": 123
+    "cardNumber":"4916 6705 5586 8558",
+    "cardExpirationDate":"08/2022",
+    "cardCvv": "560"
 }
 
-### Pega informações da Banda por ID ou Name
+### Pega informações de pagamento por ID
 
 GET http://localhost:3003/payment/getstatus
 Authorization: {{login.response.body.token}}
 Content-Type: application/json
 
 {
-    "id":"",
-    "name":"Bon Jovi"
+   "payment_id":"1961861e-8878-4d68-9567-aaa351b8b4d4"
 }

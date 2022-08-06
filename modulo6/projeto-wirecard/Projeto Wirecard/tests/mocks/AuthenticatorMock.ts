@@ -1,21 +1,20 @@
-import { UserRole} from "../../src/model/User"
 
 
  interface AuthenticationData {
     id: string;
-    role?: string;
+    email: string;
   }
 
 
 export class AuthenticatorMock {
-    public generate = (input: AuthenticationData): string => {
+    public generateToken = (input: AuthenticationData): string => {
         return "token"
     }
 
-    public verify(token: string) {
+    public getData(token: string) {
         return {
             id: "id_mock",
-            role: UserRole.NORMAL
+            email: "diego@email.com"
         }
     }
 }

@@ -1,4 +1,4 @@
-export default class ValidatorCreditCard {
+export default class ValidatorCreditCardMock {
 
     public validCreditCard(value: string) {
 
