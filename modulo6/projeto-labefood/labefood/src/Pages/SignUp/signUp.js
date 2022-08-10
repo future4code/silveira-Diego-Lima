@@ -30,9 +30,9 @@ const SignUp = () => {
   const handleClickShowPassword = () => {
     setShowPass(!showPass)
   }
-  const handleClickShowCheckPassword = () => {
-    setShowCheckPass(!showCheckPass)
-  }
+  // const handleClickShowCheckPassword = () => {
+  //   setShowCheckPass(!showCheckPass)
+  // }
 
   const onSubmitForm = (event) => {
     event.preventDefault()
@@ -41,6 +41,7 @@ const SignUp = () => {
     } else {
       setCheckErrPass(false)
     }
+    console.log(form)
   }
 
 
