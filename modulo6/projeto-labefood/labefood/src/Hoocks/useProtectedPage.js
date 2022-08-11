@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { goToLogin } from "../Routes/coordinator"
 
 
-const useProtectdPage = () => {
+const useProtectedPage = () => {
     const navigate = useNavigate()
     useEffect(() => {
         const token = localStorage.getItem('token')
@@ -13,4 +13,4 @@ const useProtectdPage = () => {
     },[navigate])
 }
 
-export default useProtectdPage;
+export default useProtectedPage;

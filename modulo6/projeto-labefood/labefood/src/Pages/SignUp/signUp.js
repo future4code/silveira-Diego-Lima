@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
-import { ButtonStyled, Form, Main, PasswordContainer, TextFieldStyled } from './styled'
+import { Form, Main, PasswordContainer, TextFieldStyled } from './styled'
 import useForm from "../../Hoocks/useForm"
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { IconButton } from '@mui/material'
+import axios from 'axios'
+import { BASE_URL } from '../../Constants/urls'
+import { goToSignUpAddress } from '../../Routes/coordinator'
+import { useNavigate } from 'react-router-dom'
+import { ButtonStyled } from '../../Global/GlobalStyled'
 
 
 
@@ -19,6 +24,8 @@ const SignUp = () => {
   const [showCheckPass, setShowCheckPass] = useState(false)
   const [checkErrPass, setCheckErrPass] = useState(false)
 
+  const navigate = useNavigate()
+
   const cpfMask = (value) => {
     return value
       .replace(/\D/g, "")
@@ -30,9 +37,6 @@ const SignUp = () => {
   const handleClickShowPassword = () => {
     setShowPass(!showPass)
   }
-  // const handleClickShowCheckPassword = () => {
-  //   setShowCheckPass(!showCheckPass)
-  // }
 
   const onSubmitForm = (event) => {
     event.preventDefault()
@@ -40,10 +44,23 @@ const SignUp = () => {
       setCheckErrPass(true)
     } else {
       setCheckErrPass(false)
+      signUpNewUser()
     }
-    console.log(form)
   }
 
+  const signUpNewUser = async () => {
+    await axios.post(`${BASE_URL}/signup`, form)
+      .then((res) => {
+        localStorage.setItem('token', res.data.token)
+        alert(`boas vindas ${res.data.user.name}`)
+        goToSignUpAddress(navigate)
+      })
+      .catch((err) => {
+        alert(err.response.data.message)
+        clear()
+        setConfirmPassword('')
+      })
+  }
 
   return (
     <Main>

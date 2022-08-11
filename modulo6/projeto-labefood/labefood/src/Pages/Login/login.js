@@ -2,10 +2,11 @@ import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { IconButton } from '@mui/material'
 import axios from 'axios'
 import React, { useState } from 'react'
-import { ButtonStyled, Form, Main, PasswordContainer, TextFieldStyled } from './styled'
+import { Form, Main, PasswordContainer, TextFieldStyled } from './styled'
 import { BASE_URL } from '../../Constants/urls'
 import { useNavigate } from 'react-router-dom'
-import {goToFeed} from '../../Routes/coordinator'
+import { goToFeed, goToSignUpAddress } from '../../Routes/coordinator'
+import { ButtonStyled } from '../../Global/GlobalStyled'
 
 const Login = () => {
 
@@ -40,7 +41,11 @@ const Login = () => {
         setCheckErrPass(false)
         localStorage.setItem('token', res.data.token)
         alert(`boas vindas ${res.data.user.name}`)
-        goToFeed(navigate)
+        if (res.data.user.hasAddress === false) {
+          goToSignUpAddress(navigate)
+        } else {
+          goToFeed(navigate)
+        }
       })
       .catch((err) => {
         if (err.response.data.message.includes('Senha incorreta')) {

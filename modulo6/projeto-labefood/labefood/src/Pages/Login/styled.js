@@ -1,4 +1,4 @@
-import { Button, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import styled from "styled-components";
 
 
@@ -25,13 +25,6 @@ export const TextFieldStyled = styled(TextField)`
 width: 100% ;
 `
 
-export const ButtonStyled = styled(Button)`
-    &&{
-        background-color:#E8222E ;
-        color: #000 ;
-        width: 100%;
-    }
-`
 export const PasswordContainer = styled.div`
 display: flex;
 align-items: center;
