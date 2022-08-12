@@ -3,14 +3,16 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import CardProduct from '../../Components/CardProduct/CardProduct'
 import CardRestaurantDetails from '../../Components/CardRestaurantDetails/CardRestaurantDetails'
+import Header from '../../Components/Header/Header'
 import { BASE_URL } from '../../Constants/urls'
-import { CardRestaurant, ContainerRestaurant } from './styled'
+import { CardRestaurant, Category, ContainerRestaurant, SectionProductByCategory } from './styled'
 
 const Restaurant = () => {
   const [restaurant, setRestaurant] = useState({})
   const { restaurantId } = useParams()
+  const [categories, setCategories] = useState([])
 
-  console.log(restaurant)
+
 
   const getRestaurant = () => {
     axios.get(`${BASE_URL}/restaurants/${restaurantId}`, {
@@ -27,18 +29,45 @@ const Restaurant = () => {
   }
   useEffect(() => {
     getRestaurant()
-  }, []);
+  }, [])
 
+  useEffect(() => {
+    if (restaurant.products) {
+
+      const newCategories = []
+      for (const product of restaurant.products) {
+        if (!newCategories.includes(product.category)) {
+          newCategories.push(product.category)
+        }
+      }
+      setCategories(newCategories)
+    }
+  }, [restaurant])
+
+  
   return (
     <ContainerRestaurant>
+      <Header title={"Restaurante"} back />
       <CardRestaurant>
         <CardRestaurantDetails restaurant={restaurant} />
         {
-          restaurant.products && restaurant.products.map((product) => {
-            return <CardProduct product={product} key={product.id} />
+          restaurant.products
+          &&
+          categories.map((category) => {
+            return <SectionProductByCategory>
+              <Category>{category}</Category>
+              {restaurant.products
+                .filter((product) => {
+                  return product.category === category
+                })
+                .map((product) => {
+                  return <CardProduct product={product} key={product.id} />
+                })
+              }
+            </SectionProductByCategory>
           })
-
         }
+
       </CardRestaurant>
 
     </ContainerRestaurant>

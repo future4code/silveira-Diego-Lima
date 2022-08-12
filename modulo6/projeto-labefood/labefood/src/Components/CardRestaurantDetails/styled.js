@@ -4,7 +4,6 @@ export const ContainerCardRestaurantDetails = styled.div`
     width: 100%;
     margin: 0.5rem 0;
     border-radius: 8px;
-    margin: 0.5rem 0;
 `
 
 export const ImageRestaurant = styled.img`

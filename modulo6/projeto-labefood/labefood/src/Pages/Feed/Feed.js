@@ -1,18 +1,19 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import CardRestaurant from '../../Components/CardRestaurant/CardRestaurant';
 import Header from '../../Components/Header/Header';
-import { GlobalStateContext } from '../../Global/GlobalStateContext';
+import { useGlobal } from '../../Global/GlobalStateContext';
 import useProtectedPage from '../../Hoocks/useProtectedPage';
-import { BoxInputSearch, CardsRestaurant, ContainerFeed, InputSearch, Menu, MenuItem } from './styled';
+import { BoxInputSearch, CardsRestaurant, ContainerFeed, InputSearch, MenuTop, MenuItem } from './styled';
+import Menu from '../../Components/Menu/Menu';
 
 
 
 const Feed = () => {
   useProtectedPage()
 
-  const { restaurants } = useContext(GlobalStateContext);
+  const { restaurants } = useGlobal();
   const [inputText, setInputText] = useState('')
-  const { categoryRestaurant, setCategoryRestaurant } = useContext(GlobalStateContext);
+  const { categoryRestaurant, setCategoryRestaurant } = useGlobal()
   const [valueCategory, setValueCategory] = useState('')
 
 
@@ -58,7 +59,7 @@ const Feed = () => {
           onChange={(event) => setInputText(event.target.value)}
         />
       </BoxInputSearch>
-      <Menu>
+      <MenuTop>
         <MenuItem
           select={false}
           onClick={() => changeCategory('')}
@@ -77,10 +78,11 @@ const Feed = () => {
         })}
 
 
-      </Menu>
+      </MenuTop>
       <CardsRestaurant>
         {filterRestaurant}
       </CardsRestaurant>
+        <Menu page={"home"}/>
     </ContainerFeed>
   )
 }

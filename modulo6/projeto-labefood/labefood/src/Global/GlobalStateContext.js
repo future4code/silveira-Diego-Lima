@@ -1,3 +1,8 @@
-import React from "react";
+const { createContext, useContext } = require("react");
 
-export const GlobalStateContext = React.createContext();
+
+const GlobalStateContext = createContext()
+
+export default GlobalStateContext
+
+export const useGlobal = () => useContext(GlobalStateContext)

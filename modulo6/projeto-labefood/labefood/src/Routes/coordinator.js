@@ -1,10 +1,13 @@
 
 export const goToLogin = (navigate) => {
-    navigate('/')
+    navigate('/login')
 }
 
 export const goToFeed = (navigate) => {
-    navigate('/feed')
+    navigate('/')
+}
+export const goToBack = (navigate) => {
+    navigate(-1)
 }
 
 export const goToRestaurant = (navigate, id) => {
@@ -25,4 +28,8 @@ export const goToProfile = (navigate) => {
 
 export const goToProfileId = (navigate, id) => {
     navigate(`/profile/${id}`)
+}
+
+export const goToCart = (navigate) => {
+    navigate('/cart')
 }

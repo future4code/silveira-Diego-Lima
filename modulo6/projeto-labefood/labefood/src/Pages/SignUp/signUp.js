@@ -8,6 +8,7 @@ import { BASE_URL } from '../../Constants/urls'
 import { goToSignUpAddress } from '../../Routes/coordinator'
 import { useNavigate } from 'react-router-dom'
 import { ButtonStyled } from '../../Global/GlobalStyled'
+import Header from '../../Components/Header/Header'
 
 
 
@@ -64,6 +65,7 @@ const SignUp = () => {
 
   return (
     <Main>
+      <Header back/>
       <p>Cadastrar</p>
       <Form onSubmit={onSubmitForm}>
         <TextFieldStyled

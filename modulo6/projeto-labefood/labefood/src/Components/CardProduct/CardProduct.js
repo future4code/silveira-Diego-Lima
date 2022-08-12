@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
+import BasicModal from '../Modal/BasicModal'
 import { BoxInform, BoxInformPriceButton, BoxNameQuantity, ContainerCardProduct, ImageProduct, InformButton, InformDescription, InformPrice, NameProduct } from './styled'
 
 const CardProduct = ({ product }) => {
+    const [showModal, setShowModal] = useState(false)
 
     return (
         <ContainerCardProduct>
@@ -17,10 +19,11 @@ const CardProduct = ({ product }) => {
                     <InformPrice>
                         {product.price}
                     </InformPrice>
-                    <InformButton>
+                    <InformButton onClick={() => setShowModal(true)}>
                         Adicionar
                     </InformButton>
                 </BoxInformPriceButton>
+                <BasicModal open={showModal} setOpen={setShowModal} />
             </BoxInform>
         </ContainerCardProduct>
     )

@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 
 export const ContainerFeed = styled.div`
+    width:100% ;
     
 `
 
@@ -22,7 +23,7 @@ export const BoxInputSearch = styled.div`
     margin-top: 0.5rem;
 `
 
-export const Menu = styled.nav`
+export const MenuTop = styled.nav`
     height: 2.625rem;
     display: flex;
     align-items: center;
@@ -39,9 +40,10 @@ export const MenuItem = styled.button`
     line-height: normal;
     letter-spacing: -0.39px;
     text-align: center;
-    color: ${(p) => p.select ?  '#E8222E' : "black"};
+    color: ${(p) => p.select ? '#E8222E' : "black"};
     background-color: transparent;
     border: none;
     outline: none;
     padding: 0 1rem;
 `
+

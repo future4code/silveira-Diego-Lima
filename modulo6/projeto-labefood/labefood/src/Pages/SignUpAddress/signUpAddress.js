@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import Header from '../../Components/Header/Header'
 import { BASE_URL } from '../../Constants/urls'
 import { ButtonStyled } from '../../Global/GlobalStyled'
 import useForm from '../../Hoocks/useForm'
@@ -43,6 +44,7 @@ const SignUpAddress = () => {
 
   return (
     <Main>
+      <Header back/>
       <p>Meu Endereço</p>
       <form onSubmit={onSubmitFormAddress}>
         <TextFieldStyled
