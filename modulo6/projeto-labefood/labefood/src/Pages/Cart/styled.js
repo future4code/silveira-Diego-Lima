@@ -1,41 +1,29 @@
+import { FormLabel } from '@mui/material'
 import styled from 'styled-components'
 import { StyledButton } from '../../Global/GlobalStyled'
 
 
-export const Main = styled.div`
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-`
-export const MainCart = styled.div`
-    display: flex;
-    height: 5%;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-`
+
 export const AddressUser = styled.div`
     display: flex;
     justify-content: space-around;
     flex-direction: column;
     padding: 10px;
-    border: 1px solid black;
-    height: 10%;
     background-color: lightgrey;
     font-family: 'Roboto';
-    font-size: 1.2rem;
+    align-items: flex-start;
 `
 export const AddressRestaurant = styled.div`
     display: flex;
     flex-direction: column;
     padding: 10px;
-    height: 10%;
     justify-content: space-around;
-    border: 1px solid black;
     font-family: 'Roboto';
-    font-size: 1.2rem;
+    align-items: flex-start;
+    
 `
 export const ContainerPayment = styled.div`
+    display: flex;
     padding: 10px;
     margin-top: 2em;
 `
@@ -46,41 +34,21 @@ export const ContainerCart = styled.div`
     font-family: 'Roboto', sans-serif;
 `
 
-
-export const CartCard =styled.div`
-    display: flex;
-    margin: 10px;
-    padding: 10px;
-    border-radius: 20px;
-    border: 1px solid black;
-    
+export const FormLabelStyled = styled(FormLabel)`
+    width: 20.5rem;
+    height: 1.125rem;
+    margin: 1.5rem 1rem 0.5rem;
+    font-family: Roboto;
+    font-size: 1rem;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: -0.39px;
+    color: #000;
+`
+export const Shipping = styled.div`
 `
 
-export const CardContainer =styled.div`
-    display: flex;
-    margin: 10px;
-    padding: 10px;
-    border-radius: 20px;
-    border: 1px solid black;
-`
-
-export const ImgContainer = styled.img`
-    width: 150px;
-    height: 150px;
-    border-radius: 15px;
-
-`
-
-export const InfoContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-`
-
-export const Info = styled.p`
-    margin: 10px;
-`
-
-export const ButtonRemove = styled(StyledButton)`
-    width: 100px;
-
+export const ContainerSubTotal = styled.div`
 `

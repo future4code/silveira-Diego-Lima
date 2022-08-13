@@ -5,9 +5,11 @@ import CardProduct from '../../Components/CardProduct/CardProduct'
 import CardRestaurantDetails from '../../Components/CardRestaurantDetails/CardRestaurantDetails'
 import Header from '../../Components/Header/Header'
 import { BASE_URL } from '../../Constants/urls'
+import useProtectedPage from '../../Hoocks/useProtectedPage'
 import { CardRestaurant, Category, ContainerRestaurant, SectionProductByCategory } from './styled'
 
 const Restaurant = () => {
+  useProtectedPage()
   const [restaurant, setRestaurant] = useState({})
   const { restaurantId } = useParams()
   const [categories, setCategories] = useState([])
@@ -44,7 +46,7 @@ const Restaurant = () => {
     }
   }, [restaurant])
 
-  
+
   return (
     <ContainerRestaurant>
       <Header title={"Restaurante"} back />
@@ -61,7 +63,7 @@ const Restaurant = () => {
                   return product.category === category
                 })
                 .map((product) => {
-                  return <CardProduct product={product} key={product.id} />
+                  return <CardProduct product={product} key={product.id} restaurant={restaurant} />
                 })
               }
             </SectionProductByCategory>

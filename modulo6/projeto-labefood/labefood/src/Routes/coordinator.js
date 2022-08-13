@@ -22,12 +22,16 @@ export const goToSignUpAddress = (navigate) => {
     navigate('/signUp/address')
 }
 
+
 export const goToProfile = (navigate) => {
     navigate('/profile')
 }
 
 export const goToProfileId = (navigate, id) => {
     navigate(`/profile/${id}`)
+}
+export const goToAddressEdit = (navigate, id) => {
+    navigate(`/address/edit/${id}`)
 }
 
 export const goToCart = (navigate) => {

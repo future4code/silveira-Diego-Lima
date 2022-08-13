@@ -5,17 +5,17 @@ import { useGlobal } from '../../Global/GlobalStateContext';
 import useProtectedPage from '../../Hoocks/useProtectedPage';
 import { BoxInputSearch, CardsRestaurant, ContainerFeed, InputSearch, MenuTop, MenuItem } from './styled';
 import Menu from '../../Components/Menu/Menu';
+import Order from '../../Components/Order/Order';
 
 
 
 const Feed = () => {
   useProtectedPage()
-
-  const { restaurants } = useGlobal();
+  const { states, setters } = useGlobal()
+  const { restaurants, categoryRestaurant, activeOrder } = states
+  const { setCategoryRestaurant, setActiveOrder } = setters
   const [inputText, setInputText] = useState('')
-  const { categoryRestaurant, setCategoryRestaurant } = useGlobal()
   const [valueCategory, setValueCategory] = useState('')
-
 
 
   const filterRestaurant = restaurants
@@ -50,6 +50,7 @@ const Feed = () => {
     console.log(categoryRestaurant)
   }
 
+
   return (
     <ContainerFeed>
       <Header title={"Ifuture"} />
@@ -82,7 +83,8 @@ const Feed = () => {
       <CardsRestaurant>
         {filterRestaurant}
       </CardsRestaurant>
-        <Menu page={"home"}/>
+      {activeOrder && <Order />}
+      <Menu page={"home"} />
     </ContainerFeed>
   )
 }

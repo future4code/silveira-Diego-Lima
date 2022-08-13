@@ -5,17 +5,18 @@ import GlobalStateContext from './GlobalStateContext';
 
 
 
-function GlobalState(props) {
+function GlobalState({ children }) {
     const [restaurants, setRestaurants] = useState([]);
     const [categoryRestaurant, setCategoryRestaurant] = useState([])
-    const [activeOrder, setActiveOrder] = useState([]);
-    const [productAdd, setProductAdd] = useState([]);
+    const [cart, setCart] = useState([]);
     const [addressUser, setAddressUser] = useState([]);
+    const [paymentMethod, setPaymentMethod] = useState([]);
+    const [currentRestaurant, setCurrentRestaurant] = useState({})
+    const [activeOrder, setActiveOrder] = useState(null);
     const [orderHistory, setOrderHistory] = useState([]);
     const [userStats, setUserStats] = useState([]);
-    const [paymentMethod, setPaymentMethod] = useState([]);
-    
-    
+
+
     const headers = {
         headers: {
             Auth: localStorage.getItem('token')
@@ -46,24 +47,48 @@ function GlobalState(props) {
         setCategoryRestaurant(changeObjectArray)
     }
 
+    const addToCart = (product, quantity, restaurant) => {
+        if (restaurant.id === currentRestaurant.id) {
+            setCart([...cart, { ...product, quantity }])
+        } else {
+            setCart([{ ...product, quantity }])
+            setCurrentRestaurant(restaurant)
+        }
+    }
+    const removeToCart = (id) => {
+        const index = cart.findIndex((product) => product.id === id)
+        const newCart = [...cart]
+        newCart.splice(index, 1)
+        setCart(newCart)
+    }
+
     const getAddressUser = () => {//pega endereço do usuario
         axios.get(`${BASE_URL}/profile`, headers)
             .then((response) => {
                 setAddressUser(response.data.user.address);
             }).catch((error) => console.log(error.message));
     }
+    const getActiveOrder = () => {//pega pedido ativo do usuario
+        axios.get(`${BASE_URL}/active-order`, headers)
+            .then((res) => {
+                console.log(res.data)
+                setActiveOrder(res.data.order)
+                const expiresAt = res.data.order.expiresAt
+                console.log((expiresAt - new Date().getTime())/60000)
+                setTimeout(() => {
+                    getActiveOrder()
+                }, expiresAt - new Date().getTime())
+
+            }).catch((error) => console.log(error.message));
+    }
     const getOrderHistory = () => {//pega a historico de pedidos do usuario
         axios.get(`${BASE_URL}/orders/history`, headers)
             .then((response) => {
                 setOrderHistory(response.data.orders);
+
             }).catch((error) => console.log(error.message));
     }
-    const getActiveOrder = () => {//pega pedido ativo do usuario
-        axios.get(`${BASE_URL}/active-order`, headers)
-            .then((response) => {
-                setActiveOrder(response.data.order);
-            }).catch((error) => console.log(error.message));
-    }
+
     const getProfile = () => {
         axios.get(`${BASE_URL}/profile`, headers)
             .then((response) => {
@@ -73,36 +98,27 @@ function GlobalState(props) {
     useEffect(() => {
         getRestaurantList();
         getAddressUser();
-        getOrderHistory();
         getActiveOrder();
+
+
+        getOrderHistory();
         getProfile();
 
     }, []);
 
-    const data = {
-        restaurants,
-        setRestaurants,
-        categoryRestaurant,
-        setCategoryRestaurant,
-        activeOrder,
-        setActiveOrder,
-        userStats,
-        setUserStats,
-        paymentMethod,
-        setPaymentMethod,
-        addressUser,
-        setAddressUser,
-        orderHistory,
-        setOrderHistory
+    const requests = { addToCart, removeToCart }
 
-    };
+    const states = { restaurants, categoryRestaurant, cart, addressUser, paymentMethod, currentRestaurant, activeOrder }
+
+    const setters = { setPaymentMethod, setActiveOrder }
+
+
 
     return (
-        <div>
-            <GlobalStateContext.Provider value={data}>
-                {props.children}
-            </GlobalStateContext.Provider>
-        </div>
+        <GlobalStateContext.Provider value={{ requests, states, setters }}>
+            {children}
+        </GlobalStateContext.Provider>
+
     )
 }
 

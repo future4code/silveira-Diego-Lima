@@ -1,11 +1,14 @@
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
-import React  from "react";
+import React from "react";
 import { useGlobal } from "../../Global/GlobalStateContext";
+import { FormLabelStyled } from "./styled";
 
 
 const PaymentMethod = () => {
-  const { paymentMethod, setPaymentMethod } = useGlobal()
-  console.log(paymentMethod)
+  const { states, setters } = useGlobal()
+  const { paymentMethod } = states
+  const { setPaymentMethod } = setters
+
 
   const handleChange = (event) => {
     setPaymentMethod(event.target.value);
@@ -13,7 +16,7 @@ const PaymentMethod = () => {
 
   return (
     <FormControl component="fieldset">
-      <FormLabel component="legend">Metodo de Pagamento</FormLabel>
+      <FormLabelStyled component="legend">Forma de Pagamento</FormLabelStyled>
       <RadioGroup
         aria-label="paymentMethod"
         name="paymentMethod1"

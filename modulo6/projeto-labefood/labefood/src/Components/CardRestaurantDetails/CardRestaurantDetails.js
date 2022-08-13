@@ -5,7 +5,6 @@ import { BoxInfo, ContainerCardRestaurantDetails, ImageRestaurant, Infos, NameRe
 
 const CardRestaurantDetails = ({ restaurant }) => {
 
-    
     return (
         <ContainerCardRestaurantDetails >
             <ImageRestaurant src={restaurant.logoUrl} />

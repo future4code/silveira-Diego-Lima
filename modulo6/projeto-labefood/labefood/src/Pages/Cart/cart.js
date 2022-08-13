@@ -1,63 +1,67 @@
-import React  from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import CardProduct from '../../Components/CardProduct/CardProduct'
 import Header from '../../Components/Header/Header'
 import Menu from '../../Components/Menu/Menu'
+import Order from '../../Components/Order/Order'
+import { BASE_URL } from '../../Constants/urls'
 import { useGlobal } from '../../Global/GlobalStateContext'
 import { StyledButton } from '../../Global/GlobalStyled'
+import useProtectedPage from '../../Hoocks/useProtectedPage'
 import PaymentMethod from './PaymentMethod'
-import { ContainerCart, AddressUser, AddressRestaurant, ContainerPayment, MainCart, CardContainer, ImgContainer, InfoContainer, Info, ButtonRemove } from './styled'
+import { ContainerCart, AddressUser, AddressRestaurant, ContainerPayment, ContainerSubTotal, Shipping } from './styled'
 
 const Cart = () => {
-  const { addressUser } = useGlobal()
-  const {productAdd, setProductAdd} =  useGlobal()
+  useProtectedPage()
+  const { states, setters } = useGlobal()
+  const { addressUser, cart, currentRestaurant, paymentMethod, activeOrder } = states
+  const { setActiveOrder } = setters
+  const [fullPrice, setFullPrice] = useState(0)
 
-
-  const removerProduto = (produtos) => {
-    const product = productAdd.find((item) => {
-      return item.id === produtos.id
-    })
-
-    if (product.quantity <= 1) {
-      const novoCarrinho = productAdd.filter((produto) => {
-        return produto.id !== produtos.id
-      })
-      setProductAdd(novoCarrinho)
-    } else {
-      const novoCarrinho = productAdd.map((produto) => {
-        if (produto.id === produtos.id) {
-          const carrinho = { ...produto, quantity: produto.quantity - 1 }
-          return carrinho
-        }
-        return produto
-      })
-      setProductAdd(novoCarrinho)
+  
+  const TotalPrice = () => {
+    let totPrice = 0
+    const frete = currentRestaurant.shipping
+    for (const product of cart) {
+      totPrice += product.price * product.quantity + frete
     }
+    setFullPrice(totPrice)
+  }
+
+  const placeOrder = async () => {
+    const body = {
+      products: cart.map((product) => {
+        return ({
+          id: product.id,
+          quantity: product.quantity
+        })
+
+      }),
+      paymentMethod: paymentMethod
+    }
+    await axios.post(`${BASE_URL}/restaurants/${currentRestaurant.id}/order`, body, {
+      headers: {
+        auth: localStorage.getItem('token')
+      }
+    })
+      .then((res) => {
+        setActiveOrder(res.data.order)
+      })
+      .catch((err) => {
+        console.log(err.response)
+        alert(err.data.message)
+      })
+  }
+
+  const onSubmitPlaceOrder = (event) => {
+    event.preventDefault()
+    placeOrder()
   }
 
 
-  const CarrinhoDeCompras = productAdd && productAdd.map((produto) => {
-    return (
-      <CardContainer>
-        <div key={produto.id} >
-          <ImgContainer src={produto.photoUrl} />
-        </div>
-        <InfoContainer>
-          <strong>{produto.name}</strong>
-          <Info>{produto.description}</Info>
-         
-          <p> {new Intl.NumberFormat('pt-BR', {
-            style: 'currency',
-            currency: 'BRL'
-          }).format(`${produto.price}`)}</p>
-
-          <p>Quantidade: {produto.quantity}</p>
-          <ButtonRemove color='primary' variant="contained" onClick={() => removerProduto(produto)}>Remover</ButtonRemove>
-
-        </InfoContainer>
-
-      </CardContainer>
-    )
-  })
-
+  useEffect(() => {
+    TotalPrice()
+  }, [])
 
   return (
     <ContainerCart>
@@ -68,22 +72,48 @@ const Cart = () => {
         <p>{addressUser}</p>
       </AddressUser>
       <AddressRestaurant>
-        {/* <p>{currentRestaurant.name}</p>
-          <p>{currentRestaurant.address}</p> */}
+        <p>{currentRestaurant.name}</p>
+        <p>{currentRestaurant.address}</p>
+        <p>{currentRestaurant.deliveryTime} min</p>
       </AddressRestaurant>
-          {CarrinhoDeCompras}
-      {/* {CarrinhoDeCompras.length > 0 ? CarrinhoDeCompras : <p>Carrinho vazio</p>} */}
-
+      {cart && cart.length > 0 ? cart.map((product) => {
+        return (
+          <CardProduct
+            key={product.id}
+            product={product}
+            restaurant={currentRestaurant}
+          />
+        )
+      }) : <p>Carrinho vazio</p>}
 
       <ContainerPayment>
-        <PaymentMethod />
+        <Shipping>
+          Frete
+          {new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+          }).format(currentRestaurant.shipping ? currentRestaurant.shipping : 0)}
+
+        </Shipping>
+        <ContainerSubTotal>
+          <p>Subtotal</p>
+          <p>{new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+          }).format(fullPrice ? fullPrice : 0)}
+
+          </p>
+
+        </ContainerSubTotal>
+
       </ContainerPayment>
-      <StyledButton color='primary' variant="contained" >Gerar Pedido</StyledButton>
-      
-
-
-      <Menu page={"cart"}/>
-    </ContainerCart>
+      <div>
+        <PaymentMethod />
+        <StyledButton color='primary' variant="contained" onClick={onSubmitPlaceOrder}> Gerar Pedido</StyledButton>
+      </div>
+      {activeOrder && <Order />}
+      <Menu page={"cart"} />
+    </ContainerCart >
   )
 }
 

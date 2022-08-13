@@ -8,6 +8,7 @@ import Restaurant from "../Pages/Restaurant/Restaurant"
 import Cart from '../Pages/Cart/Cart'
 import Profile from '../Pages/Profile/Profile'
 import ProfileEdit from '../Pages/ProfileEdit/ProfileEdit'
+import AddressEdit from '../Pages/AddressEdit/AddressEdit'
 
 const Router = () => {
     return (
@@ -17,6 +18,7 @@ const Router = () => {
                 <Route path='/login' element={<Login />} />
                 <Route path='/signUp' element={<SignUp />} />
                 <Route path='/signUp/address' element={<SignUpAddress />} />
+                <Route path='/address/edit/:id' element={<AddressEdit />} />
                 <Route path='/feed/:restaurantId' element={<Restaurant />} />
                 <Route path='/profile' element={<Profile />} />
                 <Route path='/profile/:id' element={<ProfileEdit />} />
