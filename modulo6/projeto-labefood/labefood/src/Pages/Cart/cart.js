@@ -21,13 +21,15 @@ const Cart = () => {
 
   const navigate = useNavigate()
 
+  console.log(cart)
+
   const TotalPrice = () => {
     let totPrice = 0
     const frete = currentRestaurant.shipping
     for (const product of cart) {
-      totPrice += product.price * product.quantity + frete
+      totPrice += product.price * product.quantity
     }
-    setFullPrice(totPrice)
+    setFullPrice(totPrice + frete)
   }
 
   const placeOrder = async () => {
