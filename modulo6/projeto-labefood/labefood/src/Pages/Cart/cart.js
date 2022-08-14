@@ -6,7 +6,7 @@ import Header from '../../Components/Header/Header'
 import Menu from '../../Components/Menu/Menu'
 import { BASE_URL } from '../../Constants/urls'
 import { useGlobal } from '../../Global/GlobalStateContext'
-import { ButtonStyled} from '../../Global/GlobalStyled'
+import { ButtonStyled } from '../../Global/GlobalStyled'
 import useProtectedPage from '../../Hoocks/useProtectedPage'
 import { goToFeed } from '../../Routes/coordinator'
 import PaymentMethod from './PaymentMethod'
@@ -21,7 +21,6 @@ const Cart = () => {
 
   const navigate = useNavigate()
 
-  console.log(cart)
 
   const TotalPrice = () => {
     let totPrice = 0
@@ -56,9 +55,13 @@ const Cart = () => {
       })
       .catch((err) => {
         alert(err.response.data.message)
-        setCart([])
-        setCurrentRestaurant({})
-        goToFeed(navigate)
+        if (err.response.data.message === "Já existe um pedido em andamento") {
+          setCart([])
+          setCurrentRestaurant({})
+          goToFeed(navigate)
+        } else {
+
+        }
       })
   }
 
@@ -80,48 +83,45 @@ const Cart = () => {
         <h3>Endereço de entrega</h3>
         <p>{addressUser}</p>
       </AddressUser>
+
       <AddressRestaurant>
         <NameProduct>{currentRestaurant.name}</NameProduct>
         <p>{currentRestaurant.address}</p>
         <p>{currentRestaurant.deliveryTime && currentRestaurant.deliveryTime.length > 0 ? `${currentRestaurant.deliveryTime} min` : <></>}</p>
       </AddressRestaurant>
+
       <CardContainer>
-      {cart && cart.length > 0 ? cart.map((product) => {
-        return (
-          <CardProduct
-            key={product.id}
-            product={product}
-            restaurant={currentRestaurant}
-          />
-        )
-      }) : <p>Carrinho vazio</p>}
+        {cart && cart.length > 0 ? cart.map((product) => {
+          return (
+            <CardProduct
+              key={product.id}
+              product={product}
+              restaurant={currentRestaurant}
+            />
+          )
+        }) : <p>Carrinho vazio</p>}
       </CardContainer>
-     
-        <Shipping>
-         <p>Frete <></>
+
+      <Shipping>
+        <p>Frete <></>
           {new Intl.NumberFormat('pt-BR', {
             style: 'currency',
             currency: 'BRL'
           }).format(currentRestaurant.shipping ? currentRestaurant.shipping : 0)}
-          </p> 
-        </Shipping>
-        <ContainerSubTotal>
-          
-          <h3>Subtotal</h3>
-          <p>{new Intl.NumberFormat('pt-BR', {
-            style: 'currency',
-            currency: 'BRL'
-          }).format(fullPrice ? fullPrice : 0)}
-          </p>
+        </p>
+      </Shipping>      
+      <ContainerSubTotal>
+        <h3>Subtotal</h3>
+        <p>{new Intl.NumberFormat('pt-BR', {
+          style: 'currency',
+          currency: 'BRL'
+        }).format(fullPrice ? fullPrice : 0)}
+        </p>
+      </ContainerSubTotal>
+      
+      <PaymentMethod />
+      <ButtonStyled color='primary' variant="contained" onClick={onSubmitPlaceOrder}> Cofirmar</ButtonStyled>
 
-        </ContainerSubTotal>
-
-    
-      <div>
-        <PaymentMethod />
-        <ButtonStyled color='primary' variant="contained" onClick={onSubmitPlaceOrder}> Cofirmar</ButtonStyled>
-      </div>
-    
       <Menu page={"cart"} />
     </ContainerCart >
   )

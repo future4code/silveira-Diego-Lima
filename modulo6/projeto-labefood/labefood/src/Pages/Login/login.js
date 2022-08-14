@@ -1,13 +1,15 @@
 import { Visibility, VisibilityOff } from '@mui/icons-material'
-import { Button, CircularProgress, IconButton } from '@mui/material'
+import { Button, CircularProgress, FormControl, IconButton, InputLabel, OutlinedInput } from '@mui/material'
 import axios from 'axios'
-import React, { useState } from 'react'
-import { Form, LogoContainer, Main, PasswordContainer, TextFieldStyled, Title } from './styled'
+import React, { useEffect, useState } from 'react'
+import { ContainerImg, Form, LogoContainer, Main, PasswordContainer, TextFieldStyled, Title } from './styled'
 import { BASE_URL } from '../../Constants/urls'
 import { useNavigate } from 'react-router-dom'
 import { goToFeed, goToSignUp, goToSignUpAddress } from '../../Routes/coordinator'
 import { ButtonStyled } from '../../Global/GlobalStyled'
 import Logo4Food from '../../Assests/logo-4food.svg'
+import InitialScreen from '../../Assests/Tela-Inicial.png'
+
 
 const Login = () => {
 
@@ -19,6 +21,7 @@ const Login = () => {
   const [checkErrEmail, setCheckErrEmail] = useState(false)
   const [checkErrPass, setCheckErrPass] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [showSplash, setShowSplash] = useState(true)
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword)
@@ -64,9 +67,15 @@ const Login = () => {
         }
       })
   }
+  useEffect(() => {
+    setTimeout(() => {
+      setShowSplash(false)
+    }, 3000)
+  }, [])
 
   return (
     <Main>
+      {showSplash && <ContainerImg src={InitialScreen} />}
       <LogoContainer>
         <img src={Logo4Food} alt='logo 4food'></img>
       </LogoContainer>
@@ -85,7 +94,7 @@ const Login = () => {
           required
         />
         <PasswordContainer>
-          <TextFieldStyled
+           <TextFieldStyled
             error={checkErrPass}
             helperText={checkErrPass ? errPass : ''}
             id="outlined-basic"
@@ -107,9 +116,9 @@ const Login = () => {
           </IconButton>
         </PasswordContainer>
         <ButtonStyled type='submit' >
-        {isLoading ? <CircularProgress color={"inherit"} size={24}/> : <>Entrar</>}
+          {isLoading ? <CircularProgress color={"inherit"} size={24} /> : <>Entrar</>}
         </ButtonStyled>
-        
+
         <Button onClick={() => goToSignUp(navigate)}>Não possui cadastro? Clique aqui.</Button>
       </Form>
     </Main>

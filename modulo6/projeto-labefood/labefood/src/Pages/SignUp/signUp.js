@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Form, Main, PasswordContainer, TextFieldStyled, LogoContainer } from './styled'
 import useForm from "../../Hoocks/useForm"
 import { Visibility, VisibilityOff } from '@mui/icons-material'
-import { CircularProgress, IconButton } from '@mui/material'
+import { CircularProgress, FormControl, IconButton, InputLabel, OutlinedInput } from '@mui/material'
 import axios from 'axios'
 import { BASE_URL } from '../../Constants/urls'
 import { goToSignUpAddress } from '../../Routes/coordinator'
@@ -106,47 +106,48 @@ const SignUp = () => {
           required
         />
         <PasswordContainer>
-          <TextFieldStyled
-            id="outlined-adornment-password"
-            label={"Senha"}
-            name='password'
-            type={showPass ? 'password' : 'text'}
-            variant="outlined"
-            placeholder={'Mínimo 6 caracteres'}
-            value={form.password}
-            onChange={handleInputChange}
-            inputProps={{ minLength: 6, title: "A senha deve conter no mínimo 6 caracteres " }}
-            required
-          />
-          <IconButton
-            aria-label="toggle password visibility"
-            onClick={handleClickShowPassword}
-            edge="end"
-          >
-            {showPass ? <VisibilityOff /> : <Visibility />}
-          </IconButton>
+          <FormControl sx={{width: "80vw" }} variant="outlined" required>
+            <InputLabel htmlFor="outlined-adornment-password" >
+              Senha
+            </InputLabel>
+            <OutlinedInput
+              id="outlined-adornment-password"
+              name='password'
+              label={"Senha"}
+              type={showPass ? 'password' : 'text'}
+              placeholder={'Mínimo 6 caracteres'}
+              value={form.password}
+              onChange={handleInputChange}
+              inputProps={{ minLength: 6, title: "A senha deve conter no mínimo 6 caracteres " }}
+              
+              endAdornment={
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  edge="end"
+                >
+                  {showPass ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              }
+            />
+          </FormControl>
         </PasswordContainer>
         <PasswordContainer>
-          <TextFieldStyled
-            error={checkErrPass}
-            helperText={checkErrPass ? 'Deve ser a mesma que a anterior.' : ''}
-            id="outlined-basic"
-            label="Confirmar"
-            type={showPass ? 'password' : 'text'}
-            variant="outlined"
-            placeholder={'Confime a senha anterior'}
-            value={confirmPassword}
-            onChange={(event) => setConfirmPassword(event.target.value)}
-            inputProps={{ minLength: 6, title: "A senha deve conter no mínimo 6 caracteres " }}
-            required
-          />
-          <IconButton
-            aria-label="toggle password visibility"
-            onClick={handleClickShowPassword}
-            edge="end"
-          >
-            {showPass ? <VisibilityOff /> : <Visibility />}
-          </IconButton>
+          <FormControl sx={{width: "80vw" }} variant="outlined">
+            <TextFieldStyled
+              error={checkErrPass}
+              helperText={checkErrPass ? 'Deve ser a mesma que a anterior.' : ''}
+              id="outlined-adornment-password"
+              name='password'
+              label="Confirmar"
+              type={showPass ? 'password' : 'text'}
+              placeholder={'Confime a senha anterior'}
+              value={confirmPassword}
+              onChange={(event) => setConfirmPassword(event.target.value)}
+              inputProps={{ minLength: 6, title: "A senha deve conter no mínimo 6 caracteres " }}
+              required
+            />
+          </FormControl>
         </PasswordContainer>
         <ButtonStyled type='submit' >
           {isLoading ? <CircularProgress color={"inherit"} size={24} /> : <>Criar</>}

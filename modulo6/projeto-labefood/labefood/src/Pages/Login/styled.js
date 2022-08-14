@@ -49,3 +49,13 @@ export const LogoContainer = styled.div`
     margin: 2rem;
     justify-content: center;
 `
+
+export const ContainerImg = styled.img`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 108vh;
+    z-index: 2;
+
+`

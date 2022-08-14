@@ -55,7 +55,7 @@ export const FormLabelStyled = styled(FormLabel)`
     font-style: normal;
     line-height: normal;
     letter-spacing: -0.39px;
-    color: #000;
+    color: black;
 `
 export const Shipping = styled.div`
     display: flex;

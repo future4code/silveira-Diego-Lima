@@ -48,12 +48,3 @@ export const MenuItem = styled.button`
     padding: 0 1rem;
 `
 
-export const ContainerImg = styled.img`
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 108vh;
-    z-index: 2;
-
-`

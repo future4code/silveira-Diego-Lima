@@ -8,7 +8,7 @@ https://documenter.getpostman.com/view/7549981/SWTEdGtT
 
 
 ### Deploy realizado no surge
-https://labefood-app4food.surge.sh
+https://4foodapp-labefood.surge.sh/
 
 ## Paginas e funcionalidades implementadas
 

@@ -3,10 +3,9 @@ import CardRestaurant from '../../Components/CardRestaurant/CardRestaurant';
 import Header from '../../Components/Header/Header';
 import { useGlobal } from '../../Global/GlobalStateContext';
 import useProtectedPage from '../../Hoocks/useProtectedPage';
-import { BoxInputSearch, CardsRestaurant, ContainerFeed, InputSearch, MenuTop, MenuItem, ContainerImg } from './styled';
+import { BoxInputSearch, CardsRestaurant, ContainerFeed, InputSearch, MenuTop, MenuItem } from './styled';
 import Menu from '../../Components/Menu/Menu';
 import Order from '../../Components/Order/Order';
-import InitialScreen from '../../Assests/Tela-Inicial.png'
 import { BASE_URL } from '../../Constants/urls';
 import axios from 'axios';
 
@@ -20,7 +19,6 @@ const Feed = () => {
   const { activeOrder } = states
   const [inputText, setInputText] = useState('')
   const [valueCategory, setValueCategory] = useState('')
-  const [showSplash, setShowSplash] = useState(true)
 
   const headers = {
     headers: {
@@ -85,14 +83,11 @@ const Feed = () => {
 
   useEffect(() => {
     getRestaurantList()
-    setTimeout(() => {
-      setShowSplash(false)
-    }, 3000)
   }, )
 
   return (
     <ContainerFeed>
-      {showSplash && <ContainerImg src={InitialScreen} />}
+  
       <Header title={"Ifuture"} />
       <BoxInputSearch>
         <InputSearch
