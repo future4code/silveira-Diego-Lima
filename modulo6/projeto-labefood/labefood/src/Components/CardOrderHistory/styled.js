@@ -1,28 +1,35 @@
 import styled from "styled-components";
 
 
-export const OrderContainer = styled.nav`
+export const OrderContainer = styled.div`
     display: flex;
-    width: 100%;
-    align-items: center;
-    height: 7.375rem;    
-    background-color: #e8222e;   
-    padding: 0 0 0 2rem;
+    width: 90%;
+    height: 7rem;
+    margin: 0.5rem 0.5rem 0;
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: #eeeeee;
+    border: solid 1px #b8b8b8;
+    flex-direction: column;
+    justify-content:space-around;
    
 `
 
-export const BoxInform = styled.div``
+export const BoxInform = styled.div`
+    
+    justify-content:space-around;
+`
 
 export const RestaurantName = styled.p`
     font-family: Montserrat;
     font-size: 1rem;
-    font-weight: normal;
+    font-weight: bold;
     font-stretch: normal;
     font-style: normal;
     line-height: normal;
     letter-spacing: -0.39px;
-    color: #000;
-    padding: 0.25rem;
+    color: #e8222e;
+   
 `
 
 export const TotalPrice = styled.p`
@@ -33,7 +40,7 @@ export const TotalPrice = styled.p`
     font-style: normal;
     line-height: normal;
     letter-spacing: -0.39px;
-    padding: 0.25rem;
+  
 `
 
 export const DeliveryDate = styled.p`
@@ -44,6 +51,5 @@ export const DeliveryDate = styled.p`
     font-style: normal;
     line-height: normal;
     letter-spacing: -0.39px;
-    color: #fff;
-    padding: 0.25rem;
+   
 `

@@ -15,6 +15,7 @@ export const ImageRestaurant = styled.img`
 
 export const NameRestaurant = styled.h3`
     font-family: Roboto;
+    margin-left: 2rem;
     font-size: 1rem;
     font-weight: normal;
     font-stretch: normal;
@@ -25,7 +26,8 @@ export const NameRestaurant = styled.h3`
 `
 export const BoxInfoTimePrice = styled.div`
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
+    color: #b8b8b8;
 `
 
 export const InfoTimePrice = styled.p`
@@ -36,6 +38,6 @@ export const InfoTimePrice = styled.p`
     font-style: normal;
     line-height: normal;
     letter-spacing: 0.39px;
-    color: #b8b8b8;
+    
 
 `

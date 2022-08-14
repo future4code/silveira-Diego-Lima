@@ -2,13 +2,14 @@ import styled from "styled-components";
 
 
 export const ContainerFeed = styled.div`
-    width:100% ;
+    width: 100vw
+    
     
 `
 
 export const CardsRestaurant = styled.div`
     padding: 0 1rem;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
 `
 export const InputSearch = styled.input`
     width: 95%;
@@ -47,3 +48,12 @@ export const MenuItem = styled.button`
     padding: 0 1rem;
 `
 
+export const ContainerImg = styled.img`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 108vh;
+    z-index: 2;
+
+`

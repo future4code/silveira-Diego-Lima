@@ -1,15 +1,17 @@
+import { CircularProgress } from '@mui/material'
 import axios from 'axios'
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Header from '../../Components/Header/Header'
 import { BASE_URL } from '../../Constants/urls'
 import { ButtonStyled } from '../../Global/GlobalStyled'
 import useForm from '../../Hoocks/useForm'
 import { goToFeed } from '../../Routes/coordinator'
-import { Main, TextFieldStyled } from './styled'
+import { Main, TextFieldStyled, Title } from './styled'
 
 const SignUpAddress = () => {
-  const [form, handleInputChange, clear] = useForm({
+  const [isLoading, setIsLoading] = useState(false)
+  const [form, handleInputChange] = useForm({
     "street": "",
     "number": "",
     "neighbourhood": "",
@@ -26,6 +28,7 @@ const SignUpAddress = () => {
   }
 
   const addAddress = async () => {
+    setIsLoading(true)
     const token = localStorage.getItem('token')
     await axios.put(`${BASE_URL}/address`, form, {
       headers: {
@@ -34,18 +37,20 @@ const SignUpAddress = () => {
     })
       .then((res) => {
         localStorage.setItem('token', res.data.token)
+        setIsLoading(false)
         goToFeed(navigate)
       })
       .catch((err) => {
         console.log(err.response)
+        setIsLoading(false)
       })
   }
 
 
   return (
     <Main>
-      <Header back/>
-      <p>Meu Endereço</p>
+      <Header back />
+      <Title>Meu Endereço</Title>
       <form onSubmit={onSubmitFormAddress}>
         <TextFieldStyled
           id="outlined-basic"
@@ -112,7 +117,9 @@ const SignUpAddress = () => {
           onChange={handleInputChange}
           required
         />
-        <ButtonStyled type='submit' > Salvar </ButtonStyled>
+        <ButtonStyled type='submit' >
+          {isLoading ? <CircularProgress color={"inherit"} size={24} /> : <>Salvar</>}
+        </ButtonStyled>
 
       </form>
 

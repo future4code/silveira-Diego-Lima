@@ -1,5 +1,6 @@
+import { CircularProgress } from '@mui/material'
 import axios from 'axios'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Header from '../../Components/Header/Header'
 import { BASE_URL } from '../../Constants/urls'
@@ -11,6 +12,7 @@ import { Main, TextFieldStyled } from './styled'
 
 const AddressEdit = () => {
     useProtectedPage()
+    const [isLoading, setIsLoading] = useState(false)
     const [form, handleInputChange, clear, setForm] = useForm({
         "street": "",
         "number": "",
@@ -27,7 +29,6 @@ const AddressEdit = () => {
             }
         })
             .then((res) => {
-                console.log(res.data.address)
                 setForm({
                     "street": res.data.address.street,
                     "number": res.data.address.number,
@@ -46,6 +47,7 @@ const AddressEdit = () => {
     const navigate = useNavigate()
 
     const updateAddress = async () => {
+        setIsLoading(true)
         const token = localStorage.getItem('token')
         await axios.put(`${BASE_URL}/address`, form, {
             headers: {
@@ -54,9 +56,12 @@ const AddressEdit = () => {
         })
             .then((res) => {
                 localStorage.setItem('token', res.data.token)
+                setIsLoading(false)
                 goToProfile(navigate)
             })
             .catch((err) => {
+                setIsLoading(false)
+                clear()
                 console.log(err.response)
             })
     }
@@ -135,7 +140,9 @@ const AddressEdit = () => {
                     onChange={handleInputChange}
                     required
                 />
-                <ButtonStyled type='submit' > Salvar </ButtonStyled>
+                <ButtonStyled type='submit' >
+                    {isLoading ? <CircularProgress color={"inherit"} size={24} /> : <>Salvar</>}
+                </ButtonStyled>
 
             </form>
 

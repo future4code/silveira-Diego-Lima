@@ -3,10 +3,11 @@ import { useGlobal } from '../../Global/GlobalStateContext'
 import { BoxInform, ClockStyled, OrderContainer, OrderContainerSpace, RestaurantName, Title, TotalPrice } from './styled'
 
 const Order = () => {
-    const { states, setters } = useGlobal()
+    const { states,  } = useGlobal()
     const { activeOrder } = states
     const { totalPrice, restaurantName } = activeOrder
 
+     
     return (
         <>
             <OrderContainer>
@@ -19,7 +20,11 @@ const Order = () => {
                         {restaurantName}
                     </RestaurantName>
                     <TotalPrice>
-                        SUBTOTAL R${totalPrice}
+                        SUBTOTAL
+                        {new Intl.NumberFormat('pt-BR', {
+                            style: 'currency',
+                            currency: 'BRL'
+                        }).format(totalPrice)}
                     </TotalPrice>
                 </BoxInform>
             </OrderContainer>

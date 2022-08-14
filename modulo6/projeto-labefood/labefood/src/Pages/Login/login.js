@@ -1,12 +1,13 @@
 import { Visibility, VisibilityOff } from '@mui/icons-material'
-import { IconButton } from '@mui/material'
+import { Button, CircularProgress, IconButton } from '@mui/material'
 import axios from 'axios'
 import React, { useState } from 'react'
-import { Form, Main, PasswordContainer, TextFieldStyled } from './styled'
+import { Form, LogoContainer, Main, PasswordContainer, TextFieldStyled, Title } from './styled'
 import { BASE_URL } from '../../Constants/urls'
 import { useNavigate } from 'react-router-dom'
-import { goToFeed, goToSignUpAddress } from '../../Routes/coordinator'
+import { goToFeed, goToSignUp, goToSignUpAddress } from '../../Routes/coordinator'
 import { ButtonStyled } from '../../Global/GlobalStyled'
+import Logo4Food from '../../Assests/logo-4food.svg'
 
 const Login = () => {
 
@@ -17,6 +18,7 @@ const Login = () => {
   const [errPass, setErrPass] = useState("")
   const [checkErrEmail, setCheckErrEmail] = useState(false)
   const [checkErrPass, setCheckErrPass] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword)
@@ -31,6 +33,7 @@ const Login = () => {
     logar(userLogin)
   }
   const logar = async (body) => {
+    setIsLoading(true)
     await axios.post(`${BASE_URL}/login`, body)
       .then((res) => {
         setEmail('')
@@ -43,24 +46,31 @@ const Login = () => {
         alert(`boas vindas ${res.data.user.name}`)
         if (res.data.user.hasAddress === false) {
           goToSignUpAddress(navigate)
+          setIsLoading(false)
         } else {
           goToFeed(navigate)
+          setIsLoading(false)
         }
       })
       .catch((err) => {
         if (err.response.data.message.includes('Senha incorreta')) {
           setErrPass(err.response.data.message)
           setCheckErrPass(true)
+          setIsLoading(false)
         } else {
           setErrEmail(err.response.data.message)
           setCheckErrEmail(true)
+          setIsLoading(false)
         }
       })
   }
 
   return (
     <Main>
-      <p>Entrar</p>
+      <LogoContainer>
+        <img src={Logo4Food} alt='logo 4food'></img>
+      </LogoContainer>
+      <Title>Entrar</Title>
       <Form onSubmit={onSubmitLogin}>
         <TextFieldStyled
           error={checkErrEmail}
@@ -79,7 +89,7 @@ const Login = () => {
             error={checkErrPass}
             helperText={checkErrPass ? errPass : ''}
             id="outlined-basic"
-            label="Password"
+            label="Senha"
             type={showPassword ? 'password' : 'text'}
             variant="outlined"
             placeholder={'Mínimo 6 caracteres'}
@@ -96,7 +106,11 @@ const Login = () => {
             {showPassword ? <VisibilityOff /> : <Visibility />}
           </IconButton>
         </PasswordContainer>
-        <ButtonStyled type='submit' >Entrar</ButtonStyled>
+        <ButtonStyled type='submit' >
+        {isLoading ? <CircularProgress color={"inherit"} size={24}/> : <>Entrar</>}
+        </ButtonStyled>
+        
+        <Button onClick={() => goToSignUp(navigate)}>Não possui cadastro? Clique aqui.</Button>
       </Form>
     </Main>
   )

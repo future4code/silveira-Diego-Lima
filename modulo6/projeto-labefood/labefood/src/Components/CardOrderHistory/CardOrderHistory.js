@@ -1,5 +1,5 @@
 import React from 'react'
-import { BoxInform, DeliveryDate, OrderContainer, RestaurantName, TotalPrice } from './styled'
+import { DeliveryDate, OrderContainer, RestaurantName, TotalPrice } from './styled'
 
 const CardOrderHistory = ({ order, date }) => {
 
@@ -13,7 +13,7 @@ const CardOrderHistory = ({ order, date }) => {
 
     return (
         <OrderContainer>
-            <BoxInform>
+         
 
                 <RestaurantName>
                     {order.restaurantName}
@@ -27,7 +27,7 @@ const CardOrderHistory = ({ order, date }) => {
                         currency: 'BRL'
                     }).format(order.totalPrice)}
                 </TotalPrice>
-            </BoxInform>
+           
         </OrderContainer>
     )
 }

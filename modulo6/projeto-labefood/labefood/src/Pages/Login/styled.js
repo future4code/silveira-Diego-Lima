@@ -30,3 +30,22 @@ display: flex;
 align-items: center;
 justify-content: space-between;
 `
+
+export const Title = styled.h2`
+    font-family: Roboto;
+    font-family: Roboto;
+    font-size: 1rem;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: -0.39px;
+    text-align: center;
+    color: #000;
+`
+
+export const LogoContainer = styled.div`
+    display: flex;
+    margin: 2rem;
+    justify-content: center;
+`

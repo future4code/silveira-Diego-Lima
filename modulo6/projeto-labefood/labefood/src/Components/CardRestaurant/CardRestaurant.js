@@ -14,8 +14,11 @@ const CardRestaurant = ({ restaurant }) => {
             <ImageRestaurant src={restaurant.logoUrl} />
             <NameRestaurant>{restaurant.name}</NameRestaurant>
             <BoxInfoTimePrice>
-                <InfoTimePrice>{restaurant.deliveryTime}</InfoTimePrice>
-                <InfoTimePrice>{restaurant.shipping}</InfoTimePrice>
+                <InfoTimePrice>{`${restaurant.deliveryTime} min`}</InfoTimePrice>
+                <InfoTimePrice>{new Intl.NumberFormat('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                }).format(restaurant.shipping)}</InfoTimePrice>
             </BoxInfoTimePrice>
         </ContainerCardRestaurant>
     )

@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 
 export const Main = styled.div`
-    padding: 10px;
     width: 100%;
     height: 100vh;
     display: flex;
@@ -14,18 +13,31 @@ export const Main = styled.div`
     font-size: 1rem;
     }
     form{
-    margin-top: 20px;
+    margin-top: 1rem;
+    display: flex;
     flex-direction: column;
-    height: 50%;
-    width: 90%;
+    height: 60%;
+    width: 80%;
     justify-content: space-evenly;
     
     }    
 
 `
 export const TextFieldStyled = styled(TextField)`
-width: 100% ;
+    width: 100% ;
+   
 
 `
 
-
+export const Title = styled.h2`     
+    font-family: Roboto;
+    margin-top: 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: -0.39px;
+    text-align: center;
+    color: #000;
+`

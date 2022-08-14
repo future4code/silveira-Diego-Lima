@@ -7,14 +7,15 @@ import { BASE_URL } from '../../Constants/urls'
 import axios from 'axios'
 import { goToProfile } from '../../Routes/coordinator'
 import useProtectedPage from '../../Hoocks/useProtectedPage'
+import { CircularProgress } from '@mui/material'
 
 
 const ProfileEdit = () => {
     useProtectedPage()
-
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [cpf, setCpf] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
 
     const headers = {
         headers: {
@@ -33,6 +34,7 @@ const ProfileEdit = () => {
     }
 
     const updateProfile = () => {
+        setIsLoading(true)
         const body = {
             name,
             email,
@@ -40,10 +42,14 @@ const ProfileEdit = () => {
         }
         axios.put(`${BASE_URL}/profile`, body, headers)
             .then((res) => {
-                console.log(res.data)
+                setIsLoading(false)
                 goToProfile(navigate)
 
-            }).catch((err) => console.log(err));
+
+            }).catch((err) => {
+                setIsLoading(false)
+                console.log(err);
+            })
     }
 
 
@@ -97,7 +103,9 @@ const ProfileEdit = () => {
                     onChange={(e) => setCpf(e.target.value)}
                     required
                 />
-                <ButtonStyled type='submit' > Salvar </ButtonStyled>
+                <ButtonStyled type='submit' >
+                    {isLoading ? <CircularProgress color={"inherit"} size={24} /> : <>Salvar</>}
+                </ButtonStyled>
             </Form>
 
         </Main>

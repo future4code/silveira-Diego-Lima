@@ -72,6 +72,7 @@ export const Hr2 = styled.div`
 `
 export const ConteinerHistory = styled.div`
     display: flex;
+    align-items: center;
     flex-direction: column;
     font-family: Roboto;
     h3{

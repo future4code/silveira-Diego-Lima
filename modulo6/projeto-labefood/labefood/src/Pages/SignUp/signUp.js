@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-import { Form, Main, PasswordContainer, TextFieldStyled } from './styled'
+import { Form, Main, PasswordContainer, TextFieldStyled, LogoContainer } from './styled'
 import useForm from "../../Hoocks/useForm"
 import { Visibility, VisibilityOff } from '@mui/icons-material'
-import { IconButton } from '@mui/material'
+import { CircularProgress, IconButton } from '@mui/material'
 import axios from 'axios'
 import { BASE_URL } from '../../Constants/urls'
 import { goToSignUpAddress } from '../../Routes/coordinator'
 import { useNavigate } from 'react-router-dom'
 import { ButtonStyled } from '../../Global/GlobalStyled'
 import Header from '../../Components/Header/Header'
-
+import Logo4Food from '../../Assests/logo-4food.svg'
 
 
 const SignUp = () => {
@@ -22,8 +22,8 @@ const SignUp = () => {
   })
   const [showPass, setShowPass] = useState(false)
   const [confirmPassword, setConfirmPassword] = useState("")
-  const [showCheckPass, setShowCheckPass] = useState(false)
   const [checkErrPass, setCheckErrPass] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const navigate = useNavigate()
 
@@ -50,23 +50,28 @@ const SignUp = () => {
   }
 
   const signUpNewUser = async () => {
+    setIsLoading(true)
     await axios.post(`${BASE_URL}/signup`, form)
       .then((res) => {
         localStorage.setItem('token', res.data.token)
         alert(`boas vindas ${res.data.user.name}`)
+        setIsLoading(false)
         goToSignUpAddress(navigate)
       })
       .catch((err) => {
         alert(err.response.data.message)
         clear()
+        setIsLoading(false)
         setConfirmPassword('')
       })
   }
 
   return (
     <Main>
-      <Header back/>
-      <p>Cadastrar</p>
+      <Header title={"Cadastrar"} back />
+      <LogoContainer>
+        <img src={Logo4Food} alt="logo 4food"></img>
+      </LogoContainer>
       <Form onSubmit={onSubmitForm}>
         <TextFieldStyled
           id="outlined-basic"
@@ -74,7 +79,7 @@ const SignUp = () => {
           name='name'
           type={'text'}
           variant="outlined"
-          placeholder={'Digite seu nome'}
+          placeholder={'Nome e sobrenome'}
           value={form.name}
           onChange={handleInputChange}
         />
@@ -84,18 +89,18 @@ const SignUp = () => {
           name='email'
           type={'email'}
           variant="outlined"
-          placeholder={'Digite seu email'}
+          placeholder={'email@email.com'}
           value={form.email}
           onChange={handleInputChange}
           required
         />
         <TextFieldStyled
           id="outlined-basic"
-          label={"Cpf"}
+          label={"CPF"}
           name='cpf'
           type={'text'}
           variant="outlined"
-          placeholder={'Digite seu cpf'}
+          placeholder={'000.000.000-00'}
           value={cpfMask(form.cpf)}
           onChange={handleInputChange}
           required
@@ -103,7 +108,7 @@ const SignUp = () => {
         <PasswordContainer>
           <TextFieldStyled
             id="outlined-adornment-password"
-            label={"Password"}
+            label={"Senha"}
             name='password'
             type={showPass ? 'password' : 'text'}
             variant="outlined"
@@ -129,7 +134,7 @@ const SignUp = () => {
             label="Confirmar"
             type={showPass ? 'password' : 'text'}
             variant="outlined"
-            placeholder={'Mínimo 6 caracteres'}
+            placeholder={'Confime a senha anterior'}
             value={confirmPassword}
             onChange={(event) => setConfirmPassword(event.target.value)}
             inputProps={{ minLength: 6, title: "A senha deve conter no mínimo 6 caracteres " }}
@@ -143,7 +148,9 @@ const SignUp = () => {
             {showPass ? <VisibilityOff /> : <Visibility />}
           </IconButton>
         </PasswordContainer>
-        <ButtonStyled type='submit' > Cadastrar </ButtonStyled>
+        <ButtonStyled type='submit' >
+          {isLoading ? <CircularProgress color={"inherit"} size={24} /> : <>Criar</>}
+        </ButtonStyled>
 
       </Form>
 

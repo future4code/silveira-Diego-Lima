@@ -4,16 +4,16 @@ import { useParams } from 'react-router-dom'
 import CardProduct from '../../Components/CardProduct/CardProduct'
 import CardRestaurantDetails from '../../Components/CardRestaurantDetails/CardRestaurantDetails'
 import Header from '../../Components/Header/Header'
+import Menu from '../../Components/Menu/Menu'
 import { BASE_URL } from '../../Constants/urls'
 import useProtectedPage from '../../Hoocks/useProtectedPage'
-import { CardRestaurant, Category, ContainerRestaurant, SectionProductByCategory } from './styled'
+import { CardRestaurant, Category, ContainerRestaurant, Hr, SectionProductByCategory } from './styled'
 
 const Restaurant = () => {
   useProtectedPage()
   const [restaurant, setRestaurant] = useState({})
   const { restaurantId } = useParams()
   const [categories, setCategories] = useState([])
-
 
 
   const getRestaurant = () => {
@@ -58,6 +58,7 @@ const Restaurant = () => {
           categories.map((category) => {
             return <SectionProductByCategory>
               <Category>{category}</Category>
+              <Hr></Hr>
               {restaurant.products
                 .filter((product) => {
                   return product.category === category
@@ -71,7 +72,7 @@ const Restaurant = () => {
         }
 
       </CardRestaurant>
-
+      <Menu  />
     </ContainerRestaurant>
   )
 }

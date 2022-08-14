@@ -2,15 +2,14 @@ import styled from "styled-components";
 
 
 export const ContainerHeader = styled.div` 
-    width: 100%;
-    margin-left:3px;
+    width: 90vw;
     height: 2.75rem;
+    margin-left: 1rem;
     display: grid;
-    grid-template-columns: 24px 1fr 24px;
-    padding: 0 1rem;
+    grid-template-columns: 25px 1fr 25px;
     justify-items: center;
     align-items: center;
-    box-shadow: 0 0.5px 0 0 rgba(0, 0, 0);
+    box-shadow: 0 0.5px 0 0 rgba(0, 0, 0, 0.25);
     
 `
 export const Title = styled.h1`

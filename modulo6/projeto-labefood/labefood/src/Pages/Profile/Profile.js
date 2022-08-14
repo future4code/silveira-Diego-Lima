@@ -25,12 +25,12 @@ const Profile = () => {
     const date = `${day}/${month}/${year}`
     return date
   }
-
+  
   
   return (
     <App>
 
-      <Header title={"Meu Perfil"} />
+      <Header title={"Meu Perfil"} back logout/>
       <Hr></Hr>
 
       <EditUser>
@@ -61,7 +61,7 @@ const Profile = () => {
         <h3>Histórico de pedidos</h3>
         <Hr2></Hr2>
         {order[0].orders && order[0].orders.length > 0 ? order[0].orders && order[0].orders.map((order) => {
-          return <CardOrderHistory order={order} date={converDate(order.createdAt)} />
+          return <CardOrderHistory order={order} date={converDate(order.createdAt)} key={order.createdAt} />
         }) : <p>Você não realizou nenhum pedido </p>}
       </ConteinerHistory>
 

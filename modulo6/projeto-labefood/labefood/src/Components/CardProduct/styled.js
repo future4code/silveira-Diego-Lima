@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 export const ContainerCardProduct = styled.div`
     width: 100%;
+    
     margin: 0.5rem 0;
     display: flex;
     border: solid 1px grey;
@@ -11,8 +12,8 @@ export const ContainerCardProduct = styled.div`
 
 export const ImageProduct = styled.img`
     width: 6rem;
-    height: 7rem;    
-    border-radius: 7px 7px 0 0;
+    height: 7.3rem;    
+    border-radius: 7px;
 `
 export const QuantityProduct = styled.div`
     display: flex;
@@ -22,24 +23,28 @@ export const QuantityProduct = styled.div`
     width: 2.063rem;
     height: 2.063rem;
     border-radius: 8px 0 8px 0;
-    color: red;
+    color: white;
+    background-color: red;
 `
 export const BoxNameQuantity = styled.div`
     display: flex;
     justify-content: space-between;
+    
 `
 
 export const NameProduct = styled.h3`
     font-family: Roboto;
     font-size: 1rem;
-    font-weight: normal;
+    font-weight: bold;
     font-stretch: normal;
     font-style: normal;
     line-height: normal;
     letter-spacing: 0.39px;
     color: #e8222e;
+    margin-left: 1.5rem;
     padding-bottom: 0.25rem;
     padding-top: 1rem;
+    margin-top: -0.3rem;
 `
 export const BoxInform = styled.div`
     display: flex;
@@ -57,6 +62,8 @@ export const InformDescription = styled.p`
     letter-spacing: 0.39px;
     color: grey;
     padding: 0.25rem 0;
+    margin-left: 1.5rem;
+    margin-top: -0.5rem;
     flex-grow: 1;
 `
 export const BoxInformPriceButton = styled.div`
@@ -65,7 +72,18 @@ export const BoxInformPriceButton = styled.div`
     justify-content: space-between;
 
 `
-export const InformPrice = styled.p``
+export const InformPrice = styled.p`
+    font-family: Roboto;
+    font-size: 1rem;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 0.39px;
+    color: #000000;
+    margin-left: 1.5rem;
+    margin-top: -0.3rem;
+`
 
 export const InformAddButton = styled.button`
     width: 5.625rem;
@@ -73,10 +91,17 @@ export const InformAddButton = styled.button`
     border-radius: 8px 0 8px 0;
     background-color: white;
     outline: 0;
-    border: 1px black solid;
+    border: 1.5px black solid;
 `
 export const InformRemoveButton = styled(InformAddButton)`
     border: 1px red solid;
-    color: red;
+    color: white;
+    background: red;
+   
 `
-
+export const Hr = styled.div`
+    background: black;
+    width: 100%;
+    height: 1px;
+    margin: 5px auto;
+`

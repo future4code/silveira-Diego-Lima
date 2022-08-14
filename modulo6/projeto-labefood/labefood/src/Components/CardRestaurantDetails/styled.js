@@ -16,7 +16,7 @@ export const ImageRestaurant = styled.img`
 export const NameRestaurant = styled.h3`
     font-family: Roboto;
     font-size: 1rem;
-    font-weight: normal;
+    font-weight: bold;
     font-stretch: normal;
     font-style: normal;
     line-height: normal;
@@ -25,8 +25,9 @@ export const NameRestaurant = styled.h3`
     margin-bottom: 0.625rem;
 `
 export const BoxInfo = styled.div`
-    display: flex;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+
   
 `
 export const Infos = styled.p`
@@ -38,5 +39,11 @@ export const Infos = styled.p`
     line-height: normal;
     letter-spacing: 0.39px;
     color: #b8b8b8;
+    margin-top: -0.025rem;
 
+`
+export const BoxInfoRestaurant = styled.div`
+    display: flex;
+    flex-direction: column;
+   
 `

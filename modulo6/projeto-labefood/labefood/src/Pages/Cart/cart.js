@@ -1,24 +1,26 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import CardProduct from '../../Components/CardProduct/CardProduct'
 import Header from '../../Components/Header/Header'
 import Menu from '../../Components/Menu/Menu'
-import Order from '../../Components/Order/Order'
 import { BASE_URL } from '../../Constants/urls'
 import { useGlobal } from '../../Global/GlobalStateContext'
-import { StyledButton } from '../../Global/GlobalStyled'
+import { ButtonStyled} from '../../Global/GlobalStyled'
 import useProtectedPage from '../../Hoocks/useProtectedPage'
+import { goToFeed } from '../../Routes/coordinator'
 import PaymentMethod from './PaymentMethod'
-import { ContainerCart, AddressUser, AddressRestaurant, ContainerPayment, ContainerSubTotal, Shipping } from './styled'
+import { ContainerCart, AddressUser, AddressRestaurant, ContainerSubTotal, Shipping, NameProduct, CardContainer } from './styled'
 
 const Cart = () => {
   useProtectedPage()
   const { states, setters } = useGlobal()
-  const { addressUser, cart, currentRestaurant, paymentMethod, activeOrder } = states
-  const { setActiveOrder } = setters
+  const { addressUser, cart, currentRestaurant, paymentMethod } = states
+  const { setActiveOrder, setCart, setCurrentRestaurant } = setters
   const [fullPrice, setFullPrice] = useState(0)
 
-  
+  const navigate = useNavigate()
+
   const TotalPrice = () => {
     let totPrice = 0
     const frete = currentRestaurant.shipping
@@ -46,10 +48,15 @@ const Cart = () => {
     })
       .then((res) => {
         setActiveOrder(res.data.order)
+        setCart([])
+        setCurrentRestaurant({})
+        goToFeed(navigate)
       })
       .catch((err) => {
-        console.log(err.response)
-        alert(err.data.message)
+        alert(err.response.data.message)
+        setCart([])
+        setCurrentRestaurant({})
+        goToFeed(navigate)
       })
   }
 
@@ -68,14 +75,15 @@ const Cart = () => {
       <Header title={"Meu Carrinho"} back />
 
       <AddressUser>
-        <p>Endereço de entrega</p>
+        <h3>Endereço de entrega</h3>
         <p>{addressUser}</p>
       </AddressUser>
       <AddressRestaurant>
-        <p>{currentRestaurant.name}</p>
+        <NameProduct>{currentRestaurant.name}</NameProduct>
         <p>{currentRestaurant.address}</p>
-        <p>{currentRestaurant.deliveryTime} min</p>
+        <p>{currentRestaurant.deliveryTime && currentRestaurant.deliveryTime.length > 0 ? `${currentRestaurant.deliveryTime} min` : <></>}</p>
       </AddressRestaurant>
+      <CardContainer>
       {cart && cart.length > 0 ? cart.map((product) => {
         return (
           <CardProduct
@@ -85,33 +93,33 @@ const Cart = () => {
           />
         )
       }) : <p>Carrinho vazio</p>}
-
-      <ContainerPayment>
+      </CardContainer>
+     
         <Shipping>
-          Frete
+         <p>Frete <></>
           {new Intl.NumberFormat('pt-BR', {
             style: 'currency',
             currency: 'BRL'
           }).format(currentRestaurant.shipping ? currentRestaurant.shipping : 0)}
-
+          </p> 
         </Shipping>
         <ContainerSubTotal>
-          <p>Subtotal</p>
+          
+          <h3>Subtotal</h3>
           <p>{new Intl.NumberFormat('pt-BR', {
             style: 'currency',
             currency: 'BRL'
           }).format(fullPrice ? fullPrice : 0)}
-
           </p>
 
         </ContainerSubTotal>
 
-      </ContainerPayment>
+    
       <div>
         <PaymentMethod />
-        <StyledButton color='primary' variant="contained" onClick={onSubmitPlaceOrder}> Gerar Pedido</StyledButton>
+        <ButtonStyled color='primary' variant="contained" onClick={onSubmitPlaceOrder}> Cofirmar</ButtonStyled>
       </div>
-      {activeOrder && <Order />}
+    
       <Menu page={"cart"} />
     </ContainerCart >
   )
