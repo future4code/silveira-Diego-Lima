@@ -1,0 +1,48 @@
+### Cadastro de usuario
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{   
+    "name": "Diego", 
+    "email":"diego@email.com",
+    "cpf": "12345678910",
+    "password":"123456"
+          
+}
+
+### Login do usuário
+# @name login
+POST http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+    "email":"diego@email.com",
+    "password":"123456"
+}
+
+### Registrar pagamento
+
+POST http://localhost:3003/payment/create
+Authorization: {{login.response.body.token}}
+Content-Type: application/json
+
+{
+    "clientId": "123456789",
+    "amount": 505.50,
+    "type":"credit card",
+    "cardHolderName":"DIEGO E LIMA",
+    "cardNumber":"6062827951520129",
+    "cardExpirationDate":"08/2025",
+    "cardCvv": 123
+}
+
+### Pega informações da Banda por ID ou Name
+
+GET http://localhost:3003/payment/getstatus
+Authorization: {{login.response.body.token}}
+Content-Type: application/json
+
+{
+    "id":"",
+    "name":"Bon Jovi"
+}
