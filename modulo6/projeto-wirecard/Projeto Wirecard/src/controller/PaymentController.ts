@@ -20,7 +20,6 @@ export class PaymentController {
                 cardExpirationDate,
                 cardCvv
             }
-            console.log(input)
 
             const payment = await PaymentBusiness.registerPayment(input, token)
 
@@ -40,6 +39,12 @@ export class PaymentController {
     public getPaymentStatus = async (req: Request, res: Response) => {
 
         try {
+            const token = req.headers.authorization as string
+            const id = req.body
+
+            const paymentStatus = await PaymentBusiness.getPayment(id, token)
+
+            res.status(200).send({ message: paymentStatus })
 
 
         } catch (error: any) {

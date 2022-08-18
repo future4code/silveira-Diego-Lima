@@ -1,5 +1,4 @@
 import { Payment } from "../model/Payment";
-import { User } from "../model/User";
 import { BaseDatabase } from "./BaseDatabase";
 
 export class PaymentDatabase extends BaseDatabase {
@@ -11,7 +10,8 @@ export class PaymentDatabase extends BaseDatabase {
     try {
       await this.getConnection()
         .insert({
-          id: payment.getId(),
+          payment_id: payment.getId(),
+          status: payment.getStatus(),
           user_id: payment.getUserId(),
           client_id: payment.getClientId(),
           amount: payment.getAmount(),
@@ -19,26 +19,29 @@ export class PaymentDatabase extends BaseDatabase {
           card_holder_name: payment.getCardHolderName(),
           card_number: payment.getCardNumber(),
           card_expiration_date: payment.getExpirationDate(),
-          card_cvv: payment.getCvv()
+          card_cvv: payment.getCvv(),
+          emissor: payment.getEmissor()
         })
         .into(PaymentDatabase.TABLE_NAME);
     } catch (error: any) {
       throw new Error(error.sqlMessage || error.message);
     }
   }
-  
-  // public async getUserByEmail(email: string): Promise<User> {
-  //   try {
-  //     const result = await this.getConnection()
-  //       .select("*")
-  //       .from(PaymentDatabase.TABLE_NAME)
-  //       .where({ email });
 
-  //     return result[0] && User.toUserModel(result[0]);
+  public async getPaymentById(id: string): Promise<Payment> {
+    try {
+      const result = await this.getConnection()
+        .select("*")
+        .from(PaymentDatabase.TABLE_NAME)
+        .join('User_Wirecard', 'User_Wirecard.id', '=', 'user_id')
+        .where(id);
+        console.log(result[0])
+      
+      return result[0] && Payment.toStatusPaymentModel(result[0]);
 
-  //   } catch (error: any) {
-  //     throw new Error(error.sqlMessage || error.message);
-  //   }
-  // }
+    } catch (error: any) {
+      throw new Error(error.sqlMessage || error.message);
+    }
+  }
 }
 export default new PaymentDatabase()

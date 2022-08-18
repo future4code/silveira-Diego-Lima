@@ -1,4 +1,54 @@
-# Labenu Music Awards
-Como você deve saber muito bem, o nosso querido chefinho Astrodev é uma pessoa com Networking incrível e ele conhece vários artistas estrelados. Além disso, ele também é um grande ~~megalomaníaco~~ visionário e está planejando fazer um grande evento: o **LAMA**, *Labenu Musical Awards*, um festival  com várias bandas famosas para a formatura da sua turma e, no final, vocês podem eleger a banda que mais gostaram! Entretanto, na opinião dele, vocês só serão merecedores se entregarem um sistema impecável que permita o gerenciamento completo desses shows.
+# Case WIRECARD
 
-Para isso já deixamos algumas tabelas prontas para vocês não precisarem se preocupar com a modelagem do banco. Deixamos também um template do projeto já com a estrutura da parte de usuários. Vocês podem usá-las a vontade, mas, se quiser fazer do zero sem esse auxílio, também pode.
+Na construção dessa API foram criados 4 endpoints:
+### Sign Up ### 
+endpoint solicita as seguintes informações do Buyer:  
+'name', 'email', 'senha' e  'cpf'. 
+### Login ###
+endpoint que retorna um token de autenticação
+dessa forma é possivel criar um pagamento 
+### Create Payment ###
+nesse endpoint é necessario informar:
+- amount
+- type
+- client id 
+
+em caso de pagamento for do tipo 'credit card' será necessario as seguintes informações:
+ - card holder name
+ - card number
+ - card expiration date
+ - card cvv
+
+ As tabelas do banco de dados ficaram organizadas dessa maneira:
+
+### TABLE User_Wirecard (
+- id VARCHAR(255) PRIMARY KEY,
+- name VARCHAR(255) NOT NULL,
+- email VARCHAR(255) NOT NULL,
+- cpf VARCHAR(11) NOT NULL,
+- password VARCHAR(255) NOT NULL);
+### TABLE Payment_Wirecard (
+- payment_id VARCHAR(255) PRIMARY KEY,
+- status VARCHAR(255) NOT NULL,
+- user_id VARCHAR(255) NOT NULL,
+- client_id VARCHAR(255) NOT NULL,
+- amount FLOAT NOT NULL,
+- type ENUM("credit card","boleto") DEFAULT "boleto",
+- card_holder_name VARCHAR(255),
+- card_number VARCHAR(25),
+- card_expiration_date VARCHAR(7),
+- card_cvv INT,
+- emissor VARCHAR(255),
+- FOREIGN KEY(user_id) REFERENCES User_Wirecard(id)
+);
+
+### Get Payment By ID
+este endpoint retorna todas as informações do pagamento e o status
+é necessario informar um token e id do pagamento
+O retorno será todas informações essenciais do pagamento e do comprador.
+
+Testes unitarios foram realizados nos endpoints de create payment e get payment
+
+Abaixo está o link da documentação da API:
+
+https://documenter.getpostman.com/view/20352107/VUjMnkSs
